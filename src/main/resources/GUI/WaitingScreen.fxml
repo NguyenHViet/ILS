@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to top,  #ffb88c, #de6262);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.WaitingScreen">
+   <bottom>
+      <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="300.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="800.0" style="-fx-spacing: 20;">
+               <children>
+                  <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#newGame" text="Chơi Mới" />
+                  <Button mnemonicParsing="false" text="Chơi Tiếp" />
+                  <Button mnemonicParsing="false" text="Cài Đặt" />
+                  <Button mnemonicParsing="false" text="Thoát" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </FlowPane>
+   </bottom>
+</BorderPane>

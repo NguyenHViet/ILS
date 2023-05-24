@@ -1,0 +1,21 @@
+.dificult_slider, .slider {
+    -default-track-color: -fx-control-inner-background;
+}
+
+.slider .track {
+    -fx-background-color: linear-gradient(to right, #ff726f, #93dbaa);
+}
+
+.dificult_slider .track {
+    -fx-background-color: linear-gradient(to right, #93dbaa, #ff726f);
+}
+
+.modifier-button {
+    -fx-background-radius: 50%;
+    -fx-max-height: 31px;
+    -fx-max-width: 31px;
+    -fx-min-height: 31px;
+    -fx-min-width: 31px;
+    -fx-height: 31px;
+    -fx-width: 31px;
+}
