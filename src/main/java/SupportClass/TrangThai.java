@@ -113,11 +113,4 @@ public class TrangThai extends ThuocTinh {
         return "TT_TT";
     }
 
-    /**
-     * @param hu
-     */
-    @Override
-    public void chiuTacDong(HieuUng hu) {
-    }
-
 }

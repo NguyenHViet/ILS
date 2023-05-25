@@ -34,6 +34,26 @@ public class HU_ThuocTinh extends HieuUng {
      */
     private double tyLeTTTang;
 
+    private int tangTiemNang;
+
+    /**
+     * Get the value of tangTiemNang
+     *
+     * @return the value of tangTiemNang
+     */
+    public int getTangTiemNang() {
+        return tangTiemNang;
+    }
+
+    /**
+     * Set the value of tangTiemNang
+     *
+     * @param tangTiemNang new value of tangTiemNang
+     */
+    public void setTangTiemNang(int tangTiemNang) {
+        this.tangTiemNang = tangTiemNang;
+    }
+
     /**
      * @param maHU
      * @param moTa
@@ -41,12 +61,20 @@ public class HU_ThuocTinh extends HieuUng {
      * @param maTT
      * @param tangTT
      * @param tyLeTTTang
+     * @param tangTiemNang
      */
-    public HU_ThuocTinh(String maHU, String moTa, ArrayList<DieuKien> dsDK, String maTT, int tangTT, double tyLeTTTang) {
+    public HU_ThuocTinh(String maHU,
+            String moTa,
+            ArrayList<DieuKien> dsDK,
+            String maTT, int tangTT,
+            double tyLeTTTang,
+            int tangTiemNang
+    ) {
         super(maHU, moTa, dsDK);
         this.maTT = maTT;
         this.tangTT = tangTT;
         this.tyLeTTTang = tyLeTTTang;
+        this.tangTiemNang = tangTiemNang;
     }
 
     /**
@@ -96,7 +124,15 @@ public class HU_ThuocTinh extends HieuUng {
      */
     @Override
     public HU_ThuocTinh cloneHU() {
-        return new HU_ThuocTinh(this.maHU, this.moTa, this.dsDK, this.maTT, this.tangTT, this.tyLeTTTang);
+        return new HU_ThuocTinh(
+                this.maHU,
+                this.moTa,
+                this.dsDK,
+                this.maTT,
+                this.tangTT,
+                this.tyLeTTTang,
+                this.tangTiemNang
+        );
     }
 
     /**
@@ -110,11 +146,19 @@ public class HU_ThuocTinh extends HieuUng {
     /**
      * @param dsDT
      * @param bc
-     * @return 
+     * @return
      */
     @Override
     public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
-        return false;
+        if (dsDK == null) {
+            return true;
+        }
+        for (DieuKien dk : dsDK) {
+            if (!dk.kiemTraDK(dsDT, bc)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

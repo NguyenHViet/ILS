@@ -25,7 +25,7 @@ public class ModalDieuKien {
                 "Tài nguyên khan hiếm",
                 "RSC",
                 20,
-                "BC",
+                "BOICANH",
                 DK_SoSanh.NHO_HON_HOAC_BANG);
         
         DieuKien dk0001 = new DK_SoSanh(
@@ -35,7 +35,7 @@ public class ModalDieuKien {
                 "Sức khỏe yếu",
                 "STR",
                 20,
-                "NV",
+                "NHANVAT",
                 DK_SoSanh.NHO_HON_HOAC_BANG);
         DieuKien dk0002 = new DK_SoSanh(
                 "0002",
@@ -44,7 +44,7 @@ public class ModalDieuKien {
                 "Tâm lý yếu",
                 "MNT",
                 20,
-                "NV",
+                "NHANVAT",
                 DK_SoSanh.NHO_HON_HOAC_BANG);
         
         dsDieuKien.add(dk0000);

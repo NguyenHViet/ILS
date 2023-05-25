@@ -340,6 +340,12 @@ public class GeneratorSystem {
         ChiSo triLuc = new ChiSo("INT", "Trí lực", "", true, tongDiemTP_Val + basic, tiemNang, 0);
         dsTT.add(triLuc);
 
+        ChiSo csTuoi = new ChiSo("AGE", "Tuổi", "", false, tuoi, 1, 0);
+        dsTT.add(csTuoi);
+
+        ChiSo csGioiTinh = new ChiSo("GDR", "Giới tính", "", false, gioiTinh, 0, 0);
+        dsTT.add(csGioiTinh);
+
 //        Mối quan hệ
         ArrayList<MoiQuanHe> dsMQH = new ArrayList<>();
 
@@ -367,24 +373,108 @@ public class GeneratorSystem {
         return null;
     }
 
+    static private ArrayList<NhanVat> taoDSDTTG(String loaiDTTG, ArrayList<NhanVat> dsNV, int soLuong) {
+        ArrayList<NhanVat> dsDTTG = (ArrayList<NhanVat>) dsNV.clone();
+        ArrayList<NhanVat> result = new ArrayList<>();
+
+        String[] dsLoaiDTTG = loaiDTTG.split("_");
+
+        int index;
+        NhanVat npc;
+        for (String type : dsLoaiDTTG) {
+            switch (type) {
+                case "MC":
+                    for (NhanVat nv : dsDTTG) {
+                        if (nv.isPlayable()) {
+                            result.add(nv);
+                            dsDTTG.remove(nv);
+                            break;
+                        }
+                    }
+                    break;
+                case "RANDOMNPC":
+                    while (!dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        if (!npc.isPlayable()) {
+                            result.add(npc);
+                            dsDTTG.remove(npc);
+                        }
+                    }
+                    break;
+                case "RANDOMMNPC":
+                    while (!dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        if (!npc.isPlayable() && npc.getGioiTinh() == 0) {
+                            result.add(npc);
+                            dsDTTG.remove(npc);
+                        }
+                    }
+                    break;
+                case "RANDOMFNPC":
+                    while (!dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        if (!npc.isPlayable() && npc.getGioiTinh() == 1) {
+                            result.add(npc);
+                            dsDTTG.remove(npc);
+                            break;
+                        }
+                    }
+                    break;
+                case "RANDOMNPCS":
+                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        if (!npc.isPlayable()) {
+                            result.add(npc);
+                            dsDTTG.remove(npc);
+                        }
+                    }
+                    break;
+                case "RANDOMMNPCS":
+                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        if (!npc.isPlayable() && npc.getGioiTinh() == 0) {
+                            result.add(npc);
+                            dsDTTG.remove(npc);
+                        }
+                    }
+                    break;
+                case "RANDOMFNPCS":
+                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        if (!npc.isPlayable() && npc.getGioiTinh() == 1) {
+                            result.add(npc);
+                            dsDTTG.remove(npc);
+                        }
+                    }
+                    break;
+                case "NONE":
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return result;
+    }
+
     /**
      * @param maSK
      * @return
      */
-    static public SuKien taoSuKien(SuKien mauSK, NhanVat mc, BoiCanh bc) {
+    static public SuKien taoSuKien(SuKien mauSK, NhanVat mc, ArrayList<NhanVat> dsDTTG, BoiCanh bc) {
         SuKien sk = mauSK.cloneSK();
 
+        ArrayList<NhanVat> dsNV = (ArrayList<NhanVat>) dsDTTG.clone();
+        dsNV.add(mc);
         sk.setBoiCanh(bc);
-        switch (mauSK.getLoaiDTTG()) {
-            case "MC":
-                sk.getDSDTTG().add(mc);
-                break;
-            case "NONE":
-                break;
-            default:
-                break;
-        }
-        
+        sk.setDSDTTG(taoDSDTTG(sk.getLoaiDTTG(), dsNV, sk.getSoLuongDTTG()));
+
         ArrayList<LuaChon> dsMauLC = mauSK.getDSLC();
         ArrayList<LuaChon> dsLC = new ArrayList<>();
         if (dsMauLC == null) {
@@ -394,13 +484,14 @@ public class GeneratorSystem {
                     null,
                     null,
                     "NONE",
+                    0,
                     null,
                     null
             ));
         } else {
             for (int i = 0; i < dsMauLC.size(); i++) {
                 LuaChon mauLC = dsMauLC.get(i);
-                LuaChon lc = taoLuaChon(mauLC, mc, bc);
+                LuaChon lc = taoLuaChon(mauLC, sk.getDSDTTG(), bc);
                 dsLC.add(lc);
             }
         }
@@ -419,24 +510,18 @@ public class GeneratorSystem {
 
     /**
      * @param mauLC
-     * @param mc
+     * @param dsDTTG
      * @param bc
      * @return
      */
-    static public LuaChon taoLuaChon(LuaChon mauLC, NhanVat mc, BoiCanh bc) {
+    static public LuaChon taoLuaChon(LuaChon mauLC, ArrayList<NhanVat> dsDTTG, BoiCanh bc) {
         LuaChon lc = mauLC.cloneLC();
 
+        ArrayList<NhanVat> dsNV = (ArrayList<NhanVat>) dsDTTG.clone();
+
         lc.setBoiCanh(bc);
-        lc.setDSDTTG(new ArrayList<>());
-        switch (lc.getLoaiDTTG()) {
-            case "MC":
-                lc.getDSDTTG().add(mc);
-                break;
-            case "NONE":
-                break;
-            default:
-                break;
-        }
+        lc.setDSDTTG(taoDSDTTG(lc.getLoaiDTTG(), dsDTTG, lc.getSoLuongDTTG()));
+
         return lc;
     }
 
@@ -723,7 +808,7 @@ public class GeneratorSystem {
             dsMQH.add(new MoiQuanHe("Cha", father.getMaNV(), thanThiet, tinTuong));
             father.getDSQH().add(new MoiQuanHe("Con", nv.getMaNV(), thanThiet, tinTuong));
             ModalNhanVat.themNhanVat(father);
-            dsNV.add(nv);
+            dsNV.add(father);
         } else {
             father = ModalNhanVat.getNhanVat(nv.getQuanHe("Cha").get(0).getMaNV());
         }
@@ -736,7 +821,7 @@ public class GeneratorSystem {
             dsMQH.add(new MoiQuanHe("Mẹ", mother.getMaNV(), thanThiet, tinTuong));
             mother.getDSQH().add(new MoiQuanHe("Con", nv.getMaNV(), thanThiet, tinTuong));
             ModalNhanVat.themNhanVat(mother);
-            dsNV.add(nv);
+            dsNV.add(mother);
         } else {
             mother = ModalNhanVat.getNhanVat(nv.getQuanHe("Mẹ").get(0).getMaNV());
         }
@@ -814,7 +899,7 @@ public class GeneratorSystem {
                     break;
             }
             ModalNhanVat.themNhanVat(ACE);
-            dsNV.add(nv);
+            dsNV.add(ACE);
         }
 
 //          Dành cho update

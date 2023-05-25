@@ -4,7 +4,7 @@
  */
 package Modal;
 
-import GameEvent.HieuUng;
+import GameEvent.*;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +12,23 @@ import java.util.ArrayList;
  * @author vuvuive
  */
 public class ModalHieuUng {
+
     private static ArrayList<HieuUng> dsHieuUng = new ArrayList<HieuUng>();
+
+    public static void taiHieuUng() {
+//        Tạo điều kiện thử nghiệm
+        HieuUng hu0000 = new HU_ThuocTinh(
+                "0000",
+                "Giảm sức khỏe",
+                null,
+                "STR",
+                -10,
+                0,
+                0
+        );
+
+        dsHieuUng.add(hu0000);
+    }
 
     public static void themHieuUng(HieuUng hu) {
         dsHieuUng.add(hu);
@@ -37,5 +53,5 @@ public class ModalHieuUng {
         String maNV = "0000" + dsHieuUng.size();
         return maNV.substring(maNV.length() - 4, maNV.length());
     }
-    
+
 }

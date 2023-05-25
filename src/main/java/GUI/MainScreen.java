@@ -46,6 +46,22 @@ public class MainScreen {
     private StackPane mainAreaStack;
     @FXML
     private Pane emptyPane;
+    
+//    Button area
+    @FXML
+    private Button jobBtn;
+    @FXML
+    private Button entertainmentBtn;
+    @FXML
+    private Button worldNewsBtn;
+    @FXML
+    private Button nextYearBtn;
+    @FXML
+    private Button bagBtn;
+    @FXML
+    private Button relationshipBtn;
+    @FXML
+    private Button historyBtn;
 
 //    Các màn hình chức năng
     private VBox worldMap;
@@ -64,7 +80,7 @@ public class MainScreen {
         initStackPane();
 //        Load data
         reloadProfile();
-
+        reloadButtonArea();
         MainSystem.suKienNamKeTiep();
 
         loadEvent();
@@ -134,14 +150,28 @@ public class MainScreen {
             ((ProfileItemComponent) loader.getController()).loadData(tt);
         }
     }
+    
+    public void reloadButtonArea() {
+        NhanVat mc = MainSystem.getNguoiChoi();
+        if (mc.getTuoi() < 10) {
+            jobBtn.setDisable(true);
+        } else {
+            jobBtn.setDisable(false);
+        }
+    }
 
     public void loadEvent() throws IOException {
         reloadStackPane();
         SuKien sk = MainSystem.getSuKienHienTai();
         if (sk != null) {
+            nextYearBtn.setDisable(true);
             currentEventController.loadData(sk, this);
             mainAreaStack.getChildren().add(currentEvent);
+            MainSystem.kichHoatSuKienHienTai();
+        } else {
+            nextYearBtn.setDisable(false);
         }
+        reloadProfile();
     }
 
     @FXML
@@ -176,7 +206,9 @@ public class MainScreen {
     private void namKeTiep() throws IOException {
         mainAreaStack.getChildren().clear();
         MainSystem.suKienNamKeTiep();
+        MainSystem.nhanVatPhatTrien();
         loadEvent();
+        reloadButtonArea();
     }
 
 }

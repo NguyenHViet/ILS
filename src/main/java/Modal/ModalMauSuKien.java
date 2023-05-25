@@ -5,6 +5,7 @@
 package Modal;
 
 import GameEvent.DieuKien;
+import GameEvent.HieuUng;
 import GameEvent.LuaChon;
 import GameEvent.SuKien;
 import GameObject.NhanVat;
@@ -29,8 +30,10 @@ public class ModalMauSuKien {
     private static ArrayList<SuKien> dsSKTT = new ArrayList<>();
 //    Sự kiện tùy biến
     private static ArrayList<SuKien> dsSKTB = new ArrayList<>();
+//    Danh sách kỳ vọng
+    private static ArrayList<SuKien> dsKV = new ArrayList<>();
 
-    public static void taiMauSuKienBoiCanh() {
+    public static void taiMauSuKien() {
         dsSKBC = new ArrayList<SuKien>();
 //        Sự kiện thử nghiệm
         DieuKien dk0000 = Modal.ModalDieuKien.getDieuKien("0000");
@@ -38,18 +41,25 @@ public class ModalMauSuKien {
         LuaChon lc0000 = Modal.ModalLuaChon.getLuaChon("0000");
         LuaChon lc0001 = Modal.ModalLuaChon.getLuaChon("0001");
         LuaChon lc0002 = Modal.ModalLuaChon.getLuaChon("0002");
+        
+        HieuUng hu0000 = Modal.ModalHieuUng.getHieuUng("0000");
 
         ArrayList<LuaChon> dsLC = new ArrayList<>();
         ArrayList<DieuKien> dsDK = new ArrayList<>();
+        ArrayList<HieuUng> dsHU = new ArrayList<>();
 
         dsLC.add(lc0000);
         dsLC.add(lc0001);
         dsLC.add(lc0002);
+        
         dsDK.add(dk0000);
+        
+        dsHU.add(hu0000);
 
         SuKien sk0000 = new SuKien("0000",
                 "MỘT NĂM BÌNH AN",
                 "Không có chuyện gì đặc sắc, mọi chuyện trôi qua bình an.",
+                "",
                 null,
                 null,
                 null,
@@ -58,23 +68,24 @@ public class ModalMauSuKien {
                 "NONE",
                 0,
                 0,
-                "SuKien_BoiCanh",
-                1,
+                "SUKIEN_BOICANH",
+                0.99,
                 false);
 
         SuKien sk0001 = new SuKien("0001",
                 "TÀI NGUYÊN KHAN HIẾM",
                 "Các nước bắt đầu cạnh tranh khốc liệt để dành làm chủ lượng tài ít ỏi còn lại. Lượng tài nguyên ít ỏi bị chia nhỏ, tình hình chính trị trở nên căng thẳng.",
+                "",
                 dsLC,
                 null,
                 dsDK,
                 null,
                 null,
-                "NONE",
+                "MC",
                 0,
                 0,
-                "SuKien_BoiCanh",
-                1.0,
+                "SUKIEN_BOICANH",
+                1,
                 false);
         
         dsDK.clear();
@@ -83,16 +94,17 @@ public class ModalMauSuKien {
         SuKien sk0002 = new SuKien("0002",
                 "CẢM THẤY MỆT MỎI",
                 "Vì sức khỏe yếu, tài nguyên khan hiếm khiến bạn càng thiếu thốn dinh dưỡng.",
+                "",
+                null,
+                dsHU,
                 null,
                 null,
                 null,
-                null,
-                null,
-                "NONE",
+                "MC",
                 0,
                 0,
-                "SuKien_BoiCanh",
-                1.0,
+                "SUKIEN_BOICANH",
+                1,
                 false);
 
         dsSKBC.add(sk0000);
@@ -114,19 +126,6 @@ public class ModalMauSuKien {
             }
         }
         return null;
-    }
-
-    /**
-     */
-    static public void khoiTaoSuKienHangNam() {
-        // TODO implement here
-    }
-
-    /**
-     * @param nguoiChoi
-     */
-    static public void khoiTaoSuKienTuyBien(NhanVat nguoiChoi) {
-        // TODO implement here
     }
 
     /**

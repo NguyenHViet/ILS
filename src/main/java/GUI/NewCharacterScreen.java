@@ -341,6 +341,9 @@ public class NewCharacterScreen {
             gender = 1;
         }
         mc.setGioiTinh(gender);
+        ((ChiSo) mc.getThuocTinh("GDR")).setGiaTri(gender);
+        
+        ((ChiSo) mc.getThuocTinh("AGE")).setGiaTri(0);
 //        Chủng tộc
         mc.setChungToc("Nhân tộc");
 
@@ -358,7 +361,11 @@ public class NewCharacterScreen {
 
     @FXML
     private void backToNewWorldScreen() throws IOException {
+        UI.startLoad();
         UI.setMainFrame("NewWorldScreen");
+        UI.setNeededContent(100);
+        UI.setLoadedContent(0);
+        UI.loadFill(5);
     }
 
     @FXML

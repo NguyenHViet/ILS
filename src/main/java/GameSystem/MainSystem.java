@@ -35,7 +35,7 @@ public class MainSystem {
 
     private static SuKien suKienHienTai;
 
-    static private ArrayList<SuKien> dsSKLauDai;
+    static private ArrayList<SuKien> dsSKLauDai = new ArrayList<SuKien>();
 
     /**
      * Get the value of suKienHienTai
@@ -74,12 +74,12 @@ public class MainSystem {
     }
 
     static private ArrayList<SuKien> chuanBiSuKienTiepTheo(ArrayList<SuKien> dsMauSK, int soLuongSKToiDa) {
-        ArrayList<SuKien> dsSKDuBi = new ArrayList<SuKien>();
-        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        ArrayList<SuKien> dsSKDuBi = new ArrayList<>();
+        ArrayList<SuKien> result = new ArrayList<>();
         double lucky = new Random().nextDouble();
 
         for (SuKien mauSK : dsMauSK) {
-            SuKien sk = GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, tg);
+            SuKien sk = GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, dsNV, tg);
             if (lucky <= sk.getTyLeXuatHien()) {
                 if (sk.kiemTraDK()) {
                     if (sk.getTyLeXuatHien() == 1.0) {
@@ -104,7 +104,7 @@ public class MainSystem {
      */
     static public void taoSuKien() {
 //        Sự kiện thế giới
-        int SoLuongSKTGToiDa = 3;
+        int SoLuongSKTGToiDa = 1;
         ArrayList<SuKien> dsSKTG = chuanBiSuKienTiepTheo(Modal.ModalMauSuKien.suKienTheGioi(), SoLuongSKTGToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKTG);
 //        Sự kiện quốc gia
@@ -114,6 +114,7 @@ public class MainSystem {
     }
 
     /**
+     * @param luaChon
      */
     static public void xuLySuKienHienTai(LuaChon luaChon) {
         luaChon.kichHoat();
@@ -123,12 +124,12 @@ public class MainSystem {
             dsSKHienTai.remove(0);
         }
         // Thêm sự kiện tiếp theo
-        ArrayList<SuKien> dsSuKienTiepTheo = new ArrayList<SuKien>();
-        ArrayList<SuKien> dsSK = new ArrayList<SuKien>();
+        ArrayList<SuKien> dsSuKienTiepTheo = new ArrayList<>();
+        ArrayList<SuKien> dsSK = new ArrayList<>();
         if (nextEvent != null) {
             for (String maSK : nextEvent) {
                 SuKien mauSK = Modal.ModalMauSuKien.getMauSuKien(maSK);
-                dsSuKienTiepTheo.add(GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, tg));
+                dsSuKienTiepTheo.add(GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, dsNV, tg));
             }
             dsSK.addAll(chuanBiSuKienTiepTheo(dsSuKienTiepTheo, 100));
         }
@@ -143,12 +144,30 @@ public class MainSystem {
     static public void kichHoatSuKienHienTai() {
         MainSystem.suKienHienTai.kichHoat();
     }
+    
+    static public void suKienKhanCap(SuKien sk) {
+        dsSKHienTai.add(0, sk);
+    }
 
     /**
      */
     static public void suKienNamKeTiep() {
+        MainSystem.dsSKHienTai.clear();
+        for (SuKien sk : MainSystem.dsSKLauDai) {
+            sk.demNguocThoiHan();
+            if (sk.getThoiHan() == 0) {
+                MainSystem.dsSKHienTai.add(sk);
+            }
+        }
         MainSystem.taoSuKien();
         MainSystem.suKienHienTai = MainSystem.dsSKHienTai.get(0);
+    }
+    
+    static public void nhanVatPhatTrien() {
+        MainSystem.nguoiChoi.phatTrien();
+        for (NhanVat npc: MainSystem.dsNV) {
+            npc.phatTrien();
+        }
     }
 
     /**

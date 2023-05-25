@@ -365,7 +365,17 @@ public class NhanVat {
      * @param hu
      */
     public void chiuTacDong(HieuUng hu) {
-
+        if (hu instanceof HU_ThuocTinh) {
+            ThuocTinh tt = this.getThuocTinh(((HU_ThuocTinh) hu).getMaTT());
+            if (tt instanceof ChiSo) {
+                int giaTri = ((ChiSo) tt).getGiaTri();
+                int tiemNang = ((ChiSo) tt).getTiemNang();
+                
+                ((ChiSo) tt).setGiaTri(giaTri + ((HU_ThuocTinh) hu).getTangTT());
+                ((ChiSo) tt).setTiemNang(tiemNang + ((HU_ThuocTinh) hu).getTangTiemNang());
+            }
+        }
+        this.capNhapThuocTinh();
     }
 
     /**
@@ -380,6 +390,7 @@ public class NhanVat {
                 ((TrangThai) tt).setThoiHan(thoiHanMoi);
             }
         }
+        this.tuoi = ((ChiSo) this.getThuocTinh("AGE")).getGiaTri();
     }
 
     /**

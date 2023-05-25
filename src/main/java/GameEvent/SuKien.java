@@ -15,6 +15,7 @@ public class SuKien implements Interface_KichHoatSK {
     public SuKien() {
         this.maSK = "";
         this.moTa = "";
+        this.tomTat = "";
         this.tenSK = "";
         this.dsLC = new ArrayList<LuaChon>();
         this.dsHU = new ArrayList<HieuUng>();
@@ -22,7 +23,7 @@ public class SuKien implements Interface_KichHoatSK {
         this.dsDTTG = new ArrayList<NhanVat>();
         this.boiCanh = null;
         this.loaiDTTG = "";
-        this.soLuong = 0;
+        this.soLuongDTTG = 0;
         this.thoiHan = 0;
         this.loaiSK = "";
         this.tyLeXuatHien = 0.0;
@@ -73,7 +74,7 @@ public class SuKien implements Interface_KichHoatSK {
     /**
      *
      */
-    private int soLuong;
+    private int soLuongDTTG;
 
     private int thoiHan;
 
@@ -82,6 +83,26 @@ public class SuKien implements Interface_KichHoatSK {
     private double tyLeXuatHien;
 
     private String tenSK;
+
+    private String tomTat;
+
+    /**
+     * Get the value of tomTat
+     *
+     * @return the value of tomTat
+     */
+    public String getTomTat() {
+        return tomTat;
+    }
+
+    /**
+     * Set the value of tomTat
+     *
+     * @param tomTat new value of tomTat
+     */
+    public void setTomTat(String tomTat) {
+        this.tomTat = tomTat;
+    }
 
     /**
      * Get the value of tenSK
@@ -138,21 +159,21 @@ public class SuKien implements Interface_KichHoatSK {
     }
 
     /**
-     * Get the value of soLuong
+     * Get the value of soLuongDTTG
      *
-     * @return the value of soLuong
+     * @return the value of soLuongDTTG
      */
-    public int getSoLuong() {
-        return this.soLuong;
+    public int getSoLuongDTTG() {
+        return this.soLuongDTTG;
     }
 
     /**
-     * Set the value of soLuong
+     * Set the value of soLuongDTTG
      *
-     * @param soLuong new value of soLuong
+     * @param soLuongDTTG new value of soLuongDTTG
      */
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setSoLuongDTTG(int soLuongDTTG) {
+        this.soLuongDTTG = soLuongDTTG;
     }
 
     /**
@@ -171,6 +192,10 @@ public class SuKien implements Interface_KichHoatSK {
      */
     public void setThoiHan(int thoiHan) {
         this.thoiHan = thoiHan;
+    }
+
+    public void demNguocThoiHan() {
+        this.thoiHan--;
     }
 
     /**
@@ -213,6 +238,7 @@ public class SuKien implements Interface_KichHoatSK {
      * @param maSK
      * @param tenSK
      * @param moTa
+     * @param tomTat
      * @param dsLC
      * @param dsHU
      * @param dsDK
@@ -228,6 +254,7 @@ public class SuKien implements Interface_KichHoatSK {
     public SuKien(String maSK,
             String tenSK,
             String moTa,
+            String tomTat,
             ArrayList<LuaChon> dsLC,
             ArrayList<HieuUng> dsHU,
             ArrayList<DieuKien> dsDK,
@@ -241,6 +268,7 @@ public class SuKien implements Interface_KichHoatSK {
             boolean daHoanThanh) {
         this.maSK = maSK;
         this.moTa = moTa;
+        this.tomTat = tomTat;
         this.tenSK = tenSK;
         this.dsLC = dsLC;
         this.dsHU = dsHU;
@@ -248,7 +276,7 @@ public class SuKien implements Interface_KichHoatSK {
         this.dsDTTG = dsDTTG;
         this.boiCanh = boiCanh;
         this.loaiDTTG = loaiDTTG;
-        this.soLuong = soLuong;
+        this.soLuongDTTG = soLuong;
         this.thoiHan = thoiHan;
         this.loaiSK = loaiSK;
         this.tyLeXuatHien = tyLeXuatHien;
@@ -256,8 +284,6 @@ public class SuKien implements Interface_KichHoatSK {
     }
 
     /**
-     * @param dsDT
-     * @param bc
      * @return
      */
     public ArrayList<LuaChon> layLCPhuHop() {
@@ -370,13 +396,14 @@ public class SuKien implements Interface_KichHoatSK {
         return new SuKien(this.maSK,
                 this.tenSK,
                 this.moTa,
+                this.tomTat,
                 this.dsLC,
                 this.dsHU,
                 this.dsDK,
                 this.dsDTTG,
                 this.boiCanh,
                 this.loaiDTTG,
-                this.soLuong,
+                this.soLuongDTTG,
                 this.thoiHan,
                 this.loaiSK,
                 this.tyLeXuatHien,
@@ -403,7 +430,18 @@ public class SuKien implements Interface_KichHoatSK {
      */
     @Override
     public void kichHoat() {
-
+        if (this.dsHU == null) {
+            return;
+        }
+        for (HieuUng hu : this.dsHU) {
+            for (NhanVat nv : this.dsDTTG) {
+                nv.chiuTacDong(hu);
+            }
+            if (hu instanceof HU_ThuocTinh || hu instanceof HU_VatPham) {
+                this.boiCanh.chiuTacDong(hu);
+            }
+        }
+        this.daHoanThanh = true;
     }
 
 }
