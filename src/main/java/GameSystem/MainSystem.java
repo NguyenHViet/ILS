@@ -110,6 +110,9 @@ public class MainSystem {
 //        Sự kiện quốc gia
 //        Sự kiện tỉnh
 //        Sự kiện hằng năm
+        int SoLuongSKHNToiDa = 1;
+        ArrayList<SuKien> dsSKHN = chuanBiSuKienTiepTheo(Modal.ModalMauSuKien.suKienHangNam(), SoLuongSKHNToiDa);
+        MainSystem.dsSKHienTai.addAll(dsSKHN);
 //        Sự kiện tùy biến
     }
 
@@ -131,7 +134,7 @@ public class MainSystem {
                 SuKien mauSK = Modal.ModalMauSuKien.getMauSuKien(maSK);
                 dsSuKienTiepTheo.add(GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, dsNV, tg));
             }
-            dsSK.addAll(chuanBiSuKienTiepTheo(dsSuKienTiepTheo, 100));
+            dsSK.addAll(0, chuanBiSuKienTiepTheo(dsSuKienTiepTheo, 100));
         }
         MainSystem.dsSKHienTai.addAll(dsSK);
         if (!MainSystem.dsSKHienTai.isEmpty()) {
@@ -144,7 +147,7 @@ public class MainSystem {
     static public void kichHoatSuKienHienTai() {
         MainSystem.suKienHienTai.kichHoat();
     }
-    
+
     static public void suKienKhanCap(SuKien sk) {
         dsSKHienTai.add(0, sk);
     }
@@ -162,10 +165,10 @@ public class MainSystem {
         MainSystem.taoSuKien();
         MainSystem.suKienHienTai = MainSystem.dsSKHienTai.get(0);
     }
-    
+
     static public void nhanVatPhatTrien() {
         MainSystem.nguoiChoi.phatTrien();
-        for (NhanVat npc: MainSystem.dsNV) {
+        for (NhanVat npc : MainSystem.dsNV) {
             npc.phatTrien();
         }
     }
@@ -182,6 +185,23 @@ public class MainSystem {
      */
     static public ArrayList<NhanVat> getDSNV() {
         return dsNV;
+    }
+
+    /**
+     * @param maNV
+     * @return
+     */
+    static public NhanVat getNhanVat(String maNV) {
+        ArrayList<NhanVat> ds = (ArrayList<NhanVat>) dsNV.clone();
+        ds.add(nguoiChoi);
+        NhanVat result = null;
+        for (NhanVat nv : ds) {
+            if (nv.getMaNV().equals(maNV)) {
+                result = nv;
+                break;
+            }
+        }
+        return result;
     }
 
     /**

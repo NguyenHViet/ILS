@@ -15,8 +15,10 @@ public class HU_ThuocTinh extends HieuUng {
     public HU_ThuocTinh() {
         super();
         this.maTT = "";
-        this.tangTT = 0;
+        this.tangGiaTri = 0;
         this.tyLeTTTang = 0.0;
+        this.tangTiemNang = 0;
+        this.tangTamThoi = 0;
     }
 
     /**
@@ -27,7 +29,7 @@ public class HU_ThuocTinh extends HieuUng {
     /**
      *
      */
-    private int tangTT;
+    private int tangGiaTri;
 
     /**
      *
@@ -35,6 +37,8 @@ public class HU_ThuocTinh extends HieuUng {
     private double tyLeTTTang;
 
     private int tangTiemNang;
+
+    private int tangTamThoi;
 
     /**
      * Get the value of tangTiemNang
@@ -54,6 +58,14 @@ public class HU_ThuocTinh extends HieuUng {
         this.tangTiemNang = tangTiemNang;
     }
 
+    public int getTangTamThoi() {
+        return tangTamThoi;
+    }
+
+    public void setTangTamThoi(int tangTamThoi) {
+        this.tangTamThoi = tangTamThoi;
+    }
+
     /**
      * @param maHU
      * @param moTa
@@ -61,6 +73,7 @@ public class HU_ThuocTinh extends HieuUng {
      * @param maTT
      * @param tangTT
      * @param tyLeTTTang
+     * @param tangTamThoi
      * @param tangTiemNang
      */
     public HU_ThuocTinh(String maHU,
@@ -68,12 +81,14 @@ public class HU_ThuocTinh extends HieuUng {
             ArrayList<DieuKien> dsDK,
             String maTT, int tangTT,
             double tyLeTTTang,
+            int tangTamThoi,
             int tangTiemNang
     ) {
         super(maHU, moTa, dsDK);
         this.maTT = maTT;
-        this.tangTT = tangTT;
+        this.tangGiaTri = tangTT;
         this.tyLeTTTang = tyLeTTTang;
+        this.tangTamThoi = tangTamThoi;
         this.tangTiemNang = tangTiemNang;
     }
 
@@ -87,8 +102,8 @@ public class HU_ThuocTinh extends HieuUng {
     /**
      * @return
      */
-    public int getTangTT() {
-        return this.tangTT;
+    public int getTangGiaTri() {
+        return this.tangGiaTri;
     }
 
     /**
@@ -106,10 +121,10 @@ public class HU_ThuocTinh extends HieuUng {
     }
 
     /**
-     * @param tangTT
+     * @param tangGiaTri
      */
-    public void setTangTT(int tangTT) {
-        this.tangTT = tangTT;
+    public void setTangGiaTri(int tangGiaTri) {
+        this.tangGiaTri = tangGiaTri;
     }
 
     /**
@@ -129,8 +144,9 @@ public class HU_ThuocTinh extends HieuUng {
                 this.moTa,
                 this.dsDK,
                 this.maTT,
-                this.tangTT,
+                this.tangGiaTri,
                 this.tyLeTTTang,
+                this.tangTamThoi,
                 this.tangTiemNang
         );
     }
@@ -141,24 +157,6 @@ public class HU_ThuocTinh extends HieuUng {
     @Override
     public String loaiHU() {
         return "HU_TT";
-    }
-
-    /**
-     * @param dsDT
-     * @param bc
-     * @return
-     */
-    @Override
-    public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
-        if (dsDK == null) {
-            return true;
-        }
-        for (DieuKien dk : dsDK) {
-            if (!dk.kiemTraDK(dsDT, bc)) {
-                return false;
-            }
-        }
-        return true;
     }
 
 }

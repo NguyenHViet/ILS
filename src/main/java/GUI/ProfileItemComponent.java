@@ -52,7 +52,7 @@ public class ProfileItemComponent {
         } else {
             gioiTinh = "Nữ";
         }
-        itemName.textProperty().setValue(nv.getHoTen() + " - " + gioiTinh + " - " + nv.getTuoi() + " (" + mqh.getQuanHe() + ")");
+        itemName.textProperty().setValue(nv.getHoTen() + " - " + gioiTinh + " - " + nv.getTuoi() + " tuổi (" + mqh.getQuanHe() + ")");
         if (mqh instanceof MoiQuanHe) {
             Label thanThietLabel = new Label("Thân thiết:");
             Label thanThietValue = new Label(mqh.getThanThiet() + "");

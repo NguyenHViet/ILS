@@ -4,8 +4,7 @@
  */
 package Modal;
 
-import GameEvent.DK_SoSanh;
-import GameEvent.DieuKien;
+import GameEvent.*;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +26,7 @@ public class ModalDieuKien {
                 20,
                 "BOICANH",
                 DK_SoSanh.NHO_HON_HOAC_BANG);
-        
+
         DieuKien dk0001 = new DK_SoSanh(
                 "0001",
                 false,
@@ -37,6 +36,7 @@ public class ModalDieuKien {
                 20,
                 "NHANVAT",
                 DK_SoSanh.NHO_HON_HOAC_BANG);
+
         DieuKien dk0002 = new DK_SoSanh(
                 "0002",
                 false,
@@ -46,10 +46,36 @@ public class ModalDieuKien {
                 20,
                 "NHANVAT",
                 DK_SoSanh.NHO_HON_HOAC_BANG);
+
+        DieuKien dk0003 = new DK_ThanThiet(
+                "0003",
+                true,
+                1,
+                "Ba không thương",
+                "",
+                "Cha",
+                "GIADINH",
+                100,
+                100
+        );
         
+        DieuKien dk0004 = new DK_ThanThiet(
+                "0004",
+                true,
+                1,
+                "Mẹ không yêu",
+                "",
+                "Mẹ",
+                "GIADINH",
+                100,
+                100
+        );
+
         dsDieuKien.add(dk0000);
         dsDieuKien.add(dk0001);
         dsDieuKien.add(dk0002);
+        dsDieuKien.add(dk0003);
+        dsDieuKien.add(dk0004);
     }
 
     public static void themDieuKien(DieuKien dk) {

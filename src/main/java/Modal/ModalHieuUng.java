@@ -24,10 +24,37 @@ public class ModalHieuUng {
                 "STR",
                 -10,
                 0,
+                0,
                 0
         );
 
+        HieuUng hu0001 = new HU_QuanHe(
+                "0001",
+                "Giảm thân thiết với cha",
+                null,
+                "",
+                "Cha",
+                "",
+                "",
+                -10,
+                -5
+        );
+        
+        HieuUng hu0002 = new HU_QuanHe(
+                "0002",
+                "Giảm thân thiết với mẹ",
+                null,
+                "",
+                "Mẹ",
+                "",
+                "",
+                -10,
+                -5
+        );
+
         dsHieuUng.add(hu0000);
+        dsHieuUng.add(hu0001);
+        dsHieuUng.add(hu0002);
     }
 
     public static void themHieuUng(HieuUng hu) {

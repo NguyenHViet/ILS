@@ -9,6 +9,7 @@ C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Modal\ModalDieuKien.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_KyNang.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\LoadingScreen.java
+C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Modal\ModalNgheNghiep.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_SoSanh.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_ThanThiet.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\ChiSo.java
@@ -37,6 +38,7 @@ C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\MoiQuanHe.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameObject\TrangBi.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\TheGioi.java
+C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Modal\ModalThuocTinh.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Modal\GameDatabase.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\BoiCanh.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\NgheNghiep.java
@@ -46,11 +48,13 @@ C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\ThuocTinh.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_ThongThao.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\Tinh.java
+C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Modal\ModalVatPham.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_VatPham.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\ProfileItemComponent.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_SoHuuVP.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\module-info.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\MiniMapComponent.java
+C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Modal\ModalKyNang.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_QuanHe.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_ThuocTinh.java
 C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\TrangThai.java

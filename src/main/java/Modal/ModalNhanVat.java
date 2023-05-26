@@ -27,7 +27,7 @@ public class ModalNhanVat {
         NhanVat result = null;
         for (NhanVat nv : dsNhanVat) {
             if (nv.getMaNV().equals(maNV)) {
-                result = nv;
+                result = nv.cloneNV();
                 break;
             }
         }

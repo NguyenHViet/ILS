@@ -26,23 +26,31 @@ public class ModalMauSuKien {
     private static ArrayList<SuKien> dsSKQG = new ArrayList<>();
 //    Sự kiện tỉnh
     private static ArrayList<SuKien> dsSKT = new ArrayList<>();
-//    Sự kiện thông thường
-    private static ArrayList<SuKien> dsSKTT = new ArrayList<>();
+//    Sự kiện hằng năm
+    private static ArrayList<SuKien> dsSKHN = new ArrayList<>();
 //    Sự kiện tùy biến
     private static ArrayList<SuKien> dsSKTB = new ArrayList<>();
 //    Danh sách kỳ vọng
     private static ArrayList<SuKien> dsKV = new ArrayList<>();
+//    Danh sách hệ quả
+    private static ArrayList<SuKien> dsHQ = new ArrayList<>();
 
     public static void taiMauSuKien() {
         dsSKBC = new ArrayList<SuKien>();
 //        Sự kiện thử nghiệm
         DieuKien dk0000 = Modal.ModalDieuKien.getDieuKien("0000");
-        
+        DieuKien dk0001 = Modal.ModalDieuKien.getDieuKien("0001");
+        DieuKien dk0002 = Modal.ModalDieuKien.getDieuKien("0002");
+        DieuKien dk0003 = Modal.ModalDieuKien.getDieuKien("0003");
+        DieuKien dk0004 = Modal.ModalDieuKien.getDieuKien("0004");
+
         LuaChon lc0000 = Modal.ModalLuaChon.getLuaChon("0000");
         LuaChon lc0001 = Modal.ModalLuaChon.getLuaChon("0001");
         LuaChon lc0002 = Modal.ModalLuaChon.getLuaChon("0002");
-        
+
         HieuUng hu0000 = Modal.ModalHieuUng.getHieuUng("0000");
+        HieuUng hu0001 = Modal.ModalHieuUng.getHieuUng("0001");
+        HieuUng hu0002 = Modal.ModalHieuUng.getHieuUng("0002");
 
         ArrayList<LuaChon> dsLC = new ArrayList<>();
         ArrayList<DieuKien> dsDK = new ArrayList<>();
@@ -51,9 +59,9 @@ public class ModalMauSuKien {
         dsLC.add(lc0000);
         dsLC.add(lc0001);
         dsLC.add(lc0002);
-        
+
         dsDK.add(dk0000);
-        
+
         dsHU.add(hu0000);
 
         SuKien sk0000 = new SuKien("0000",
@@ -68,7 +76,7 @@ public class ModalMauSuKien {
                 "NONE",
                 0,
                 0,
-                "SUKIEN_BOICANH",
+                "SUKIEN",
                 0.99,
                 false);
 
@@ -78,38 +86,63 @@ public class ModalMauSuKien {
                 "",
                 dsLC,
                 null,
-                dsDK,
+                (ArrayList<DieuKien>) dsDK.clone(),
                 null,
                 null,
                 "MC",
                 0,
                 0,
-                "SUKIEN_BOICANH",
+                "SUKIEN",
                 1,
                 false);
-        
+
         dsDK.clear();
         dsDK.add(dk0000);
-        
+
         SuKien sk0002 = new SuKien("0002",
                 "CẢM THẤY MỆT MỎI",
                 "Vì sức khỏe yếu, tài nguyên khan hiếm khiến bạn càng thiếu thốn dinh dưỡng.",
                 "",
                 null,
-                dsHU,
+                (ArrayList<HieuUng>) dsHU.clone(),
                 null,
                 null,
                 null,
                 "MC",
                 0,
                 0,
-                "SUKIEN_BOICANH",
+                "HEQUA",
+                1,
+                false);
+
+        dsDK.clear();
+        dsDK.add(dk0003);
+        dsDK.add(dk0004);
+        
+        dsHU.clear();
+        dsHU.add(hu0001);
+        dsHU.add(hu0002);
+
+        SuKien sk0003 = new SuKien("0003",
+                "KHÔNG AI YÊU THƯƠNG",
+                "Cha mẹ bạn không ai quan tâm đến bạn, bạn thấy lạc lõng trong ngôi nhà lặng ngắt.",
+                "",
+                null,
+                (ArrayList<HieuUng>) dsHU.clone(),
+                (ArrayList<DieuKien>) dsDK.clone(),
+                null,
+                null,
+                "FAMILY",
+                0,
+                0,
+                "SUKIEN",
                 1,
                 false);
 
         dsSKBC.add(sk0000);
         dsSKBC.add(sk0001);
-        dsSKTT.add(sk0002);
+        dsSKHN.add(sk0003);
+        dsHQ.add(sk0002);
     }
 
     public static SuKien getMauSuKien(String maSK) {
@@ -117,12 +150,14 @@ public class ModalMauSuKien {
         toanBoSuKien.addAll(dsSKTG);
         toanBoSuKien.addAll(dsSKQG);
         toanBoSuKien.addAll(dsSKT);
-        toanBoSuKien.addAll(dsSKTT);
+        toanBoSuKien.addAll(dsSKHN);
         toanBoSuKien.addAll(dsSKTB);
+        toanBoSuKien.addAll(dsKV);
+        toanBoSuKien.addAll(dsHQ);
 
         for (SuKien sk : toanBoSuKien) {
             if (sk.getMaSK().equals(maSK)) {
-                return sk;
+                return sk.cloneSK();
             }
         }
         return null;
@@ -156,9 +191,8 @@ public class ModalMauSuKien {
     /**
      * @return
      */
-    static public ArrayList<SuKien> suKienNV() {
-        // TODO implement here
-        return null;
+    static public ArrayList<SuKien> suKienHangNam() {
+        return dsSKHN;
     }
 
     /**

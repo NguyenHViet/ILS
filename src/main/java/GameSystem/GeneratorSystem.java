@@ -361,7 +361,7 @@ public class GeneratorSystem {
 //        Kỹ năng
         ArrayList<KyNang> dsKN = new ArrayList<>();
 
-        return new NhanVat(maNV, tenNV, gioiTinh, "Nhân loại", tuoi, dsTT, dsMQH, tuiDo, vt, nn, dsKN, playable);
+        return new NhanVat(maNV, tenNV, "Nhân loại", dsTT, dsMQH, tuiDo, vt, nn, dsKN, playable);
     }
 
     /**
@@ -380,16 +380,25 @@ public class GeneratorSystem {
         String[] dsLoaiDTTG = loaiDTTG.split("_");
 
         int index;
-        NhanVat npc;
+        NhanVat mc = MainSystem.getNguoiChoi();
+        NhanVat npc = null;
         for (String type : dsLoaiDTTG) {
             switch (type) {
                 case "MC":
                     for (NhanVat nv : dsDTTG) {
                         if (nv.isPlayable()) {
-                            result.add(nv);
-                            dsDTTG.remove(nv);
+                            npc = nv;
+                            result.add(npc);
+                            dsDTTG.remove(npc);
                             break;
                         }
+                    }
+                    break;
+                case "FAMILY":
+                    for (MoiQuanHe mqh: mc.getVongQuanHe("GIADINH")) {
+                        npc = MainSystem.getNhanVat(mqh.getMaNV());
+                        result.add(npc);
+                        dsDTTG.remove(npc);
                     }
                     break;
                 case "RANDOMNPC":
@@ -496,16 +505,41 @@ public class GeneratorSystem {
             }
         }
         sk.setDSLC(dsLC);
+
+        ArrayList<DieuKien> dsMauDK = mauSK.getDSDK();
+        ArrayList<DieuKien> dsDK = new ArrayList<>();
+        if (dsMauDK != null) {
+            for (DieuKien mauDK : dsMauDK) {
+                dsDK.add(taoDieuKien(mauDK, mc));
+            }
+        }
+        sk.setDSDK(dsDK);
+        
+        ArrayList<HieuUng> dsMauHU = mauSK.getDSHU();
+        ArrayList<HieuUng> dsHU = new ArrayList<>();
+        if (dsMauHU != null) {
+            for (HieuUng mauHU : dsMauHU) {
+                dsHU.add(taoHieuUng(mauHU, mc));
+            }
+        }
+        sk.setDSHU(dsHU);
+
         return sk;
     }
 
     /**
      * @param mauDK
-     * @param mc
+     * @param mcSK
      * @return
      */
-    static public DieuKien taoDieuKien(DieuKien mauDK, NhanVat mc) {
-        return null;
+    static public DieuKien taoDieuKien(DieuKien mauDK, NhanVat mcSK) {
+        DieuKien dk = mauDK.cloneDK();
+        if (dk instanceof DK_SoSanh) {
+            return dk;
+        } else if (dk instanceof DK_ThanThiet) {
+            ((DK_ThanThiet) dk).setMaNV(mcSK.getMaNV());
+        }
+        return dk;
     }
 
     /**
@@ -526,12 +560,18 @@ public class GeneratorSystem {
     }
 
     /**
-     * @param maHU
+     * @param mauHU
+     * @param mcSK
      * @return
      */
-    static public HieuUng taoHieuUng(String maHU) {
-        // TODO implement here
-        return null;
+    static public HieuUng taoHieuUng(HieuUng mauHU, NhanVat mcSK) {
+        HieuUng hu = mauHU.cloneHU();
+        if (hu instanceof HU_ThuocTinh) {
+            return hu;
+        } else if (hu instanceof HU_QuanHe) {
+            ((HU_QuanHe) hu).setMaNV(mcSK.getMaNV());
+        }
+        return hu;
     }
 
     /**
@@ -805,12 +845,12 @@ public class GeneratorSystem {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
             father = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 0, false);
-            dsMQH.add(new MoiQuanHe("Cha", father.getMaNV(), thanThiet, tinTuong));
-            father.getDSQH().add(new MoiQuanHe("Con", nv.getMaNV(), thanThiet, tinTuong));
+            dsMQH.add(new MoiQuanHe("Cha", "GIADINH", father.getMaNV(), thanThiet, tinTuong));
+            father.getDSQH().add(new MoiQuanHe("Con", "GIADINH", nv.getMaNV(), thanThiet, tinTuong));
             ModalNhanVat.themNhanVat(father);
             dsNV.add(father);
         } else {
-            father = ModalNhanVat.getNhanVat(nv.getQuanHe("Cha").get(0).getMaNV());
+            father = MainSystem.getNhanVat(nv.getQuanHe("Cha").get(0).getMaNV());
         }
 //        Mẹ
         NhanVat mother;
@@ -818,12 +858,12 @@ public class GeneratorSystem {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
             mother = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 1, false);
-            dsMQH.add(new MoiQuanHe("Mẹ", mother.getMaNV(), thanThiet, tinTuong));
-            mother.getDSQH().add(new MoiQuanHe("Con", nv.getMaNV(), thanThiet, tinTuong));
+            dsMQH.add(new MoiQuanHe("Mẹ", "GIADINH", mother.getMaNV(), thanThiet, tinTuong));
+            mother.getDSQH().add(new MoiQuanHe("Con", "GIADINH", nv.getMaNV(), thanThiet, tinTuong));
             ModalNhanVat.themNhanVat(mother);
             dsNV.add(mother);
         } else {
-            mother = ModalNhanVat.getNhanVat(nv.getQuanHe("Mẹ").get(0).getMaNV());
+            mother = MainSystem.getNhanVat(nv.getQuanHe("Mẹ").get(0).getMaNV());
         }
 //        Anh, chị, em
         int hopPhap;
@@ -850,49 +890,49 @@ public class GeneratorSystem {
             int tinTuong = myGenerator.nextInt(100);
             switch (randomACE) {
                 case 0:
-                    dsMQH.add(new MoiQuanHe("Anh", ACE.getMaNV(), thanThiet, tinTuong));
+                    dsMQH.add(new MoiQuanHe("Anh", "GIADINH", ACE.getMaNV(), thanThiet, tinTuong));
                     if (gioiTinh == 0) {
-                        MoiQuanHe mqh = new MoiQuanHe("Em gái", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Em gái", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     } else {
-                        MoiQuanHe mqh = new MoiQuanHe("Em trai", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Em trai", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     }
                     break;
                 case 1:
-                    dsMQH.add(new MoiQuanHe("Chị", ACE.getMaNV(), thanThiet, tinTuong));
+                    dsMQH.add(new MoiQuanHe("Chị", "GIADINH", ACE.getMaNV(), thanThiet, tinTuong));
                     if (gioiTinh == 0) {
-                        MoiQuanHe mqh = new MoiQuanHe("Em gái", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Em gái", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     } else {
-                        MoiQuanHe mqh = new MoiQuanHe("Em trai", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Em trai", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     }
                     break;
                 case 2:
-                    dsMQH.add(new MoiQuanHe("Em trai", ACE.getMaNV(), thanThiet, tinTuong));
+                    dsMQH.add(new MoiQuanHe("Em trai", "GIADINH", ACE.getMaNV(), thanThiet, tinTuong));
                     if (gioiTinh == 0) {
-                        MoiQuanHe mqh = new MoiQuanHe("Anh", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Anh", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     } else {
-                        MoiQuanHe mqh = new MoiQuanHe("Chị", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Chị", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     }
                     break;
                 case 3:
-                    dsMQH.add(new MoiQuanHe("Em gái", ACE.getMaNV(), thanThiet, tinTuong));
+                    dsMQH.add(new MoiQuanHe("Em gái", "GIADINH", ACE.getMaNV(), thanThiet, tinTuong));
                     if (gioiTinh == 0) {
-                        MoiQuanHe mqh = new MoiQuanHe("Anh", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Anh", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     } else {
-                        MoiQuanHe mqh = new MoiQuanHe("Chị", nv.getMaNV(), thanThiet, tinTuong);
+                        MoiQuanHe mqh = new MoiQuanHe("Chị", "GIADINH", nv.getMaNV(), thanThiet, tinTuong);
                         ACE.getDSQH().add(mqh);
                         dsACE.add(mqh);
                     }

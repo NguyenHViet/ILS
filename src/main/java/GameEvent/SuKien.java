@@ -415,6 +415,7 @@ public class SuKien implements Interface_KichHoatSK {
      */
     @Override
     public boolean kiemTraDK() {
+        
         if (dsDK == null) {
             return true;
         }
