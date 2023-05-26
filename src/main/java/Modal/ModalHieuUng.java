@@ -51,10 +51,20 @@ public class ModalHieuUng {
                 -10,
                 -5
         );
+        
+        HieuUng hu0003 = new HU_VatPham(
+                "0003",
+                "Nhặt được cục đá",
+                null,
+                "0000",
+                1,
+                false
+        );
 
         dsHieuUng.add(hu0000);
         dsHieuUng.add(hu0001);
         dsHieuUng.add(hu0002);
+        dsHieuUng.add(hu0003);
     }
 
     public static void themHieuUng(HieuUng hu) {

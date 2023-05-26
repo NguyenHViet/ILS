@@ -70,12 +70,24 @@ public class ModalDieuKien {
                 100,
                 100
         );
+        
+        DieuKien dk0005 = new DK_SoHuuVP(
+                "0005",
+                true,
+                1,
+                "Không có một cục đá",
+                "0000",
+                "NGUYENLIEU",
+                1,
+                "NHANVAT"
+        );
 
         dsDieuKien.add(dk0000);
         dsDieuKien.add(dk0001);
         dsDieuKien.add(dk0002);
         dsDieuKien.add(dk0003);
         dsDieuKien.add(dk0004);
+        dsDieuKien.add(dk0005);
     }
 
     public static void themDieuKien(DieuKien dk) {

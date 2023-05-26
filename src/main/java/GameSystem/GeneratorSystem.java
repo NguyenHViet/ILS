@@ -190,7 +190,7 @@ public class GeneratorSystem {
     static public QuocGia taoQuocGia(String maQG, BoiCanh bc) {
         String tenQG = taoTenNgauNghien(1);
         ArrayList<Tinh> dsT = new ArrayList<>();
-//        Tạo thuộc tính ban đầu cho thế giới
+//        Tạo thuộc tính ban đầu cho quốc gia
         ArrayList<ThuocTinh> dsTT = taoThuocTinhBoiCanh(bc, 10);
         QuocGia result = new QuocGia(maQG, tenQG, dsTT, bc, dsT);
         int SNT = ((ChiSo) result.getThuocTinh("SNT")).getGiaTri();
@@ -215,7 +215,7 @@ public class GeneratorSystem {
     static public Tinh taoTinh(String maT, BoiCanh bc) {
         String tenT = taoTenNgauNghien(1);
         ArrayList<DiaDanh> dsDD = new ArrayList<>();
-//        Tạo thuộc tính ban đầu cho thế giới
+//        Tạo thuộc tính ban đầu cho tỉnh
         ArrayList<ThuocTinh> dsTT = taoThuocTinhBoiCanh(bc, 10);
         Tinh result = new Tinh(maT, tenT, dsTT, bc, dsDD);
         int SNT = ((ChiSo) result.getThuocTinh("SNT")).getGiaTri();
@@ -235,15 +235,17 @@ public class GeneratorSystem {
     /**
      * @param maDD
      * @param bc
+     * @param loaiDD
      * @return
      */
-    static public DiaDanh taoDiaDanh(String maDD, BoiCanh bc) {
+    static public DiaDanh taoDiaDanh(String maDD, BoiCanh bc, int loaiDD) {
         String tenDD = taoTenNgauNghien(1);
         ArrayList<VatPham> dsTN = new ArrayList<>();
-//        Tạo thuộc tính ban đầu cho thế giới
         ArrayList<ThuocTinh> dsTT = taoThuocTinhBoiCanh(bc, 10);
         ArrayList<LuaChon> dsLC = new ArrayList<>();
-        DiaDanh result = new DiaDanh(maDD, tenDD, dsTT, bc, "", dsTN, dsLC);
+        String loaiDiaDanh = "";
+        DiaDanh result = new DiaDanh(maDD, tenDD, dsTT, bc, loaiDiaDanh, dsTN, dsLC);
+//        Lấy thuộc tính ban đầu của địa danh
         int SNT = ((ChiSo) result.getThuocTinh("SNT")).getGiaTri();
         int MNA = ((ChiSo) result.getThuocTinh("MNA")).getGiaTri();
         int MNE = ((ChiSo) result.getThuocTinh("MNE")).getGiaTri();
@@ -255,6 +257,52 @@ public class GeneratorSystem {
         int SVV = 600 - (RSC + CLM + CVL) + CLS;
         result.getDSTT().add(new ChiSo("CVL", "Trình độ văn minh", "", true, CVL, 0, 0));
         result.getDSTT().add(new ChiSo("SVV", "Độ khó sinh tồn", "", true, SVV, 0, 0));
+        
+        switch (loaiDD) {
+            case 0:
+                if (EPM > 80) {
+                    loaiDiaDanh = "Trung tâm thương mại";
+                } else if (EPM > 60) {
+                    loaiDiaDanh = "Khu chợ lớn";
+                } else if (EPM > 40) {
+                    loaiDiaDanh = "Chợ";
+                } else if (EPM > 20) {
+                    loaiDiaDanh = "Cửa hàng";
+                } else {
+                    loaiDiaDanh = "Quầy hàng rong";
+                }
+                break;
+            case 1:
+                if (MNE > 80) {
+                    loaiDiaDanh = "Trung tâm y tế";
+                } else if (MNE > 60) {
+                    loaiDiaDanh = "Bệnh viện";
+                } else if (MNE > 40) {
+                    loaiDiaDanh = "Trạm y tế";
+                } else if (MNE > 20) {
+                    loaiDiaDanh = "Quầy thuốc";
+                } else {
+                    loaiDiaDanh = "Nhà thầy thuốc";
+                }
+                break;
+            case 2:
+                if (MNE > 80) {
+                    loaiDiaDanh = "Đại học viện";
+                } else if (MNE > 60) {
+                    loaiDiaDanh = "Học viện";
+                } else if (MNE > 40) {
+                    loaiDiaDanh = "Trường chuyên";
+                } else if (MNE > 20) {
+                    loaiDiaDanh = "Trường";
+                } else {
+                    loaiDiaDanh = "Trường làng";
+                }
+                break;
+            default:
+                break;
+        }
+
+        result.setLoaiDD(loaiDiaDanh);
         return result;
     }
 
@@ -319,6 +367,8 @@ public class GeneratorSystem {
         tongDiemTP_Val -= tiemNang * 5;
         ChiSo theLuc = new ChiSo("PHY", "Thể lực", "", true, giaTri + basic, tiemNang, 0);
         dsTT.add(theLuc);
+        ChiSo sucBen = new ChiSo("STA", "Sức bền", "", false, giaTri + basic, 0, 0);
+        dsTT.add(sucBen);
 
 //        Tâm lý
 //            Thiên bẩm
@@ -395,7 +445,7 @@ public class GeneratorSystem {
                     }
                     break;
                 case "FAMILY":
-                    for (MoiQuanHe mqh: mc.getVongQuanHe("GIADINH")) {
+                    for (MoiQuanHe mqh : mc.getVongQuanHe("GIADINH")) {
                         npc = MainSystem.getNhanVat(mqh.getMaNV());
                         result.add(npc);
                         dsDTTG.remove(npc);
@@ -514,7 +564,7 @@ public class GeneratorSystem {
             }
         }
         sk.setDSDK(dsDK);
-        
+
         ArrayList<HieuUng> dsMauHU = mauSK.getDSHU();
         ArrayList<HieuUng> dsHU = new ArrayList<>();
         if (dsMauHU != null) {
@@ -802,12 +852,18 @@ public class GeneratorSystem {
                 int soLuongDiaDanh = myGenerator.nextInt(3) + 3;
 //                                Tạo địa danh
                 for (int k = 0; k < soLuongDiaDanh; k++) {
-                    DiaDanh dd = taoDiaDanh("0000", t);
+                    int loaiDD;
+                    if (k < 3) {
+                        loaiDD = k;
+                    } else {
+                        loaiDD = myGenerator.nextInt(10);
+                    }
+                    DiaDanh dd = taoDiaDanh("0000", t, loaiDD);
                     dd.setToaDo(pos);
                     UI.updateProgressContent("Đang tạo địa danh " + dd.getTenBC() + ", tỉnh " + t.getTenBC() + ", quốc gia " + qg.getTenBC());
                     dsDD.add(dd);
                     try {
-                        Thread.sleep(5);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
                     }
                     UI.updateProgress(1);

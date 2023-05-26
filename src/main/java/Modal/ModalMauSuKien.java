@@ -43,6 +43,7 @@ public class ModalMauSuKien {
         DieuKien dk0002 = Modal.ModalDieuKien.getDieuKien("0002");
         DieuKien dk0003 = Modal.ModalDieuKien.getDieuKien("0003");
         DieuKien dk0004 = Modal.ModalDieuKien.getDieuKien("0004");
+        DieuKien dk0005 = Modal.ModalDieuKien.getDieuKien("0005");
 
         LuaChon lc0000 = Modal.ModalLuaChon.getLuaChon("0000");
         LuaChon lc0001 = Modal.ModalLuaChon.getLuaChon("0001");
@@ -51,6 +52,7 @@ public class ModalMauSuKien {
         HieuUng hu0000 = Modal.ModalHieuUng.getHieuUng("0000");
         HieuUng hu0001 = Modal.ModalHieuUng.getHieuUng("0001");
         HieuUng hu0002 = Modal.ModalHieuUng.getHieuUng("0002");
+        HieuUng hu0003 = Modal.ModalHieuUng.getHieuUng("0003");
 
         ArrayList<LuaChon> dsLC = new ArrayList<>();
         ArrayList<DieuKien> dsDK = new ArrayList<>();
@@ -138,10 +140,33 @@ public class ModalMauSuKien {
                 "SUKIEN",
                 1,
                 false);
+        
+        dsDK.clear();
+        dsDK.add(dk0005);
+        
+        dsHU.clear();
+        dsHU.add(hu0003);
+
+        SuKien sk0004 = new SuKien("0004",
+                "ĐI NHẶT ĐÁ",
+                "Bạn cảm thấy chán, nên bạn đi ra ngoài chơi và nhặt được 1 cục đá.",
+                "",
+                null,
+                (ArrayList<HieuUng>) dsHU.clone(),
+                (ArrayList<DieuKien>) dsDK.clone(),
+                null,
+                null,
+                "MC",
+                0,
+                0,
+                "SUKIEN",
+                1,
+                false);
 
         dsSKBC.add(sk0000);
         dsSKBC.add(sk0001);
         dsSKHN.add(sk0003);
+        dsSKHN.add(sk0004);
         dsHQ.add(sk0002);
     }
 
