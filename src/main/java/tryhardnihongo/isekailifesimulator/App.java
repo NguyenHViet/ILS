@@ -28,6 +28,7 @@ public class App extends Application {
         Modal.ModalDieuKien.taiDieuKien();
         Modal.ModalLuaChon.taiLuaChon();
         Modal.ModalHieuUng.taiHieuUng();
+        Modal.ModalVatPham.taiVatPham();
         
         Modal.ModalMauSuKien.taiMauSuKien();
 

@@ -18,6 +18,7 @@ public class DK_ThanThiet extends DieuKien {
         super();
         this.maNV = "";
         this.loaiQH = "";
+        this.vongQuanHe = "";
         this.thanThiet = 0;
         this.tinTuong = 0;
     }

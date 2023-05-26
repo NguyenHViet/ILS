@@ -39,13 +39,14 @@ public class TrangBi extends VatPham {
      * @param maVP
      * @param tenVP
      * @param loaiVP
+     * @param moTa
      * @param dsLC
      * @param doBen
      * @param dsTT
      * @param dsHU
      */
-    public TrangBi(String maVP, String tenVP, String loaiVP, ArrayList<LuaChon> dsLC, int doBen, ArrayList<ThuocTinh> dsTT, ArrayList<HieuUng> dsHU) {
-        super(maVP, tenVP, loaiVP, dsLC);
+    public TrangBi(String maVP, String tenVP, String loaiVP, String moTa, ArrayList<LuaChon> dsLC, int doBen, ArrayList<ThuocTinh> dsTT, ArrayList<HieuUng> dsHU) {
+        super(maVP, tenVP, loaiVP, moTa, dsLC);
         this.doBen = doBen;
         this.dsTT = dsTT;
         this.dsHU = dsHU;
@@ -98,7 +99,7 @@ public class TrangBi extends VatPham {
      */
     @Override
     public TrangBi cloneVP() {
-        return new TrangBi(this.maVP, this.tenVP, this.loaiVP, this.dsLC, this.doBen, this.dsTT, this.dsHU);
+        return new TrangBi(this.maVP, this.tenVP, this.loaiVP, this.moTa, this.dsLC, this.doBen, this.dsTT, this.dsHU);
     }
 
     /**

@@ -16,8 +16,8 @@ public class DiaDanh extends BoiCanh {
     public DiaDanh() {
         super();
         this.loaiDD = "";
-        this.dsLC = new ArrayList<LuaChon>();
-        this.taiNguyen = new ArrayList<VatPham>();
+        this.dsLC = new ArrayList<>();
+        this.taiNguyen = new ArrayList<>();
     }
 
     /**

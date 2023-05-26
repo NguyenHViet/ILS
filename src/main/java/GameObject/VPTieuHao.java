@@ -32,12 +32,13 @@ public class VPTieuHao extends VatPham {
      * @param maVP
      * @param tenVP
      * @param loaiVP
+     * @param moTa
      * @param dsLC
      * @param soLuong
      * @param dsHU
      */
-    public VPTieuHao(String maVP, String tenVP, String loaiVP, ArrayList<LuaChon> dsLC, int soLuong, ArrayList<HieuUng> dsHU) {
-        super(maVP, tenVP, loaiVP, dsLC);
+    public VPTieuHao(String maVP, String tenVP, String loaiVP, String moTa, ArrayList<LuaChon> dsLC, int soLuong, ArrayList<HieuUng> dsHU) {
+        super(maVP, tenVP, loaiVP, moTa, dsLC);
         this.soLuong = soLuong;
         this.dsHU = dsHU;
     }
@@ -75,7 +76,7 @@ public class VPTieuHao extends VatPham {
      */
     @Override
     public VPTieuHao cloneVP() {
-        return new VPTieuHao(this.maVP, this.tenVP, this.loaiVP, this.dsLC, this.soLuong, this.dsHU);
+        return new VPTieuHao(this.maVP, this.tenVP, this.loaiVP, this.moTa, this.dsLC, this.soLuong, this.dsHU);
     }
 
     /**

@@ -16,6 +16,7 @@ public abstract class VatPham {
         this.maVP = "";
         this.tenVP = "";
         this.loaiVP = "";
+        this.moTa = "";
         this.dsLC = new ArrayList<LuaChon>();
     }
 
@@ -39,16 +40,38 @@ public abstract class VatPham {
      */
     protected ArrayList<LuaChon> dsLC;
 
+    protected String moTa;
+
+    /**
+     * Get the value of moTa
+     *
+     * @return the value of moTa
+     */
+    public String getMoTa() {
+        return moTa;
+    }
+
+    /**
+     * Set the value of moTa
+     *
+     * @param moTa new value of moTa
+     */
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
     /**
      * @param maVP
      * @param tenVP
      * @param loaiVP
+     * @param moTa
      * @param dsLC
      */
-    public VatPham(String maVP, String tenVP, String loaiVP, ArrayList<LuaChon> dsLC) {
+    public VatPham(String maVP, String tenVP, String loaiVP, String moTa, ArrayList<LuaChon> dsLC) {
         this.maVP = maVP;
         this.tenVP = tenVP;
         this.loaiVP = loaiVP;
+        this.moTa = moTa;
         this.dsLC = dsLC;
     }
 

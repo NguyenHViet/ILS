@@ -395,7 +395,7 @@ public class NhanVat {
                 if (mqh2.getQuanHe().equals(((HU_QuanHe) hu).getLoaiQuanHe())) {
                     int thanThiet = mqh1.getThanThiet() + ((HU_QuanHe) hu).getThanThiet();
                     int tinTuong = mqh1.getTinTuong() + ((HU_QuanHe) hu).getTinTuong();
-                    
+
                     if (thanThiet <= 0) {
                         thanThiet = 0;
                     }
@@ -419,6 +419,26 @@ public class NhanVat {
                     }
                 }
             }
+        } else if (hu instanceof HU_VatPham) {
+            VatPham vp = this.getVatPham(((HU_VatPham) hu).getMaVP());
+            if (!((HU_VatPham) hu).getSuDung()) {
+                if (vp != null) {
+                    if (vp instanceof VPTieuHao) {
+                        int soLuong = ((VPTieuHao) vp).getSoLuong();
+                        ((VPTieuHao) vp).setSoLuong(soLuong + ((HU_VatPham) hu).getSoLuong());
+                    } else {
+                        TrangBi trangBi = (TrangBi) Modal.ModalVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
+                        this.tuiDo.add(trangBi);
+                    }
+                } else {
+                    VatPham newvp = Modal.ModalVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
+                    if (newvp instanceof VPTieuHao) {
+                        ((VPTieuHao) newvp).setSoLuong(((HU_VatPham) hu).getSoLuong());
+                    }
+                    this.tuiDo.add(newvp);
+
+                }
+            }
         }
 
         this.capNhapThuocTinh();
@@ -427,6 +447,8 @@ public class NhanVat {
     /**
      */
     public void phatTrien() {
+        int sucBen = ((ChiSo) this.getThuocTinh("STA")).getGiaTri();
+
         for (ThuocTinh tt : this.dsTT) {
             if (tt instanceof ChiSo) {
                 int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getTiemNang();
@@ -436,6 +458,15 @@ public class NhanVat {
                 ((TrangThai) tt).setThoiHan(thoiHanMoi);
             }
         }
+
+        capNhapThuocTinh();
+
+        int theLuc = ((ChiSo) this.getThuocTinh("PHY")).getGiaTri() + ((ChiSo) this.getThuocTinh("PHY")).getGiaTriTamThoi();
+        sucBen += (int) theLuc * 0.8;
+        if (sucBen > theLuc) {
+            sucBen = theLuc;
+        }
+        ((ChiSo) this.getThuocTinh("STA")).setGiaTri(sucBen);
     }
 
     /**
@@ -443,8 +474,7 @@ public class NhanVat {
     public void capNhapThuocTinh() {
         for (ThuocTinh tt : this.dsTT) {
             if (tt instanceof ChiSo) {
-                int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getGiaTriTamThoi();
-                ((ChiSo) tt).setGiaTri(chiSoMoi);
+                ((ChiSo) tt).setGiaTriTamThoi(0);
             }
         }
     }
