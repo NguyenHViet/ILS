@@ -4,16 +4,21 @@
  */
 package GUI;
 
-import GameObject.NhanVat;
+import GameObject.*;
 import Modal.ModalNhanVat;
 import SupportClass.*;
+import WorldBuilder.DiaDanh;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  *
@@ -35,7 +40,7 @@ public class ProfileItemComponent {
             int giaTriHienTai = ((ChiSo) thuocTinh).getGiaTri() + ((ChiSo) thuocTinh).getGiaTriTamThoi();
             Label giaTriLabel = new Label("Giá trị:");
             Label giaTriValue = new Label(giaTriHienTai + " (" + ((ChiSo) thuocTinh).getGiaTriTamThoi() + ")");
-            Label tiemNangLabel = new Label("Tiềm năng");
+            Label tiemNangLabel = new Label("Tiềm năng:");
             Label tiemNangValue = new Label("" + ((ChiSo) thuocTinh).getTiemNang());
             profileItemContent.add(giaTriLabel, 0, 0);
             profileItemContent.add(giaTriValue, 1, 0);
@@ -75,10 +80,10 @@ public class ProfileItemComponent {
             thanThiet.setAlignment(Pos.CENTER);
             tinTuong.setAlignment(Pos.CENTER);
 
-            thanThietValue.setMinWidth(43);
-            tinTuongValue.setMinWidth(43);
-            pbThanThiet.setMinWidth(110);
-            pbTinTuong.setMinWidth(110);
+            thanThietValue.setMinWidth(38);
+            tinTuongValue.setMinWidth(38);
+            pbThanThiet.setMinWidth(105);
+            pbTinTuong.setMinWidth(105);
             pbThanThiet.setMaxHeight(15);
             pbTinTuong.setMaxHeight(15);
             profileItemContent.setMinWidth(153);
@@ -88,6 +93,45 @@ public class ProfileItemComponent {
             profileItemContent.add(tinTuongLabel, 0, 1);
             profileItemContent.add(tinTuong, 1, 1);
         }
+    }
+
+    public void loadData(VatPham vp) {
+        itemName.textProperty().setValue(vp.getTenVP());
+        if (vp instanceof VPTieuHao) {
+            Label describeLabel = new Label("Mô tả:");
+            ScrollPane descirbeBox = new ScrollPane();
+            TextFlow descirbeTF = new TextFlow();
+            Text descirbeValue = new Text(vp.getMoTa());
+            Label amountLabel = new Label("Số lượng:");
+            Label amountValue = new Label("" + ((VPTieuHao) vp).getSoLuong());
+
+            descirbeTF.getChildren().add(descirbeValue);
+            descirbeTF.setMaxWidth(135);
+            descirbeBox.setContent(descirbeTF);
+            descirbeBox.setStyle("-fx-padding: 5px");
+            descirbeBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+            profileItemContent.getColumnConstraints().get(0).setPercentWidth(25);
+            profileItemContent.getColumnConstraints().get(1).setPercentWidth(75);
+            profileItemContent.getRowConstraints().get(0).setMinHeight(75);
+            profileItemContent.getColumnConstraints().get(1).setHgrow(Priority.ALWAYS);
+
+            profileItemContent.add(describeLabel, 0, 0);
+            profileItemContent.add(descirbeBox, 1, 0);
+            profileItemContent.add(amountLabel, 0, 1);
+            profileItemContent.add(amountValue, 1, 1);
+
+            GridPane.setHgrow(descirbeBox, Priority.ALWAYS);
+            GridPane.setVgrow(descirbeBox, Priority.ALWAYS);
+        }
+    }
+
+    public void loadData(DiaDanh dd) {
+        itemName.textProperty().setValue(dd.getTenBC());
+        Label typeLabel = new Label("Loại địa danh:");
+        Label typeValue = new Label("" + dd.getLoaiDD());
+        profileItemContent.add(typeLabel, 0, 0);
+        profileItemContent.add(typeValue, 1, 0);
     }
 
 }

@@ -39,6 +39,8 @@ public class MainScreen {
     @FXML
     private Label characterRaceLabel;
     @FXML
+    private Label tinhNameLabel;
+    @FXML
     private GridPane generalProfilePane;
     @FXML
     private TextFlow eventLog;
@@ -46,7 +48,10 @@ public class MainScreen {
     private StackPane mainAreaStack;
     @FXML
     private Pane emptyPane;
-    
+
+    @FXML
+    private ProgressBar STA_Value_Bar;
+
 //    Button area
     @FXML
     private Button jobBtn;
@@ -72,6 +77,12 @@ public class MainScreen {
 
     private VBox currentEvent;
     private CurrentEventComponent currentEventController;
+    
+    private VBox inventory;
+    private InventoryComponent inventoryController;
+    
+    private VBox entertainment;
+    private EntertainmentComponent entertainmentController;
 
     private String chucNangHienTai = "";
 
@@ -89,24 +100,34 @@ public class MainScreen {
     private void initStackPane() throws IOException {
         FXMLLoader loader1 = new FXMLLoader(UI.class.getResource("MiniMapComponent.fxml"));
         worldMap = (VBox) loader1.load();
+        
         FXMLLoader loader2 = new FXMLLoader(UI.class.getResource("RelationshipComponent.fxml"));
         relationship = (VBox) loader2.load();
 
-        FXMLLoader loader = new FXMLLoader(UI.class.getResource("CurrentEventComponent.fxml"));
-        currentEvent = loader.load();
+        FXMLLoader loader3 = new FXMLLoader(UI.class.getResource("CurrentEventComponent.fxml"));
+        currentEvent = loader3.load();
+        
+        FXMLLoader loader4 = new FXMLLoader(UI.class.getResource("InventoryComponent.fxml"));
+        inventory = loader4.load();
+        
+        FXMLLoader loader5 = new FXMLLoader(UI.class.getResource("EntertainmentComponent.fxml"));
+        entertainment = loader5.load();
 
-        mainAreaStack.getChildren().add(worldMap);
-        mainAreaStack.getChildren().add(relationship);
+        reloadStackPane();
 
         worldMapController = (MiniMapComponent) loader1.getController();
         relationshipController = (RelationshipComponent) loader2.getController();
-        currentEventController = loader.getController();
+        currentEventController = (CurrentEventComponent) loader3.getController();
+        inventoryController = (InventoryComponent) loader4.getController();
+        entertainmentController = (EntertainmentComponent) loader5.getController();
     }
 
     private void reloadStackPane() {
         mainAreaStack.getChildren().clear();
         mainAreaStack.getChildren().add(worldMap);
         mainAreaStack.getChildren().add(relationship);
+        mainAreaStack.getChildren().add(inventory);
+        mainAreaStack.getChildren().add(entertainment);
         mainAreaStack.getChildren().add(emptyPane);
         mainAreaStack.getChildren().add(eventLog);
         emptyPane.toFront();
@@ -127,6 +148,8 @@ public class MainScreen {
         }
         characterAgeLabel.textProperty().setValue(String.valueOf(mc.getTuoi()));
         characterRaceLabel.textProperty().setValue(mc.getChungToc());
+        String viTri = mc.getViTri().getBoiCanh().getTenBC() + " - " + mc.getViTri().getTenBC();
+        tinhNameLabel.textProperty().setValue(viTri);
 
 //        Tải lại chỉ số nhân vật
         statusPane.getChildren().clear();
@@ -149,8 +172,11 @@ public class MainScreen {
             }
             ((ProfileItemComponent) loader.getController()).loadData(tt);
         }
+
+        double STA_Value = ((ChiSo) mc.getThuocTinh("STA")).getGiaTri() / ((ChiSo) mc.getThuocTinh("PHY")).getGiaTri();
+        STA_Value_Bar.setProgress(STA_Value);
     }
-    
+
     public void reloadButtonArea() {
         NhanVat mc = MainSystem.getNguoiChoi();
         if (mc.getTuoi() < 10) {
@@ -209,6 +235,34 @@ public class MainScreen {
         MainSystem.nhanVatPhatTrien();
         loadEvent();
         reloadButtonArea();
+    }
+    
+    @FXML
+    private void openInventory() throws IOException {
+        inventoryController.loadData(MainSystem.getNguoiChoi().getTuiDo());
+        if (!"Inventory".equals(chucNangHienTai)) {
+            emptyPane.toFront();
+            inventory.toFront();
+            chucNangHienTai = "Inventory";
+        } else {
+            inventory.toBack();
+            currentEvent.toFront();
+            chucNangHienTai = "";
+        }
+    }
+    
+    @FXML
+    private void showEntertainmentPane() throws IOException {
+        entertainmentController.loadData(MainSystem.getNguoiChoi().getViTri());
+        if (!"Entertainment".equals(chucNangHienTai)) {
+            emptyPane.toFront();
+            entertainment.toFront();
+            chucNangHienTai = "Entertainment";
+        } else {
+            entertainment.toBack();
+            currentEvent.toFront();
+            chucNangHienTai = "";
+        }
     }
 
 }
