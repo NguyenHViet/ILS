@@ -31,6 +31,8 @@ public class MainScreen {
     @FXML
     private VBox conditionPane;
     @FXML
+    private VBox identityPlanList;
+    @FXML
     private Label characterNameLabel;
     @FXML
     private Label characterGenderLabel;
@@ -177,6 +179,15 @@ public class MainScreen {
         STA_Value_Bar.setProgress(STA_Value);
     }
 
+    public void reloadLongTermEvent() throws IOException {
+        identityPlanList.getChildren().clear();
+        for (SuKien sk : MainSystem.getDsSKLauDai()) {
+            FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
+            identityPlanList.getChildren().add(loader.load());
+            ((ProfileItemComponent) loader.getController()).loadData(sk);
+        }
+    }
+
     public void reloadButtonArea() {
         NhanVat mc = MainSystem.getNguoiChoi();
         if (mc.getTuoi() < 10) {
@@ -184,10 +195,17 @@ public class MainScreen {
         } else {
             jobBtn.setDisable(false);
         }
+        
+        if (mc.getTuoi() < 3) {
+            entertainmentBtn.setDisable(true);
+        } else {
+            entertainmentBtn.setDisable(false);
+        }
     }
 
     public void loadEvent() throws IOException {
         reloadStackPane();
+        reloadLongTermEvent();
         SuKien sk = MainSystem.getSuKienHienTai();
         if (sk != null) {
             nextYearBtn.setDisable(true);
@@ -231,8 +249,8 @@ public class MainScreen {
     @FXML
     private void namKeTiep() throws IOException {
         mainAreaStack.getChildren().clear();
-        MainSystem.suKienNamKeTiep();
         MainSystem.nhanVatPhatTrien();
+        MainSystem.suKienNamKeTiep();
         loadEvent();
         reloadButtonArea();
     }

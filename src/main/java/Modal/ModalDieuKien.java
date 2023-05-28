@@ -25,7 +25,8 @@ public class ModalDieuKien {
                 "RSC",
                 20,
                 "BOICANH",
-                DK_SoSanh.NHO_HON_HOAC_BANG);
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
 
         DieuKien dk0001 = new DK_SoSanh(
                 "0001",
@@ -35,7 +36,8 @@ public class ModalDieuKien {
                 "STR",
                 20,
                 "NHANVAT",
-                DK_SoSanh.NHO_HON_HOAC_BANG);
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
 
         DieuKien dk0002 = new DK_SoSanh(
                 "0002",
@@ -45,7 +47,8 @@ public class ModalDieuKien {
                 "MNT",
                 20,
                 "NHANVAT",
-                DK_SoSanh.NHO_HON_HOAC_BANG);
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
 
         DieuKien dk0003 = new DK_ThanThiet(
                 "0003",
@@ -81,6 +84,17 @@ public class ModalDieuKien {
                 1,
                 "NHANVAT"
         );
+        
+        DieuKien dk0006 = new DK_SoSanh(
+                "0006",
+                false,
+                1,
+                "Mới ra đời",
+                "AGE",
+                0,
+                "NHANVAT",
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
 
         dsDieuKien.add(dk0000);
         dsDieuKien.add(dk0001);
@@ -88,6 +102,7 @@ public class ModalDieuKien {
         dsDieuKien.add(dk0003);
         dsDieuKien.add(dk0004);
         dsDieuKien.add(dk0005);
+        dsDieuKien.add(dk0006);
     }
 
     public static void themDieuKien(DieuKien dk) {
