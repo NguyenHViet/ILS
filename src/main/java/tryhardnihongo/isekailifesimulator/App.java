@@ -25,6 +25,7 @@ public class App extends Application {
         UI.setLoadingContent("Đang tải dữ liệu từ database ...");
         UI.setNeededContent(100);
         
+        Modal.GameDatabase.connectDatabase("jdbc:mysql://localhost:3306/game_db","root","password");
         Modal.ModalDieuKien.taiDieuKien();
         Modal.ModalLuaChon.taiLuaChon();
         
