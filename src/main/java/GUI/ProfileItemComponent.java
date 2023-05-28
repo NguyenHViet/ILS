@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import GameEvent.SuKien;
 import GameObject.*;
 import Modal.ModalNhanVat;
 import SupportClass.*;
@@ -128,10 +129,26 @@ public class ProfileItemComponent {
 
     public void loadData(DiaDanh dd) {
         itemName.textProperty().setValue(dd.getTenBC());
-        Label typeLabel = new Label("Loại địa danh:");
-        Label typeValue = new Label("" + dd.getLoaiDD());
-        profileItemContent.add(typeLabel, 0, 0);
-        profileItemContent.add(typeValue, 1, 0);
+        Label typeLabel = new Label(dd.getLoaiDD());
+
+        profileItemContent.getColumnConstraints().get(1).setHgrow(Priority.ALWAYS);
+
+        profileItemContent.add(typeLabel, 0, 0, 2, 1);
+    }
+
+    public void loadData(SuKien sk) {
+        itemName.textProperty().setValue(sk.getTenSK());
+        Label typeLabel = new Label(sk.getMoTa());
+        Label timerLabel = new Label("Thời hạn");
+        Label timerValue = new Label(sk.getMoTa());
+
+        profileItemContent.getColumnConstraints().get(0).setPercentWidth(25);
+        profileItemContent.getColumnConstraints().get(1).setPercentWidth(75);
+        profileItemContent.getColumnConstraints().get(1).setHgrow(Priority.ALWAYS);
+
+        profileItemContent.add(typeLabel, 0, 0, 2, 1);
+        profileItemContent.add(timerLabel, 0, 1);
+        profileItemContent.add(timerValue, 1, 1);
     }
 
 }
