@@ -110,9 +110,4 @@ public abstract class ThuocTinh {
      */
     abstract public String loaiTT();
 
-    /**
-     * @param hu
-     */
-    abstract public void chiuTacDong(HieuUng hu);
-
 }

@@ -114,11 +114,4 @@ public class ChiSo extends ThuocTinh {
         return "TT_CS";
     }
 
-    /**
-     * @param hu 
-     */
-    @Override
-    public void chiuTacDong(HieuUng hu) {
-    }
-
 }

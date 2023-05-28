@@ -12,6 +12,7 @@ public class MoiQuanHe {
      */
     public MoiQuanHe() {
         this.quanHe = "";
+        this.vongQuanHe = "";
         this.maNV = "";
         this.thanThiet = 0;
         this.tinTuong = 0;
@@ -37,14 +38,36 @@ public class MoiQuanHe {
      */
     private int tinTuong;
 
+    private String vongQuanHe;
+
+    /**
+     * Get the value of vongQuanHe
+     *
+     * @return the value of vongQuanHe
+     */
+    public String getVongQuanHe() {
+        return vongQuanHe;
+    }
+
+    /**
+     * Set the value of vongQuanHe
+     *
+     * @param vongQuanHe new value of vongQuanHe
+     */
+    public void setVongQuanHe(String vongQuanHe) {
+        this.vongQuanHe = vongQuanHe;
+    }
+
     /**
      * @param quanHe
+     * @param vongQuanHe
      * @param maNV
      * @param thanThiet
      * @param tinTuong
      */
-    public MoiQuanHe(String quanHe, String maNV, int thanThiet, int tinTuong) {
+    public MoiQuanHe(String quanHe, String vongQuanHe, String maNV, int thanThiet, int tinTuong) {
         this.quanHe = quanHe;
+        this.vongQuanHe = vongQuanHe;
         this.maNV = maNV;
         this.thanThiet = thanThiet;
         this.tinTuong = tinTuong;
@@ -106,7 +129,7 @@ public class MoiQuanHe {
      * @return
      */
     public MoiQuanHe cloneMQH() {
-        return new MoiQuanHe(this.quanHe, this.maNV, this.thanThiet, this.tinTuong);
+        return new MoiQuanHe(this.quanHe, this.vongQuanHe, this.maNV, this.thanThiet, this.tinTuong);
     }
 
 }

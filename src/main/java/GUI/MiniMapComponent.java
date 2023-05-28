@@ -102,6 +102,7 @@ public class MiniMapComponent {
                         int CVL = ((ChiSo) tg.getThuocTinh("CVL")).getGiaTri();
                         SVV_Label.setText(String.valueOf(SVV));
                         CVL_Label.setText(String.valueOf(CVL));
+                        SLDD_Label.setText("");
                     }
                 });
                 dsBtn.add(btn);

@@ -8,8 +8,13 @@ import GameObject.NhanVat;
 import Modal.ModalNhanVat;
 import SupportClass.ChiSo;
 import GameSystem.GeneratorSystem;
+import static GameSystem.GeneratorSystem.randomValue;
 import GameSystem.MainSystem;
+import WorldBuilder.QuocGia;
+import WorldBuilder.TheGioi;
+import WorldBuilder.Tinh;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -318,7 +323,6 @@ public class NewCharacterScreen {
     }
 
     private void saveNewCharacter() {
-        System.out.println("\nĐang lưu trữ dữ liệu đã tạo ...");
         NhanVat mc = MainSystem.getNguoiChoi();
 //        Sức khỏe
         ((ChiSo) mc.getThuocTinh("STR")).setGiaTri(STR_N_Value);
@@ -326,6 +330,7 @@ public class NewCharacterScreen {
 //        Thể lực
         ((ChiSo) mc.getThuocTinh("PHY")).setGiaTri(PHY_N_Value);
         ((ChiSo) mc.getThuocTinh("PHY")).setTiemNang(PHY_P_Value);
+        ((ChiSo) mc.getThuocTinh("STA")).setGiaTri(PHY_N_Value);
 //        Tâm lý
         ((ChiSo) mc.getThuocTinh("MNT")).setGiaTri(MNT_N_Value);
         ((ChiSo) mc.getThuocTinh("MNT")).setTiemNang(MNT_P_Value);
@@ -341,10 +346,12 @@ public class NewCharacterScreen {
             gender = 1;
         }
         mc.setGioiTinh(gender);
+        ((ChiSo) mc.getThuocTinh("GDR")).setGiaTri(gender);
+
+        ((ChiSo) mc.getThuocTinh("AGE")).setGiaTri(0);
 //        Chủng tộc
         mc.setChungToc("Nhân tộc");
 
-        System.out.println("Đã lưu!");
         ModalNhanVat.themNhanVat(mc);
     }
 
@@ -358,7 +365,11 @@ public class NewCharacterScreen {
 
     @FXML
     private void backToNewWorldScreen() throws IOException {
+        UI.startLoad();
         UI.setMainFrame("NewWorldScreen");
+        UI.setNeededContent(100);
+        UI.setLoadedContent(0);
+        UI.loadFill(5);
     }
 
     @FXML
@@ -400,6 +411,11 @@ public class NewCharacterScreen {
         task2.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent arg0) {
+                ArrayList<QuocGia> dsQG = MainSystem.getTG().getDSQG();
+                QuocGia qg = dsQG.get(new Random().nextInt(dsQG.size()));
+                ArrayList<Tinh> dsT = qg.getDST();
+                Tinh vt = dsT.get(new Random().nextInt(dsT.size()));
+                MainSystem.getNguoiChoi().diChuyen(vt);
                 try {
                     UI.setMainFrame("MainScreen");
                 } catch (IOException ex) {

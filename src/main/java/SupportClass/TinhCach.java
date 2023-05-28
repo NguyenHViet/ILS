@@ -63,11 +63,4 @@ public class TinhCach extends ThuocTinh {
         return "TT_TC";
     }
 
-    /**
-     * @param hu
-     */
-    @Override
-    public void chiuTacDong(HieuUng hu) {
-    }
-
 }

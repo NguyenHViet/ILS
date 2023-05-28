@@ -20,18 +20,26 @@ public class RelationshipComponent {
 
     @FXML
     private VBox familyRelationshipPane;
+    @FXML
+    private VBox socialRelationshipPane;
 
     public void initialize() throws IOException {
 //        loadData(MainSystem.getNguoiChoi().getDSQH());
     }
 
-    public void loadData(ArrayList<MoiQuanHe> moiQH) throws IOException {
+    public void loadData(ArrayList<MoiQuanHe> MQH) throws IOException {
+        ArrayList<MoiQuanHe> dsMQH = (ArrayList<MoiQuanHe>) MQH.clone();
         familyRelationshipPane.getChildren().clear();
-        for (MoiQuanHe mqh : moiQH) {
+        socialRelationshipPane.getChildren().clear();
+        for (MoiQuanHe mqh : dsMQH) {
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
             VBox quanHeItem = loader.load();
             quanHeItem.setPrefWidth(300);
-            familyRelationshipPane.getChildren().add(quanHeItem);
+            if ("GIADINH".equals(mqh.getVongQuanHe())) {
+                familyRelationshipPane.getChildren().add(quanHeItem);
+            } else if ("XAHOI".equals(mqh.getVongQuanHe())) {
+                socialRelationshipPane.getChildren().add(quanHeItem);
+            }
             ((ProfileItemComponent) loader.getController()).loadData(mqh);
         }
     }

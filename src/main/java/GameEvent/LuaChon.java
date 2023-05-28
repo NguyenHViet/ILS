@@ -54,6 +54,26 @@ public class LuaChon implements Interface_KichHoatSK {
 
     private String loaiDTTG;
 
+    private int soLuongDTTG;
+
+    /**
+     * Get the value of soLuongDTTG
+     *
+     * @return the value of soLuongDTTG
+     */
+    public int getSoLuongDTTG() {
+        return soLuongDTTG;
+    }
+
+    /**
+     * Set the value of soLuongDTTG
+     *
+     * @param soLuongDTTG new value of soLuongDTTG
+     */
+    public void setSoLuongDTTG(int soLuongDTTG) {
+        this.soLuongDTTG = soLuongDTTG;
+    }
+
     /**
      * Get the value of loaiDTTG
      *
@@ -86,6 +106,7 @@ public class LuaChon implements Interface_KichHoatSK {
             ArrayList<String> dsSK,
             ArrayList<DieuKien> dsDK,
             String loaiDTTG,
+            int soLuongDTTG,
             ArrayList<NhanVat> dsDTTG,
             BoiCanh boiCanh) {
         this.maLC = maLC;
@@ -93,6 +114,7 @@ public class LuaChon implements Interface_KichHoatSK {
         this.dsSK = dsSK;
         this.dsDK = dsDK;
         this.loaiDTTG = loaiDTTG;
+        this.soLuongDTTG = soLuongDTTG;
         this.dsDTTG = dsDTTG;
         this.boiCanh = boiCanh;
     }
@@ -184,6 +206,7 @@ public class LuaChon implements Interface_KichHoatSK {
                 this.dsSK,
                 this.dsDK,
                 this.loaiDTTG,
+                this.soLuongDTTG,
                 this.dsDTTG,
                 this.boiCanh);
     }

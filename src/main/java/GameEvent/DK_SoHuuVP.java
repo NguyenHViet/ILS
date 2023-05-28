@@ -70,7 +70,7 @@ public class DK_SoHuuVP extends DieuKien {
     @Override
     public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
         switch (loaiDT) {
-            case "NV":
+            case "NHANVAT":
                 int count = 0;
                 for (NhanVat nv : dsDT) {
                     int sLg = 0;
@@ -103,7 +103,7 @@ public class DK_SoHuuVP extends DieuKien {
                     }
                 }
                 break;
-            case "BC":
+            case "BOICANH":
                 if (bc instanceof DiaDanh) {
                     int sLg = 0;
                     for (VatPham vp : ((DiaDanh) bc).getTaiNguyen()) {
@@ -124,6 +124,10 @@ public class DK_SoHuuVP extends DieuKien {
                                 }
                             }
                         }
+                    }
+                    boolean KQKiemTra = (sLg >= this.soLuong);
+                    if (KQKiemTra != this.isNot) {
+                        return true;
                     }
                 }
                 break;

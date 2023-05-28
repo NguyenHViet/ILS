@@ -22,8 +22,11 @@ public class ModalLuaChon {
         DieuKien dk0002 = Modal.ModalDieuKien.getDieuKien("0002");
 
         ArrayList<DieuKien> dsDK = new ArrayList<>();
+        ArrayList<String> nextEvent = new ArrayList<>();
 
         dsDK.add(dk0001);
+
+        nextEvent.add("0002");
 
         LuaChon lc0000 = new LuaChon(
                 "0000",
@@ -31,29 +34,32 @@ public class ModalLuaChon {
                 null,
                 null,
                 "NONE",
+                0,
                 null,
                 null
         );
-        
+
         LuaChon lc0001 = new LuaChon(
                 "0001",
                 "Thật tồi tệ!",
-                null,
+                nextEvent,
                 dsDK,
                 "MC",
+                1,
                 null,
                 null
         );
 
         ArrayList<DieuKien> dsDK1 = new ArrayList<>();
         dsDK1.add(dk0002);
-        
+
         LuaChon lc0002 = new LuaChon(
                 "0002",
                 "Thật đáng sợ",
                 null,
                 dsDK1,
                 "MC",
+                1,
                 null,
                 null
         );

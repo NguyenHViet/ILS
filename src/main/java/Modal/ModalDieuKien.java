@@ -4,8 +4,7 @@
  */
 package Modal;
 
-import GameEvent.DK_SoSanh;
-import GameEvent.DieuKien;
+import GameEvent.*;
 import java.util.ArrayList;
 
 /**
@@ -25,9 +24,10 @@ public class ModalDieuKien {
                 "Tài nguyên khan hiếm",
                 "RSC",
                 20,
-                "BC",
-                DK_SoSanh.NHO_HON_HOAC_BANG);
-        
+                "BOICANH",
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
+
         DieuKien dk0001 = new DK_SoSanh(
                 "0001",
                 false,
@@ -35,8 +35,10 @@ public class ModalDieuKien {
                 "Sức khỏe yếu",
                 "STR",
                 20,
-                "NV",
-                DK_SoSanh.NHO_HON_HOAC_BANG);
+                "NHANVAT",
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
+
         DieuKien dk0002 = new DK_SoSanh(
                 "0002",
                 false,
@@ -44,12 +46,63 @@ public class ModalDieuKien {
                 "Tâm lý yếu",
                 "MNT",
                 20,
-                "NV",
-                DK_SoSanh.NHO_HON_HOAC_BANG);
+                "NHANVAT",
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
+
+        DieuKien dk0003 = new DK_ThanThiet(
+                "0003",
+                true,
+                1,
+                "Ba không thương",
+                "",
+                "Cha",
+                "GIADINH",
+                100,
+                100
+        );
         
+        DieuKien dk0004 = new DK_ThanThiet(
+                "0004",
+                true,
+                1,
+                "Mẹ không yêu",
+                "",
+                "Mẹ",
+                "GIADINH",
+                100,
+                100
+        );
+        
+        DieuKien dk0005 = new DK_SoHuuVP(
+                "0005",
+                true,
+                1,
+                "Không có một cục đá",
+                "0000",
+                "NGUYENLIEU",
+                1,
+                "NHANVAT"
+        );
+        
+        DieuKien dk0006 = new DK_SoSanh(
+                "0006",
+                false,
+                1,
+                "Mới ra đời",
+                "AGE",
+                0,
+                "NHANVAT",
+                DK_SoSanh.NHO_HON_HOAC_BANG
+        );
+
         dsDieuKien.add(dk0000);
         dsDieuKien.add(dk0001);
         dsDieuKien.add(dk0002);
+        dsDieuKien.add(dk0003);
+        dsDieuKien.add(dk0004);
+        dsDieuKien.add(dk0005);
+        dsDieuKien.add(dk0006);
     }
 
     public static void themDieuKien(DieuKien dk) {

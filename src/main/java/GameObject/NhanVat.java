@@ -71,8 +71,6 @@ public class NhanVat {
      */
     private ArrayList<KyNang> dsKyNang;
 
-    private int tuoi;
-
     private String chungToc;
 
     private boolean playable;
@@ -95,22 +93,12 @@ public class NhanVat {
         this.playable = playable;
     }
 
-    /**
-     * Get the value of tuoi
-     *
-     * @return the value of tuoi
-     */
     public int getTuoi() {
-        return tuoi;
+        return ((ChiSo) getThuocTinh("AGE")).getGiaTri();
     }
 
-    /**
-     * Set the value of tuoi
-     *
-     * @param tuoi new value of tuoi
-     */
     public void setTuoi(int tuoi) {
-        this.tuoi = tuoi;
+        ((ChiSo) getThuocTinh("AGE")).setGiaTri(tuoi);
     }
 
     /**
@@ -147,9 +135,7 @@ public class NhanVat {
      */
     public NhanVat(String maNV,
             String hoTen,
-            int gioiTinh,
             String chungToc,
-            int tuoi,
             ArrayList<ThuocTinh> dsTT,
             ArrayList<MoiQuanHe> dsQH,
             ArrayList<VatPham> tuiDo,
@@ -161,7 +147,6 @@ public class NhanVat {
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.chungToc = chungToc;
-        this.tuoi = tuoi;
         this.dsTT = dsTT;
         this.dsQH = dsQH;
         this.tuiDo = tuiDo;
@@ -222,6 +207,16 @@ public class NhanVat {
         ArrayList<MoiQuanHe> result = new ArrayList<MoiQuanHe>();
         for (MoiQuanHe qh : this.dsQH) {
             if (qh.getQuanHe().equals(quanHe)) {
+                result.add(qh);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<MoiQuanHe> getVongQuanHe(String vongQuanHe) {
+        ArrayList<MoiQuanHe> result = new ArrayList<MoiQuanHe>();
+        for (MoiQuanHe qh : this.dsQH) {
+            if (qh.getVongQuanHe().equals(vongQuanHe)) {
                 result.add(qh);
             }
         }
@@ -302,7 +297,7 @@ public class NhanVat {
     }
 
     public int getGioiTinh() {
-        return gioiTinh;
+        return ((ChiSo) getThuocTinh("GDR")).getGiaTri();
     }
 
     /**
@@ -316,7 +311,7 @@ public class NhanVat {
      * @param maGT
      */
     public void setGioiTinh(int maGT) {
-        this.gioiTinh = maGT;
+        ((ChiSo) getThuocTinh("GDR")).setGiaTri(maGT);
     }
 
     /**
@@ -365,12 +360,95 @@ public class NhanVat {
      * @param hu
      */
     public void chiuTacDong(HieuUng hu) {
+        if (hu instanceof HU_ThuocTinh) {
+            ThuocTinh tt = this.getThuocTinh(((HU_ThuocTinh) hu).getMaTT());
+            if (tt != null) {
+                if (tt instanceof ChiSo) {
+                    int giaTri = ((ChiSo) tt).getGiaTri();
+                    int tamThoi = ((ChiSo) tt).getGiaTriTamThoi();
+                    int tiemNang = ((ChiSo) tt).getTiemNang();
 
+                    ((ChiSo) tt).setGiaTri(giaTri + ((HU_ThuocTinh) hu).getTangGiaTri());
+                    ((ChiSo) tt).setGiaTriTamThoi(tamThoi + ((HU_ThuocTinh) hu).getTangTamThoi());
+                    ((ChiSo) tt).setTiemNang(tiemNang + ((HU_ThuocTinh) hu).getTangTiemNang());
+                }
+            } else {
+                if (tt instanceof ChiSo) {
+                    this.dsTT.add(new ChiSo(
+                            ((HU_ThuocTinh) hu).getMaTT(),
+                            "",
+                            "",
+                            false,
+                            ((HU_ThuocTinh) hu).getTangGiaTri(),
+                            ((HU_ThuocTinh) hu).getTangTiemNang(),
+                            ((HU_ThuocTinh) hu).getTangTamThoi()
+                    ));
+                }
+            }
+        } else if (hu instanceof HU_QuanHe) {
+            MoiQuanHe mqh1 = this.getMoiQuanHe(((HU_QuanHe) hu).getMaNV());
+
+            NhanVat nv = GameSystem.MainSystem.getNhanVat(((HU_QuanHe) hu).getMaNV());
+            MoiQuanHe mqh2 = nv.getMoiQuanHe(this.maNV);
+
+            if (mqh1 != null && mqh2 != null) {
+                if (mqh2.getQuanHe().equals(((HU_QuanHe) hu).getLoaiQuanHe())) {
+                    int thanThiet = mqh1.getThanThiet() + ((HU_QuanHe) hu).getThanThiet();
+                    int tinTuong = mqh1.getTinTuong() + ((HU_QuanHe) hu).getTinTuong();
+
+                    if (thanThiet <= 0) {
+                        thanThiet = 0;
+                    }
+                    if (tinTuong <= 0) {
+                        tinTuong = 0;
+                    }
+
+                    mqh1.setThanThiet(thanThiet);
+                    mqh1.setTinTuong(tinTuong);
+                    mqh2.setThanThiet(thanThiet);
+                    mqh2.setTinTuong(tinTuong);
+
+                    if (!((HU_QuanHe) hu).getMQHMoiTuNV().isBlank()
+                            || !((HU_QuanHe) hu).getMQHMoiTuNV().isEmpty()) {
+                        mqh1.setQuanHe(((HU_QuanHe) hu).getMQHMoiTuNV());
+                    }
+
+                    if (!((HU_QuanHe) hu).getMQHMoiDenNV().isBlank()
+                            || !((HU_QuanHe) hu).getMQHMoiDenNV().isEmpty()) {
+                        mqh2.setQuanHe(((HU_QuanHe) hu).getMQHMoiDenNV());
+                    }
+                }
+            }
+        } else if (hu instanceof HU_VatPham) {
+            VatPham vp = this.getVatPham(((HU_VatPham) hu).getMaVP());
+            if (!((HU_VatPham) hu).getSuDung()) {
+                if (vp != null) {
+                    if (vp instanceof VPTieuHao) {
+                        int soLuong = ((VPTieuHao) vp).getSoLuong();
+                        ((VPTieuHao) vp).setSoLuong(soLuong + ((HU_VatPham) hu).getSoLuong());
+                    } else {
+                        TrangBi trangBi = (TrangBi) Modal.ModalVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
+                        this.tuiDo.add(trangBi);
+                    }
+                } else {
+                    VatPham newvp = Modal.ModalVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
+                    if (newvp instanceof VPTieuHao) {
+                        ((VPTieuHao) newvp).setSoLuong(((HU_VatPham) hu).getSoLuong());
+                    }
+                    this.tuiDo.add(newvp);
+
+                }
+            }
+        }
+
+        this.capNhapThuocTinh();
     }
 
     /**
      */
     public void phatTrien() {
+        int sucBen = ((ChiSo) this.getThuocTinh("STA")).getGiaTri();
+
         for (ThuocTinh tt : this.dsTT) {
             if (tt instanceof ChiSo) {
                 int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getTiemNang();
@@ -380,12 +458,25 @@ public class NhanVat {
                 ((TrangThai) tt).setThoiHan(thoiHanMoi);
             }
         }
+
+        capNhapThuocTinh();
+
+        int theLuc = ((ChiSo) this.getThuocTinh("PHY")).getGiaTri() + ((ChiSo) this.getThuocTinh("PHY")).getGiaTriTamThoi();
+        sucBen += (int) theLuc * 0.8;
+        if (sucBen > theLuc) {
+            sucBen = theLuc;
+        }
+        ((ChiSo) this.getThuocTinh("STA")).setGiaTri(sucBen);
     }
 
     /**
      */
     public void capNhapThuocTinh() {
-        // TODO implement here
+        for (ThuocTinh tt : this.dsTT) {
+            if (tt instanceof ChiSo) {
+                ((ChiSo) tt).setGiaTriTamThoi(0);
+            }
+        }
     }
 
     /**
@@ -395,9 +486,7 @@ public class NhanVat {
         return new NhanVat(
                 this.maNV,
                 this.hoTen,
-                this.gioiTinh,
                 this.chungToc,
-                this.tuoi,
                 this.dsTT,
                 this.dsQH,
                 this.tuiDo,
@@ -411,9 +500,9 @@ public class NhanVat {
         System.out.println("Thong tin nhan vat");
         System.out.println("\t+ Ma nhan vat: " + this.maNV);
         System.out.println("\t+ Ten nhan vat: " + this.hoTen);
-        System.out.println("\t+ Gioi tinh: " + this.gioiTinh);
+        System.out.println("\t+ Gioi tinh: " + this.getGioiTinh());
         System.out.println("\t+ Chung toc: " + this.chungToc);
-        System.out.println("\t+ Tuoi: " + this.tuoi);
+        System.out.println("\t+ Tuoi: " + this.getTuoi());
         System.out.println();
     }
 

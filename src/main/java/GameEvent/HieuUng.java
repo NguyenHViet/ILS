@@ -88,8 +88,18 @@ public abstract class HieuUng implements Interface_KiemTraDK {
      * @return
      */
     abstract public String loaiHU();
-    
+
     @Override
-    abstract public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc);
-    
+    public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
+        if (dsDK == null) {
+            return true;
+        }
+        for (DieuKien dk : dsDK) {
+            if (!dk.kiemTraDK(dsDT, bc)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

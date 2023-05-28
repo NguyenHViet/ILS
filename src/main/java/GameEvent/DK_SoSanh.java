@@ -139,7 +139,7 @@ public class DK_SoSanh extends DieuKien {
         int giaTriKiemTra = 0;
         switch (loaiDT) {
 //            Nhân vật
-            case "NV":
+            case "NHANVAT":
                 int count = 0;
                 for (NhanVat nv : dsDT) {
                     ThuocTinh tt = nv.getThuocTinh(this.maTT);
@@ -162,7 +162,7 @@ public class DK_SoSanh extends DieuKien {
                 }
                 break;
 //            Bối cảnh
-            case "BC":
+            case "BOICANH":
                 ThuocTinh tt = bc.getThuocTinh(this.maTT);
                 if (tt != null) {
                     if (tt instanceof ChiSo) {

@@ -15,7 +15,9 @@ public class HU_QuanHe extends HieuUng {
     public HU_QuanHe() {
         super();
         this.maNV = "";
-        this.moiQH = "";
+        this.loaiQuanHe = "";
+        this.MQHMoiTuNV = "";
+        this.MQHMoiDenNV = "";
         this.thanThiet = 0;
         this.tinTuong = 0;
     }
@@ -28,7 +30,7 @@ public class HU_QuanHe extends HieuUng {
     /**
      *
      */
-    private String moiQH;
+    private String MQHMoiTuNV;
 
     /**
      *
@@ -40,19 +42,71 @@ public class HU_QuanHe extends HieuUng {
      */
     private int tinTuong;
 
+    private String MQHMoiDenNV;
+
+    private String loaiQuanHe;
+
+    /**
+     * Get the value of loaiQuanHe
+     *
+     * @return the value of loaiQuanHe
+     */
+    public String getLoaiQuanHe() {
+        return loaiQuanHe;
+    }
+
+    /**
+     * Set the value of loaiQuanHe
+     *
+     * @param loaiQuanHe new value of loaiQuanHe
+     */
+    public void setLoaiQuanHe(String loaiQuanHe) {
+        this.loaiQuanHe = loaiQuanHe;
+    }
+
+    /**
+     * Get the value of MQHMoiDenNV
+     *
+     * @return the value of MQHMoiDenNV
+     */
+    public String getMQHMoiDenNV() {
+        return MQHMoiDenNV;
+    }
+
+    /**
+     * Set the value of MQHMoiDenNV
+     *
+     * @param MQHMoiDenNV new value of MQHMoiDenNV
+     */
+    public void setMQHMoiDenNV(String MQHMoiDenNV) {
+        this.MQHMoiDenNV = MQHMoiDenNV;
+    }
+
     /**
      * @param maHU
      * @param moTa
      * @param dsDK
      * @param maNV
-     * @param moiQH
+     * @param loaiQuanHe
+     * @param MQHMoiTuNV
+     * @param MQHMoiDenNV
      * @param thanThiet
      * @param tinTuong
      */
-    public HU_QuanHe(String maHU, String moTa, ArrayList<DieuKien> dsDK, String maNV, String moiQH, int thanThiet, int tinTuong) {
+    public HU_QuanHe(String maHU,
+            String moTa,
+            ArrayList<DieuKien> dsDK,
+            String maNV,
+            String loaiQuanHe,
+            String MQHMoiTuNV,
+            String MQHMoiDenNV,
+            int thanThiet,
+            int tinTuong) {
         super(maHU, moTa, dsDK);
         this.maNV = maNV;
-        this.moiQH = moiQH;
+        this.loaiQuanHe = loaiQuanHe;
+        this.MQHMoiTuNV = MQHMoiTuNV;
+        this.MQHMoiDenNV = MQHMoiDenNV;
         this.thanThiet = thanThiet;
         this.tinTuong = tinTuong;
     }
@@ -67,8 +121,8 @@ public class HU_QuanHe extends HieuUng {
     /**
      * @return
      */
-    public String getMoiQH() {
-        return this.moiQH;
+    public String getMQHMoiTuNV() {
+        return this.MQHMoiTuNV;
     }
 
     /**
@@ -93,10 +147,10 @@ public class HU_QuanHe extends HieuUng {
     }
 
     /**
-     * @param moiQH
+     * @param MQHMoiTuNV
      */
-    public void setMoiQH(String moiQH) {
-        this.moiQH = moiQH;
+    public void setMQHMoiTuNV(String MQHMoiTuNV) {
+        this.MQHMoiTuNV = MQHMoiTuNV;
     }
 
     /**
@@ -118,7 +172,16 @@ public class HU_QuanHe extends HieuUng {
      */
     @Override
     public HU_QuanHe cloneHU() {
-        return new HU_QuanHe(this.maHU, this.moTa, this.dsDK, this.maNV, this.moiQH, this.thanThiet, this.tinTuong);
+        return new HU_QuanHe(
+                this.maHU,
+                this.moTa,
+                this.dsDK,
+                this.maNV,
+                this.loaiQuanHe,
+                this.MQHMoiTuNV,
+                this.MQHMoiDenNV,
+                this.thanThiet,
+                this.tinTuong);
     }
 
     /**
@@ -127,16 +190,6 @@ public class HU_QuanHe extends HieuUng {
     @Override
     public String loaiHU() {
         return "HU_QH";
-    }
-
-    /**
-     * @param dsDT
-     * @param bc
-     * @return 
-     */
-    @Override
-    public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
-        return false;
     }
 
 }
