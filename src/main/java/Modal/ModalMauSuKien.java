@@ -44,7 +44,6 @@ public class ModalMauSuKien {
         DieuKien dk0003 = Modal.ModalDieuKien.getDieuKien("0003");
         DieuKien dk0004 = Modal.ModalDieuKien.getDieuKien("0004");
         DieuKien dk0005 = Modal.ModalDieuKien.getDieuKien("0005");
-        DieuKien dk0006 = Modal.ModalDieuKien.getDieuKien("0006");
 
         LuaChon lc0000 = Modal.ModalLuaChon.getLuaChon("0000");
         LuaChon lc0001 = Modal.ModalLuaChon.getLuaChon("0001");
@@ -79,7 +78,7 @@ public class ModalMauSuKien {
                 "NONE",
                 0,
                 0,
-                "BOICANH",
+                "SUKIEN",
                 0.99,
                 false);
 
@@ -95,7 +94,7 @@ public class ModalMauSuKien {
                 "MC",
                 0,
                 0,
-                "BOICANH",
+                "SUKIEN",
                 1,
                 false);
 
@@ -121,7 +120,7 @@ public class ModalMauSuKien {
         dsDK.clear();
         dsDK.add(dk0003);
         dsDK.add(dk0004);
-
+        
         dsHU.clear();
         dsHU.add(hu0001);
         dsHU.add(hu0002);
@@ -135,16 +134,16 @@ public class ModalMauSuKien {
                 (ArrayList<DieuKien>) dsDK.clone(),
                 null,
                 null,
-                "GIADINH",
+                "FAMILY",
                 0,
                 0,
                 "SUKIEN",
                 1,
                 false);
-
+        
         dsDK.clear();
         dsDK.add(dk0005);
-
+        
         dsHU.clear();
         dsHU.add(hu0003);
 
@@ -160,35 +159,15 @@ public class ModalMauSuKien {
                 "MC",
                 0,
                 0,
-                "HANGNAM",
-                1,
-                false);
-
-        dsDK.clear();
-        dsDK.add(dk0006);
-
-        SuKien sk0005 = new SuKien("0005",
-                "SỐNG KHỞE",
-                "Bạn đã sống được 5 năm.",
-                "",
-                null,
-                null,
-                null,
-                null,
-                null,
-                "MC",
-                0,
-                5,
-                "KYVONG",
+                "SUKIEN",
                 1,
                 false);
 
         dsSKBC.add(sk0000);
         dsSKBC.add(sk0001);
-        dsHQ.add(sk0002);
         dsSKHN.add(sk0003);
         dsSKHN.add(sk0004);
-        dsSKHN.add(sk0005);
+        dsHQ.add(sk0002);
     }
 
     public static SuKien getMauSuKien(String maSK) {

@@ -31,8 +31,6 @@ public class MainScreen {
     @FXML
     private VBox conditionPane;
     @FXML
-    private VBox identityPlanList;
-    @FXML
     private Label characterNameLabel;
     @FXML
     private Label characterGenderLabel;
@@ -79,10 +77,10 @@ public class MainScreen {
 
     private VBox currentEvent;
     private CurrentEventComponent currentEventController;
-
+    
     private VBox inventory;
     private InventoryComponent inventoryController;
-
+    
     private VBox entertainment;
     private EntertainmentComponent entertainmentController;
 
@@ -95,22 +93,23 @@ public class MainScreen {
         reloadProfile();
         reloadButtonArea();
         MainSystem.suKienNamKeTiep();
+
         loadEvent();
     }
 
     private void initStackPane() throws IOException {
         FXMLLoader loader1 = new FXMLLoader(UI.class.getResource("MiniMapComponent.fxml"));
         worldMap = (VBox) loader1.load();
-
+        
         FXMLLoader loader2 = new FXMLLoader(UI.class.getResource("RelationshipComponent.fxml"));
         relationship = (VBox) loader2.load();
 
         FXMLLoader loader3 = new FXMLLoader(UI.class.getResource("CurrentEventComponent.fxml"));
         currentEvent = loader3.load();
-
+        
         FXMLLoader loader4 = new FXMLLoader(UI.class.getResource("InventoryComponent.fxml"));
         inventory = loader4.load();
-
+        
         FXMLLoader loader5 = new FXMLLoader(UI.class.getResource("EntertainmentComponent.fxml"));
         entertainment = loader5.load();
 
@@ -178,15 +177,6 @@ public class MainScreen {
         STA_Value_Bar.setProgress(STA_Value);
     }
 
-    public void reloadLongTermEvent() throws IOException {
-        identityPlanList.getChildren().clear();
-        for (SuKien sk : MainSystem.getDsSKLauDai()) {
-            FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
-            identityPlanList.getChildren().add(loader.load());
-//            ((ProfileItemComponent) loader.getController()).loadData();
-        }
-    }
-
     public void reloadButtonArea() {
         NhanVat mc = MainSystem.getNguoiChoi();
         if (mc.getTuoi() < 10) {
@@ -198,7 +188,6 @@ public class MainScreen {
 
     public void loadEvent() throws IOException {
         reloadStackPane();
-        reloadLongTermEvent();
         SuKien sk = MainSystem.getSuKienHienTai();
         if (sk != null) {
             nextYearBtn.setDisable(true);
@@ -242,12 +231,12 @@ public class MainScreen {
     @FXML
     private void namKeTiep() throws IOException {
         mainAreaStack.getChildren().clear();
-        MainSystem.nhanVatPhatTrien();
         MainSystem.suKienNamKeTiep();
+        MainSystem.nhanVatPhatTrien();
         loadEvent();
         reloadButtonArea();
     }
-
+    
     @FXML
     private void openInventory() throws IOException {
         inventoryController.loadData(MainSystem.getNguoiChoi().getTuiDo());
@@ -261,7 +250,7 @@ public class MainScreen {
             chucNangHienTai = "";
         }
     }
-
+    
     @FXML
     private void showEntertainmentPane() throws IOException {
         entertainmentController.loadData(MainSystem.getNguoiChoi().getViTri());

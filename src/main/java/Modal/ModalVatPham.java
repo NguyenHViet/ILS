@@ -21,7 +21,7 @@ public class ModalVatPham {
                 "0000",
                 "Cục đá",
                 "NGUYENLIEU",
-                "Cục đá vô tri.",
+                "Một cục đá bình thường.",
                 null,
                 0,
                 null
