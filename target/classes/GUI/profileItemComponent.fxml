@@ -18,7 +18,7 @@
       <HBox prefWidth="200.0" spacing="5.0">
          <children>
             <ImageView fx:id="itemImage" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
-            <GridPane fx:id="profileItemContent">
+            <GridPane fx:id="profileItemContent" hgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="91.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="91.0" />
