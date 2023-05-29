@@ -21,99 +21,46 @@ public class GameDatabase {
      */
     static private String maTG;
     
-    /**
-     *
-     */
-    static private ArrayList<NhanVat> dsNhanVat;
-    
-    /**
-     *
-     */
-    static private ArrayList<VatPham> dsVatPham;
-    
-    /**
-     *
-     */
-    static private ArrayList<TrangBi> dsTrangBi;
-    
-    /**
-     *
-     */
-    static private ArrayList<VPTieuHao> dsVPTieuHao;
-    
-    /**
-     *
-     */
-    static private ArrayList<SuKien> dsSuKien;
-    
-    /**
-     *
-     */
-    static private ArrayList<LuaChon> dsLuaChon;
-    
-    
-    /**
-     *
-     */
-    static private ArrayList<HieuUng> dsHieuUng;
-    
-    
-    /**
-     *
-     */
-    static private ArrayList<DK_CapDo> dsDK_CapDo;
-    
-    
-    /**
-     *
-     */
-    static private ArrayList<DK_ChiuTacDong> dsDK_ChiuTacDong;
-    
-    
-    /**
-     *
-     */
-    static private ArrayList<DK_SoHuuVP> dsDK_SoHuuVP;
-    
-    /**
-     *
-     */
-    static private ArrayList<DK_SoSanh> dsDK_SoSanh;
-    
-    /**
-     *
-     */
-    static private ArrayList<DK_ThanThiet> dsDK_ThanThiet;
-    
-    /**
-     *
-     */
-    static private ArrayList<DK_ThongThao> dsDK_ThongThao;
-    
-    /**
-     *
-     */
-    static private ArrayList<HU_KyNang> dsHU_KyNang;
-    
-    /**
-     *
-     */
-    static private ArrayList<HU_NgheNghiep> dsHU_NgheNghiep;
-    
-    /**
-     *
-     */
-    static private ArrayList<HU_QuanHe> dsHU_QuanHe;
-    
-    /**
-     *
-     */
-    static private ArrayList<HU_ThuocTinh> dsHU_ThuocTinh;
-    
-    /**
-     *
-     */
-    static private ArrayList<HU_VatPham> dsHU_VatPham;
+
+    static private ArrayList<HashMap> dsNhanVat = new ArrayList<>();
+    static private ArrayList<HashMap> dsVatPham = new ArrayList<>();
+    static private ArrayList<HashMap> dsThuocTinh = new ArrayList<>();
+    static private ArrayList<HashMap> dsKyNang = new ArrayList<>();
+    static private ArrayList<HashMap> dsNgheNghiep = new ArrayList<>();
+    static private ArrayList<HashMap> dsChucVu = new ArrayList<>();
+    static private ArrayList<HashMap> dsBoiCanh = new ArrayList<>();
+    static private ArrayList<HashMap> dsDauAn = new ArrayList<>();
+    static private ArrayList<HashMap> dsThuongMai = new ArrayList<>();
+    static private ArrayList<HashMap> dsSuKien = new ArrayList<>();
+    static private ArrayList<HashMap> dsLuaChon = new ArrayList<>();
+    static private ArrayList<HashMap> dsHieuUng = new ArrayList<>();
+    static private ArrayList<HashMap> dsQuanHe = new ArrayList<>();
+    static private ArrayList<HashMap> dsDieuKien = new ArrayList<>();
+    static private ArrayList<HashMap> dsBC_BC = new ArrayList<>();
+    static private ArrayList<HashMap> dsBC_TN = new ArrayList<>();
+    static private ArrayList<HashMap> dsDK_HU = new ArrayList<>();
+    static private ArrayList<HashMap> dsDK_KN = new ArrayList<>();
+    static private ArrayList<HashMap> dsDK_NN = new ArrayList<>();
+    static private ArrayList<HashMap> dsDK_QH = new ArrayList<>();
+    static private ArrayList<HashMap> dsDK_TT = new ArrayList<>();
+    static private ArrayList<HashMap> dsDK_VP = new ArrayList<>();
+    static private ArrayList<HashMap> dsHU_KN = new ArrayList<>();
+    static private ArrayList<HashMap> dsHU_NN = new ArrayList<>();
+    static private ArrayList<HashMap> dsHU_QH = new ArrayList<>();
+    static private ArrayList<HashMap> dsHU_TT = new ArrayList<>();
+    static private ArrayList<HashMap> dsHU_VP = new ArrayList<>();
+    static private ArrayList<HashMap> dsLC_DK = new ArrayList<>();
+    static private ArrayList<HashMap> dsMLC_MSK = new ArrayList<>();
+    static private ArrayList<HashMap> dsMSK_MLC = new ArrayList<>();
+    static private ArrayList<HashMap> dsNV_KN = new ArrayList<>();
+    static private ArrayList<HashMap> dsNV_TT = new ArrayList<>();
+    static private ArrayList<HashMap> dsNV_VP = new ArrayList<>();
+    static private ArrayList<HashMap> dsNV_NN_CV = new ArrayList<>();
+    static private ArrayList<HashMap> dsSK_DK = new ArrayList<>();
+    static private ArrayList<HashMap> dsSK_HU = new ArrayList<>();
+    static private ArrayList<HashMap> dsSK_NV = new ArrayList<>();
+    static private ArrayList<HashMap> dsVP_HU = new ArrayList<>();
+    static private ArrayList<HashMap> dsVP_TT= new ArrayList<>();
     
     static private HashMap getMoTa(ArrayList<HashMap> dsMoTa, String MaMT){
         for(HashMap temp: dsMoTa){
@@ -124,15 +71,7 @@ public class GameDatabase {
         }
         return new HashMap<>();
     };
-    static private HashMap getTT(ArrayList<HashMap> dsTT, String MaTT){
-        for(HashMap temp: dsTT){
-            String value = (String) temp.get("MaMT");
-            if (value != null && value.equals(MaTT)) {
-                return temp;
-            }
-        }
-        return new HashMap<>();
-    };
+
     /**
      * @param dbURL
      * @param username
@@ -188,46 +127,7 @@ public class GameDatabase {
             String queryVP_TT = "SELECT * FROM VatPham_ThuocTinh";
             
             // Lưu các bảng phụ
-            ArrayList<HashMap> dsNV = new ArrayList<>();
-            ArrayList<HashMap> dsVP = new ArrayList<>();
-            ArrayList<HashMap> dsHU = new ArrayList<>();
-            ArrayList<HashMap> dsNN = new ArrayList<>();
-            ArrayList<HashMap> dsCV = new ArrayList<>();
-            ArrayList<HashMap> dsTT = new ArrayList<>();
             ArrayList<HashMap> dsMoTa = new ArrayList<>();
-            ArrayList<HashMap> dsBC = new ArrayList<>();
-            ArrayList<HashMap> dsMSK = new ArrayList<>();
-            ArrayList<HashMap> dsDK = new ArrayList<>();
-            ArrayList<HashMap> dsKN = new ArrayList<>();
-            ArrayList<HashMap> dsMLC = new ArrayList<>();
-            ArrayList<HashMap> dsMQH = new ArrayList<>();
-            ArrayList<HashMap> dsTM = new ArrayList<>();
-            ArrayList<HashMap> dsDA= new ArrayList<>();
-            ArrayList<HashMap> dsBC_BC = new ArrayList<>();
-            ArrayList<HashMap> dsBC_TN = new ArrayList<>();
-            ArrayList<HashMap> dsDK_HU = new ArrayList<>();
-            ArrayList<HashMap> dsDK_KN = new ArrayList<>();
-            ArrayList<HashMap> dsDK_NN = new ArrayList<>();
-            ArrayList<HashMap> dsDK_QH = new ArrayList<>();
-            ArrayList<HashMap> dsDK_TT = new ArrayList<>();
-            ArrayList<HashMap> dsDK_VP = new ArrayList<>();
-            ArrayList<HashMap> dsHU_KN = new ArrayList<>();
-            ArrayList<HashMap> dsHU_NN = new ArrayList<>();
-            ArrayList<HashMap> dsHU_QH = new ArrayList<>();
-            ArrayList<HashMap> dsHU_TT = new ArrayList<>();
-            ArrayList<HashMap> dsHU_VP = new ArrayList<>();
-            ArrayList<HashMap> dsLC_DK = new ArrayList<>();
-            ArrayList<HashMap> dsMLC_MSK = new ArrayList<>();
-            ArrayList<HashMap> dsMSK_MLC = new ArrayList<>();
-            ArrayList<HashMap> dsNV_KN = new ArrayList<>();
-            ArrayList<HashMap> dsNV_TT = new ArrayList<>();
-            ArrayList<HashMap> dsNV_VP = new ArrayList<>();
-            ArrayList<HashMap> dsNV_NN_CV= new ArrayList<>();
-            ArrayList<HashMap> dsSK_DK= new ArrayList<>();
-            ArrayList<HashMap> dsSK_HU= new ArrayList<>();
-            ArrayList<HashMap> dsSK_NV= new ArrayList<>();
-            ArrayList<HashMap> dsVP_HU= new ArrayList<>();
-            ArrayList<HashMap> dsVP_TT= new ArrayList<>();
 
             Statement statement = conn.createStatement();
             
@@ -258,7 +158,7 @@ public class GameDatabase {
                 if(MC != null){
                     NV.put("NguoiChoi", MC);
                 }
-                dsNV.add(NV);
+                GameDatabase.dsNhanVat.add(NV);
             }
             
             // Lấy dữ liệu từ bảng VatPham
@@ -272,7 +172,7 @@ public class GameDatabase {
                 temp.put("doBen", bangVP.getString("doBen"));
                 temp.put("MoTa",(String) getMoTa(dsMoTa, bangVP.getString("idMoTa")).get("NoiDung"));
                 
-                dsVP.add(temp);
+                GameDatabase.dsVatPham.add(temp);
             }
             
             // Lấy dữ liệu từ bảng HieuUng
@@ -283,7 +183,7 @@ public class GameDatabase {
                 temp.put("MaHU", bangHU.getString("idHieuUng"));
                 temp.put("LoaiSK", bangHU.getString("loaiSuKien"));
                 temp.put("MoTa",(String) getMoTa(dsMoTa, bangHU.getString("idMoTa")).get("NoiDung"));
-                dsHU.add(temp);
+                GameDatabase.dsHieuUng.add(temp);
             }
             
             // Lấy dữ liệu từ bảng NgheNghiep
@@ -294,7 +194,7 @@ public class GameDatabase {
                 temp.put("MaNN", bangNN.getString("idNgheNghiep"));
                 temp.put("TenNN", bangNN.getString("tenNgheNghiep"));
                 temp.put("MoTa",(String) getMoTa(dsMoTa, bangNN.getString("idMoTa")).get("NoiDung"));
-                dsNN.add(temp);
+                GameDatabase.dsNgheNghiep.add(temp);
             }
             
             // Lấy dữ liệu từ bảng ChucVu
@@ -308,7 +208,7 @@ public class GameDatabase {
                 temp.put("MoTa",(String) getMoTa(dsMoTa, bangCV.getString("idMoTa")).get("NoiDung"));
                 temp.put("CapBac", bangCV.getString("capBac"));
                 temp.put("LCB", bangCV.getString("luongCoBan"));
-                dsCV.add(temp);
+                GameDatabase.dsChucVu.add(temp);
             }
             
             // Lấy dữ liệu từ bảng ThuocTinh
@@ -324,7 +224,7 @@ public class GameDatabase {
                 if(HT != null){
                     temp.put("HienThi", HT);
                 }
-                dsTT.add(temp);
+                GameDatabase.dsThuocTinh.add(temp);
             }
             
             // Lấy dữ liệu từ bảng BoiCanh
@@ -338,7 +238,7 @@ public class GameDatabase {
                 BC.put("LoaiBC", bangBC.getString("loaiBoiCanh"));
                 BC.put("HD", bangBC.getString("hoanhDo"));
                 BC.put("TD", bangBC.getString("tungDo"));
-                dsBC.add(BC);
+                GameDatabase.dsBoiCanh.add(BC);
             }
             
             // Lấy dữ liệu từ bảng DauAn
@@ -348,7 +248,7 @@ public class GameDatabase {
                 HashMap<String, String> DA = new HashMap<>();
                 DA.put("MaNV", bangDA.getString("idNhanVat"));
                 DA.put("MaSK", bangDA.getString("idSụKien"));
-                dsDA.add(DA);
+                GameDatabase.dsDauAn.add(DA);
             }
             
              // Lấy dữ liệu từ bảng KyNang
@@ -359,7 +259,7 @@ public class GameDatabase {
                 KN.put("MaBC", bangKN.getString("idKyNang"));
                 KN.put("TenKN", bangKN.getString("tenKyNang"));
                 KN.put("MoTa",(String) getMoTa(dsMoTa, bangKN.getString("idMoTa")).get("NoiDung"));
-                dsKN.add(KN);
+                GameDatabase.dsKyNang.add(KN);
             }
             
             // Lấy dữ liệu từ bảng MLC
@@ -373,7 +273,7 @@ public class GameDatabase {
                 if(LDTTG != null){
                     MLC.put("LDTTG", LDTTG);
                 }
-                dsMLC.add(MLC);
+                GameDatabase.dsLuaChon.add(MLC);
             }
             
             // Lấy dữ liệu từ bảng MoiQuanHe
@@ -386,7 +286,7 @@ public class GameDatabase {
                 MQH.put("QuanHe", bangMQH.getString("quanHe"));
                 MQH.put("ThanThiet", bangMQH.getString("ThanThiet"));
                 MQH.put("TinTuong", bangMQH.getString("tinTuong"));
-                dsMQH.add(MQH);
+                GameDatabase.dsQuanHe.add(MQH);
             }
             
             // Lấy dữ liệu từ bảng ThuongMai
@@ -397,7 +297,7 @@ public class GameDatabase {
                 TM.put("MaBC", bangTM.getString("idBoiCanh"));
                 TM.put("MaVP", bangTM.getString("idVatPham"));
                 TM.put("GiaCa", bangTM.getString("giaCa"));
-                dsTM.add(TM);
+                GameDatabase.dsThuongMai.add(TM);
             }
             
             // Lấy dữ liệu từ bảng MauSuKien
@@ -413,7 +313,7 @@ public class GameDatabase {
                 MSK.put("LoaiDTTG", bangMSK.getString("loaiDoiTuongTG"));
                 MSK.put("SLTG", bangMSK.getString("soLuongTG"));
                 MSK.put("TLXH", bangMSK.getString("tyLeXuatHien"));
-                dsMSK.add(MSK);
+                GameDatabase.dsSuKien.add(MSK);
             }
             
             // Lấy dữ liệu từ bảng DieuKien
@@ -429,7 +329,7 @@ public class GameDatabase {
                     DK.put("SLDTT", SLDTT);
                 }
                 
-                dsDK.add(DK);
+                GameDatabase.dsDieuKien.add(DK);
             }
             
             // Lấy dữ liệu từ bảng BoiCanh_BoiCanh
@@ -439,7 +339,7 @@ public class GameDatabase {
                 HashMap<String, String> BC_BC = new HashMap<>();
                 BC_BC.put("MaBC1", bangBC_BC.getString("idBoiCanh1"));
                 BC_BC.put("MaBC2", bangBC_BC.getString("idBoiCanh2"));
-                dsBC_BC.add(BC_BC);
+                GameDatabase.dsBC_BC.add(BC_BC);
             }
             
             // Lấy dữ liệu từ bảng BoiCanh_TaiNguyen
@@ -449,7 +349,7 @@ public class GameDatabase {
                 HashMap<String, String> BC_TN = new HashMap<>();
                 BC_TN.put("MaBC1", bangBC_TN.getString("idBoiCanh"));
                 BC_TN.put("MaVP", bangBC_TN.getString("idVatPham"));
-                dsBC_TN.add(BC_TN);
+                GameDatabase.dsBC_TN.add(BC_TN);
             }
             
             // Lấy dữ liệu từ bảng DieuKien_HieuUng
@@ -460,7 +360,7 @@ public class GameDatabase {
                 DK_HU.put("MaDK", bangDK_HU.getString("idDieuKien"));
                 DK_HU.put("MaHU", bangDK_HU.getString("idHieuUng"));
                 DK_HU.put("IsNot", bangDK_HU.getString("isNot"));
-                dsDK_HU.add(DK_HU);
+                GameDatabase.dsDK_HU.add(DK_HU);
             }
             
             // Lấy dữ liệu từ bảng DieuKien_KyNang
@@ -472,7 +372,7 @@ public class GameDatabase {
                 DK_KN.put("MaKN", bangDK_KN.getString("idKyNang"));
                 DK_KN.put("IsNot", bangDK_KN.getString("isNot"));
                 DK_KN.put("CapDo", bangDK_KN.getString("capDo"));
-                dsDK_KN.add(DK_KN);
+                GameDatabase.dsDK_KN.add(DK_KN);
             }
             
             // Lấy dữ liệu từ bảng DieuKien_NgheNghiep
@@ -485,7 +385,7 @@ public class GameDatabase {
                 DK_NN.put("IsNot", bangDK_NN.getString("isNot"));
                 DK_NN.put("ThongThao", bangDK_NN.getString("thongThao"));
                 DK_NN.put("CapBac", bangDK_NN.getString("capBac"));
-                dsDK_NN.add(DK_NN);
+                GameDatabase.dsDK_NN.add(DK_NN);
             }
             
             // Lấy dữ liệu từ bảng DieuKien_QuanHe
@@ -498,7 +398,7 @@ public class GameDatabase {
                 DK_QH.put("IsNot", bangDK_QH.getString("isNot"));
                 DK_QH.put("ThanThiet", bangDK_QH.getString("thanThiet"));
                 DK_QH.put("TinTuong", bangDK_QH.getString("tinTuong"));
-                dsDK_QH.add(DK_QH);
+                GameDatabase.dsDK_QH.add(DK_QH);
             }
             
             // Lấy dữ liệu từ bảng DieuKien_ThuocTinh
@@ -511,7 +411,7 @@ public class GameDatabase {
                 DK_TT.put("IsNot", bangDK_TT.getString("isNot"));
                 DK_TT.put("LoaiDT", bangDK_TT.getString("loaiDoiTuong"));
                 DK_TT.put("GTSS", bangDK_TT.getString("giaTriSS"));
-                dsDK_TT.add(DK_TT);
+                GameDatabase.dsDK_TT.add(DK_TT);
             }
             
             // Lấy dữ liệu từ bảng DieuKien_VatPham
@@ -525,7 +425,7 @@ public class GameDatabase {
                 DK_VP.put("LoaiDT", bangDK_VP.getString("loaiDoiTuong"));
                 DK_VP.put("LoaiVP", bangDK_VP.getString("loaiVatPham"));
                 DK_VP.put("SoLuong", bangDK_VP.getString("soLuong"));
-                dsDK_VP.add(DK_VP);
+                GameDatabase.dsDK_VP.add(DK_VP);
             }
             
             // Lấy dữ liệu từ bảng HieuUng_KyNang
@@ -536,7 +436,7 @@ public class GameDatabase {
                 HU_KN.put("MaHU", bangHU_KN.getString("idHieuUng"));
                 HU_KN.put("MaKN", bangHU_KN.getString("idKyNang"));
                 HU_KN.put("EXP", bangHU_KN.getString("kinhNghiem"));
-                dsHU_KN.add(HU_KN);
+                GameDatabase.dsHU_KN.add(HU_KN);
             }
 
             // Lấy dữ liệu từ bảng HieuUng_NgheNghiep
@@ -549,7 +449,7 @@ public class GameDatabase {
                 HU_NN.put("ThongThao", bangHU_NN.getString("thongThao"));
                 HU_NN.put("MaCV", bangHU_NN.getString("idChucVu"));
                 HU_NN.put("HSLuong", bangHU_NN.getString("heSoLuong"));
-                dsHU_NN.add(HU_NN);
+                GameDatabase.dsHU_NN.add(HU_NN);
             }
             
             // Lấy dữ liệu từ bảng HieuUng_QuanHe
@@ -561,7 +461,7 @@ public class GameDatabase {
                 HU_QH.put("QuanHe", bangHU_QH.getString("quanHe"));
                 HU_QH.put("ThanThiet", bangHU_QH.getString("thanThiet"));
                 HU_QH.put("TinTuong", bangHU_QH.getString("tinTuong"));
-                dsHU_QH.add(HU_QH);
+                GameDatabase.dsHU_QH.add(HU_QH);
             }
             
             // Lấy dữ liệu từ bảng HieuUng_ThuocTinh
@@ -573,7 +473,7 @@ public class GameDatabase {
                 HU_TT.put("MaTT", bangHU_TT.getString("idThuocTinh"));
                 HU_TT.put("GiaTriTang", bangHU_TT.getString("giaTriTang"));
                 HU_TT.put("TLTang", bangHU_TT.getString("tiLeTang"));
-                dsHU_TT.add(HU_TT);
+                GameDatabase.dsHU_TT.add(HU_TT);
             }
             
             // Lấy dữ liệu từ bảng HieuUng_VatPham
@@ -586,7 +486,7 @@ public class GameDatabase {
                 HU_VP.put("LoaiVP", bangHU_VP.getString("loaiVatPham"));
                 HU_VP.put("SoLuong", bangHU_VP.getString("soLuong"));
                 HU_VP.put("SuDung", bangHU_VP.getString("SuDung"));
-                dsHU_VP.add(HU_VP);
+                GameDatabase.dsHU_VP.add(HU_VP);
             }
             
             // Lấy dữ liệu từ bảng LuaChon_DieuKien
@@ -596,7 +496,7 @@ public class GameDatabase {
                 HashMap<String, String> LC_DK = new HashMap<>();
                 LC_DK.put("MaMLC", bangLC_DK.getString("idMauLuaChon"));
                 LC_DK.put("MaDK", bangLC_DK.getString("idDieuKien"));
-                dsLC_DK.add(LC_DK);
+                GameDatabase.dsLC_DK.add(LC_DK);
             }
             
             // Lấy dữ liệu từ bảng MLC_MSK
@@ -606,7 +506,7 @@ public class GameDatabase {
                 HashMap<String, String> MLC_MSK = new HashMap<>();
                 MLC_MSK.put("MaMLC", bangMLC_MSK.getString("idMauLuaChon"));
                 MLC_MSK.put("MaMSK", bangMLC_MSK.getString("idMauSuKien"));
-                dsMLC_MSK.add(MLC_MSK);
+                GameDatabase.dsMLC_MSK.add(MLC_MSK);
             }
             
             // Lấy dữ liệu từ bảng MSK_MLC
@@ -616,7 +516,7 @@ public class GameDatabase {
                 HashMap<String, String> MSK_MLC = new HashMap<>();
                 MSK_MLC.put("MaMLC", bangMSK_MLC.getString("idMauLuaChon"));
                 MSK_MLC.put("MaMSK", bangMSK_MLC.getString("idMauSuKien"));
-                dsMSK_MLC.add(MSK_MLC);
+                GameDatabase.dsMSK_MLC.add(MSK_MLC);
             }
             
             // Lấy dữ liệu từ bảng NhanVat_KyNang
@@ -628,7 +528,7 @@ public class GameDatabase {
                 NV_KN.put("MaKN", bangNV_KN.getString("idKyNang"));
                 NV_KN.put("EXP", bangNV_KN.getString("kinhNghiem"));
                 NV_KN.put("CapDo", bangNV_KN.getString("capDo"));
-                dsNV_KN.add(NV_KN);
+                GameDatabase.dsNV_KN.add(NV_KN);
             }
             
             // Lấy dữ liệu từ bảng NhanVat_ThuocTinh
@@ -641,7 +541,7 @@ public class GameDatabase {
                 NV_TT.put("GiaTri", bangNV_TT.getString("giaTri"));
                 NV_TT.put("TiemNang", bangNV_TT.getString("tiemNang"));
                 NV_TT.put("TGHL", bangNV_TT.getString("tgHieuLuc"));
-                dsNV_TT.add(NV_TT);
+                GameDatabase.dsNV_TT.add(NV_TT);
             }
             
             // Lấy dữ liệu từ bảng NhanVat_VatPham
@@ -652,7 +552,7 @@ public class GameDatabase {
                 NV_VP.put("MaNV", bangNV_VP.getString("idNhanVat"));
                 NV_VP.put("MaVP", bangNV_VP.getString("idVatPham"));
                 NV_VP.put("SoLuong", bangNV_VP.getString("soLuong"));
-                dsNV_VP.add(NV_VP);
+                GameDatabase.dsNV_VP.add(NV_VP);
             }
             
             // Lấy dữ liệu từ bảng NhanVat_VatPham
@@ -665,7 +565,7 @@ public class GameDatabase {
                 NV_NN_CV.put("MaCV", bangNV_NN_CV.getString("idChucVu"));
                 NV_NN_CV.put("ThongThao", bangNV_NN_CV.getString("thongThao"));
                 NV_NN_CV.put("HSLuong", bangNV_NN_CV.getString("HSLuong"));
-                dsNV_VP.add(NV_NN_CV);
+                GameDatabase.dsNV_NN_CV.add(NV_NN_CV);
             }
             
             // Lấy dữ liệu từ bảng SuKien_DieuKien
@@ -675,7 +575,7 @@ public class GameDatabase {
                 HashMap<String, String> SK_DK = new HashMap<>();
                 SK_DK.put("MaMSK", bangSK_DK.getString("idMauSuKien"));
                 SK_DK.put("MaDK", bangSK_DK.getString("idDieuKien"));
-                dsSK_DK.add(SK_DK);
+                GameDatabase.dsSK_DK.add(SK_DK);
             }
             
             // Lấy dữ liệu từ bảng SuKien_HieuUng
@@ -685,7 +585,7 @@ public class GameDatabase {
                 HashMap<String, String> SK_HU = new HashMap<>();
                 SK_HU.put("MaMSK", bangSK_HU.getString("idMauSuKien"));
                 SK_HU.put("MaHU", bangSK_HU.getString("idHieuUng"));
-                dsSK_HU.add(SK_HU);
+                GameDatabase.dsSK_HU.add(SK_HU);
             }
             
             // Lấy dữ liệu từ bảng SuKien_HieuUng
@@ -696,7 +596,7 @@ public class GameDatabase {
                 SK_NV.put("MaMSK", bangSK_NV.getString("idMauSuKien"));
                 SK_NV.put("MaNV", bangSK_NV.getString("idNhanVat"));
                 SK_NV.put("ThuTu", bangSK_NV.getString("thuTu"));
-                dsSK_NV.add(SK_NV);
+                GameDatabase.dsSK_NV.add(SK_NV);
             }
             
             // Lấy dữ liệu từ bảng VatPham_HieuUng
@@ -706,7 +606,7 @@ public class GameDatabase {
                 HashMap<String, String> VP_HU = new HashMap<>();
                 VP_HU.put("MaVP", bangVP_HU.getString("idVatPham"));
                 VP_HU.put("MaHU", bangVP_HU.getString("idHieuUng"));
-                dsVP_HU.add(VP_HU);
+                GameDatabase.dsVP_HU.add(VP_HU);
             }
             
             // Lấy dữ liệu từ bảng VatPham_ThuocTinh
@@ -719,13 +619,8 @@ public class GameDatabase {
                 VP_TT.put("GiaTri", bangVP_TT.getString("giaTri"));
                 VP_TT.put("tiemNang", bangVP_TT.getString("tiemNang"));
                 VP_TT.put("TGTD", bangVP_TT.getString("tgTacDung"));
-                dsVP_TT.add(VP_TT);
+                GameDatabase.dsVP_TT.add(VP_TT);
                 
-            }
-            
-            
-            for(HashMap a: dsMLC){
-                System.out.println(a.values());
             }
             
             // Đóng kết nối
