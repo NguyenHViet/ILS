@@ -6,6 +6,7 @@ package Modal;
 
 import GameEvent.DieuKien;
 import GameEvent.LuaChon;
+import GameEvent.SuKien;
 import java.util.ArrayList;
 
 /**
@@ -67,6 +68,14 @@ public class ModalLuaChon {
         dsLuaChon.add(lc0000);
         dsLuaChon.add(lc0001);
         dsLuaChon.add(lc0002);
+        ArrayList<DieuKien> DsDK = Modal.ModalDieuKien.getDSDieuKien();
+        ArrayList<SuKien> DsSKHN = Modal.ModalMauSuKien.suKienHangNam();
+        ArrayList<SuKien> DsSKQG = Modal.ModalMauSuKien.suKienQuocGia();
+        ArrayList<SuKien> DsSKTG = Modal.ModalMauSuKien.suKienTheGioi();
+        ArrayList<SuKien> DsSKT = Modal.ModalMauSuKien.suKienTinh();
+        ArrayList<SuKien> DsSKTB = Modal.ModalMauSuKien.suKienTuyBien();
+        ArrayList<SuKien> DsSKKV = Modal.ModalMauSuKien.suKienTuyBien();
+        ArrayList<SuKien> DsSKHQ = Modal.ModalMauSuKien.suKienTuyBien();
     }
 
     public static void themLuaChon(LuaChon dk) {
