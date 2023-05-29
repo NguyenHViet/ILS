@@ -82,27 +82,54 @@ public class MainSystem {
     static private ArrayList<SuKien> chuanBiSuKienTiepTheo(ArrayList<SuKien> dsMauSK, int soLuongSKToiDa) {
         ArrayList<SuKien> dsSKDuBi = new ArrayList<>();
         ArrayList<SuKien> toanBoSK = new ArrayList<>();
+        ArrayList<SuKien> dsKVDuBi = new ArrayList<>();
+        ArrayList<SuKien> dsKHDuBi = new ArrayList<>();
         double lucky = new Random().nextDouble();
 
         for (SuKien mauSK : dsMauSK) {
             SuKien sk = GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, dsNV, tg);
             if (lucky <= sk.getTyLeXuatHien()) {
-                if (sk.kiemTraDK()) {
-                    switch (sk.getLoaiSK()) {
-                        case "KYVONG":
-                            MainSystem.dsSKLauDai.add(sk);
-                            break;
-                        case "DINHMENH":
-                            MainSystem.dsThanhTuu.add(sk);
-                            break;
-                        default:
+                switch (sk.getLoaiSK()) {
+                    case "KYVONG":
+                    case "UOCMO":
+                        boolean dangKyVong = false;
+                        for (SuKien skLD : MainSystem.dsSKLauDai) {
+                            if (skLD.getMaSK().equals(sk.getMaSK())) {
+                                dangKyVong = true;
+                            }
+                        }
+                        if (!dangKyVong) {
+                            if (sk.getTyLeXuatHien() == 1.0) {
+                                MainSystem.dsSKLauDai.add(sk);
+                            } else {
+                                dsKVDuBi.add(sk);
+                            }
+                        }
+                        break;
+                    case "KEHOACH":
+                        boolean daKeHoach = false;
+                        for (SuKien skLD : MainSystem.dsThanhTuu) {
+                            if (skLD.getMaSK().equals(sk.getMaSK())) {
+                                daKeHoach = true;
+                            }
+                        }
+                        if (!daKeHoach) {
+                            if (sk.getTyLeXuatHien() == 1.0) {
+                                MainSystem.dsThanhTuu.add(sk);
+                            } else {
+                                dsKHDuBi.add(sk);
+                            }
+                        }
+                        break;
+                    default:
+                        if (sk.kiemTraDK()) {
                             if (sk.getTyLeXuatHien() == 1.0) {
                                 toanBoSK.add(sk);
                             } else {
                                 dsSKDuBi.add(sk);
                             }
                             break;
-                    }
+                        }
                 }
             }
         }
@@ -111,6 +138,20 @@ public class MainSystem {
             int index = new Random().nextInt(dsSKDuBi.size());
             toanBoSK.add(dsSKDuBi.get(index));
             dsSKDuBi.remove(index);
+            i--;
+        }
+        
+        for (int i = 0; i < soLuongSKToiDa && i < dsKVDuBi.size(); i++) {
+            int index = new Random().nextInt(dsKVDuBi.size());
+            MainSystem.dsSKLauDai.add(dsKVDuBi.get(index));
+            dsKVDuBi.remove(index);
+            i--;
+        }
+        
+        for (int i = 0; i < soLuongSKToiDa && i < dsKHDuBi.size(); i++) {
+            int index = new Random().nextInt(dsKHDuBi.size());
+            MainSystem.dsThanhTuu.add(dsKHDuBi.get(index));
+            dsKHDuBi.remove(index);
             i--;
         }
 
@@ -130,7 +171,10 @@ public class MainSystem {
         int SoLuongSKHNToiDa = 1;
         ArrayList<SuKien> dsSKHN = chuanBiSuKienTiepTheo(Modal.ModalMauSuKien.suKienHangNam(), SoLuongSKHNToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKHN);
-//        Sự kiện tùy biến
+//        Sự kiện kỳ vọng
+        int SoLuongSKKVToiDa = 1;
+        ArrayList<SuKien> dsSKKV = chuanBiSuKienTiepTheo(Modal.ModalMauSuKien.suKienKyVong(), SoLuongSKKVToiDa);
+        MainSystem.dsSKHienTai.addAll(dsSKKV);
     }
 
     /**
@@ -155,6 +199,20 @@ public class MainSystem {
             dsSK.addAll(0, chuanBiSuKienTiepTheo(dsSuKienTiepTheo, 100));
         }
         MainSystem.dsSKHienTai.addAll(dsSK);
+//        Kiểm tra sự kiện kỳ vọng và ước mơ
+        for (int i = 0; i < MainSystem.dsSKLauDai.size(); i++) {
+            SuKien sk = MainSystem.dsSKLauDai.get(i);
+            if (!sk.isDaHoanThanh()) {
+                if (sk.getThoiHan() == 0 || sk.kiemTraDK()) {
+                    MainSystem.dsSKHienTai.add(sk);
+                    if ("KYVONG".equals(sk.getLoaiSK())) {
+                        MainSystem.dsSKLauDai.remove(sk);
+                        i--;
+                    }
+                }
+            }
+        }
+
         if (!MainSystem.dsSKHienTai.isEmpty()) {
             MainSystem.suKienHienTai = MainSystem.dsSKHienTai.get(0);
         } else {
@@ -162,8 +220,9 @@ public class MainSystem {
         }
     }
 
-    static public void kichHoatSuKienHienTai() {
+    static public void kichHoatSuKienHienTai(MainScreen mainScreenController) {
         MainSystem.suKienHienTai.kichHoat();
+        mainScreenController.addLog(MainSystem.suKienHienTai.getTomTat());
     }
 
     static public void suKienKhanCap(SuKien sk) {
@@ -178,17 +237,23 @@ public class MainSystem {
         MainSystem.dsSKHienTai.clear();
         for (int i = 0; i < MainSystem.dsSKLauDai.size(); i++) {
             SuKien sk = MainSystem.dsSKLauDai.get(i);
-            sk.demNguocThoiHan();
-            if (sk.getThoiHan() == 0) {
-                MainSystem.dsSKHienTai.add(sk);
-                MainSystem.dsSKLauDai.remove(sk);
-                i--;
+            if (!sk.isDaHoanThanh()) {
+                sk.demNguocThoiHan();
+                if (sk.getThoiHan() == 0 || sk.kiemTraDK()) {
+                    MainSystem.dsSKHienTai.add(sk);
+                    if ("KYVONG".equals(sk.getLoaiSK())) {
+                        MainSystem.dsSKLauDai.remove(sk);
+                        i--;
+                    }
+                }
             }
         }
         for (SuKien sk : MainSystem.dsThanhTuu) {
-            sk.demNguocThoiHan();
-            if (sk.getThoiHan() == 0 && !sk.isDaHoanThanh()) {
-                MainSystem.dsSKHienTai.add(sk);
+            if (!sk.isDaHoanThanh()) {
+                sk.demNguocThoiHan();
+                if (sk.getThoiHan() == 0) {
+                    MainSystem.dsSKHienTai.add(sk);
+                }
             }
         }
         MainSystem.taoSuKien();

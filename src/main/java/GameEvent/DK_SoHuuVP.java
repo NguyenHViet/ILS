@@ -71,6 +71,10 @@ public class DK_SoHuuVP extends DieuKien {
     public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
         switch (loaiDT) {
             case "NHANVAT":
+                int toiThieu = this.dungToiThieu;
+                if (this.dungToiThieu == -1) {
+                    toiThieu = dsDT.size();
+                }
                 int count = 0;
                 for (NhanVat nv : dsDT) {
                     int sLg = 0;
@@ -98,7 +102,7 @@ public class DK_SoHuuVP extends DieuKien {
                         count++;
                     }
 
-                    if (count >= this.dungToiThieu) {
+                    if (count >= toiThieu) {
                         return true;
                     }
                 }

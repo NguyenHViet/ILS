@@ -137,6 +137,10 @@ public class DK_SoSanh extends DieuKien {
     @Override
     public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
         int giaTriKiemTra = 0;
+        int toiThieu = this.dungToiThieu;
+        if (this.dungToiThieu == -1) {
+            toiThieu = dsDT.size();
+        }
         switch (loaiDT) {
 //            Nhân vật
             case "NHANVAT":
@@ -156,7 +160,7 @@ public class DK_SoSanh extends DieuKien {
                             count++;
                         }
                     }
-                    if (count >= this.dungToiThieu) {
+                    if (count >= toiThieu) {
                         return true;
                     }
                 }

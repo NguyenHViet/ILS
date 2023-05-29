@@ -89,11 +89,11 @@ public class ModalDieuKien {
                 "0006",
                 false,
                 1,
-                "Mới ra đời",
+                "Lớn lên",
                 "AGE",
-                0,
+                4,
                 "NHANVAT",
-                DK_SoSanh.NHO_HON_HOAC_BANG
+                DK_SoSanh.LON_HON
         );
 
         dsDieuKien.add(dk0000);

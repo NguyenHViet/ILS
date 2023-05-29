@@ -21,7 +21,7 @@ public class ModalVatPham {
                 "0000",
                 "Cục đá",
                 "NGUYENLIEU",
-                "Một cục đá bình thường.",
+                "Cục đá vô tri. Có thể dùng để chọi cái một gì đó. Chó chẳng hạn... Thật là một thú vui tao nhã.",
                 null,
                 0,
                 null

@@ -403,6 +403,7 @@ public class NewCharacterScreen {
                 Tinh vt = dsT.get(new Random().nextInt(dsT.size()));
                 MainSystem.getNguoiChoi().setViTri(vt);
                 GeneratorSystem.khoiTaoNguoiThan(MainSystem.getNguoiChoi());
+                GeneratorSystem.khoiTaoXaHoi(MainSystem.getNguoiChoi());
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {

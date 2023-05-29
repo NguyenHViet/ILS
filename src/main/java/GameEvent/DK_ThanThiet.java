@@ -180,6 +180,10 @@ public class DK_ThanThiet extends DieuKien {
     @Override
     public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
         int count = 0;
+        int toiThieu = this.dungToiThieu;
+        if (this.dungToiThieu == -1) {
+            toiThieu = dsDT.size();
+        }
         NhanVat mc = Modal.ModalNhanVat.getNhanVat(this.maNV);
 
         for (NhanVat nv : dsDT) {
@@ -198,7 +202,7 @@ public class DK_ThanThiet extends DieuKien {
                     return false;
                 }
             }
-            if (count >= this.dungToiThieu) {
+            if (count >= toiThieu) {
                 return true;
             }
         }

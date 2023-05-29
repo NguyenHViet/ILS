@@ -141,15 +141,29 @@ public class ProfileItemComponent {
         Label typeLabel = new Label(sk.getMoTa());
         Label timerLabel = new Label("Thời hạn:");
         Label timerValue = new Label("" + sk.getThoiHan());
+        Label completeLabel = new Label("Tình trạng:");
+        Label timeStampLabel = new Label("Thời điểm:");
+        Label timeStampValue = new Label("" + sk.getThoiDiem());
 
-        profileItemContent.getColumnConstraints().get(0).setPercentWidth(30);
+        profileItemContent.getColumnConstraints().get(0).setPercentWidth(35);
         profileItemContent.setHgap(10);
-        profileItemContent.getColumnConstraints().get(1).setPercentWidth(65);
+        profileItemContent.getColumnConstraints().get(1).setPercentWidth(60);
         profileItemContent.getColumnConstraints().get(1).setHgrow(Priority.ALWAYS);
 
         profileItemContent.add(typeLabel, 0, 0, 2, 1);
-        profileItemContent.add(timerLabel, 0, 1);
-        profileItemContent.add(timerValue, 1, 1);
+        if (!sk.isDaHoanThanh()) {
+            Label completeValue = new Label("Chưa hoàn thành");
+            profileItemContent.add(timerLabel, 0, 1);
+            profileItemContent.add(timerValue, 1, 1);
+            profileItemContent.add(completeLabel, 0, 2);
+            profileItemContent.add(completeValue, 1, 2);
+        } else {
+            Label completeValue = new Label("Đã hoàn thành");
+            profileItemContent.add(completeLabel, 0, 1);
+            profileItemContent.add(completeValue, 1, 1);
+            profileItemContent.add(timeStampLabel, 0, 2);
+            profileItemContent.add(timeStampValue, 1, 2);
+        }
     }
 
 }

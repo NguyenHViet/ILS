@@ -33,6 +33,10 @@ public class MainScreen {
     @FXML
     private VBox identityPlanList;
     @FXML
+    private VBox identityHopeList;
+    @FXML
+    private VBox identityDreamList;
+    @FXML
     private Label characterNameLabel;
     @FXML
     private Label characterGenderLabel;
@@ -69,6 +73,8 @@ public class MainScreen {
     private Button relationshipBtn;
     @FXML
     private Button historyBtn;
+    @FXML
+    private Button returnBtn;
 
 //    Các màn hình chức năng
     private VBox worldMap;
@@ -129,7 +135,7 @@ public class MainScreen {
         eventLog.getChildren().add(txt);
 
     }
-    
+
     public void addTitle(String message) {
         Text txt = new Text(message + "\n");
         txt.setFont(Font.font("System", 15));
@@ -206,14 +212,26 @@ public class MainScreen {
 
     public void reloadLongTermEvent() throws IOException {
         identityPlanList.getChildren().clear();
+        identityHopeList.getChildren().clear();
+        identityDreamList.getChildren().clear();
         for (SuKien sk : MainSystem.getDsSKLauDai()) {
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
-            identityPlanList.getChildren().add(loader.load());
+            switch (sk.getLoaiSK()) {
+                case "KYVONG":
+                    identityHopeList.getChildren().add(loader.load());
+                    break;
+                case "KEHOACH":
+                    identityPlanList.getChildren().add(loader.load());
+                    break;
+                case "UOCMO":
+                    identityDreamList.getChildren().add(loader.load());
+                    break;
+            }
             ((ProfileItemComponent) loader.getController()).loadData(sk);
         }
     }
 
-    public void reloadButtonArea() {
+    public void reloadButtonArea() throws IOException {
         NhanVat mc = MainSystem.getNguoiChoi();
         if (mc.getTuoi() < 10) {
             jobBtn.setDisable(true);
@@ -226,6 +244,14 @@ public class MainScreen {
         } else {
             entertainmentBtn.setDisable(false);
         }
+
+        if ("".equals(chucNangHienTai)) {
+            returnBtn.setDisable(true);
+        } else {
+            returnBtn.setDisable(false);
+        }
+
+        reloadProfile(MainSystem.getNguoiChoi());
     }
 
     public void loadEvent() throws IOException {
@@ -236,16 +262,17 @@ public class MainScreen {
             nextYearBtn.setDisable(true);
             currentEventController.loadData(sk, this);
             mainAreaStack.getChildren().add(currentEvent);
-            MainSystem.kichHoatSuKienHienTai();
+            MainSystem.kichHoatSuKienHienTai(this);
         } else {
             nextYearBtn.setDisable(false);
             eventLog.toFront();
+            chucNangHienTai = "";
         }
         reloadProfile(MainSystem.getNguoiChoi());
     }
 
     @FXML
-    private void showWorldNews() {
+    private void showWorldNews() throws IOException {
         worldMapController.loadData(MainSystem.getTG());
         if (!"WorldMap".equals(chucNangHienTai)) {
             emptyPane.toFront();
@@ -257,6 +284,7 @@ public class MainScreen {
             currentEvent.toFront();
             chucNangHienTai = "";
         }
+        reloadButtonArea();
     }
 
     @FXML
@@ -272,6 +300,7 @@ public class MainScreen {
             currentEvent.toFront();
             chucNangHienTai = "";
         }
+        reloadButtonArea();
     }
 
     @FXML
@@ -279,8 +308,8 @@ public class MainScreen {
         mainAreaStack.getChildren().clear();
         MainSystem.nhanVatPhatTrien();
         MainSystem.suKienNamKeTiep(this);
+        reloadScreen();
         loadEvent();
-        reloadButtonArea();
     }
 
     @FXML
@@ -296,6 +325,7 @@ public class MainScreen {
             currentEvent.toFront();
             chucNangHienTai = "";
         }
+        reloadButtonArea();
     }
 
     @FXML
@@ -311,6 +341,7 @@ public class MainScreen {
             currentEvent.toFront();
             chucNangHienTai = "";
         }
+        reloadButtonArea();
     }
 
     @FXML
@@ -324,6 +355,16 @@ public class MainScreen {
             currentEvent.toFront();
             chucNangHienTai = "";
         }
+        reloadButtonArea();
+    }
+
+    @FXML
+    private void returnMain() throws IOException {
+        emptyPane.toFront();
+        eventLog.toFront();
+        currentEvent.toFront();
+        chucNangHienTai = "";
+        reloadButtonArea();
     }
 
 }

@@ -46,7 +46,7 @@
                                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                  </padding>
                                  <content>
-                                    <VBox fx:id="identityHopeList" minHeight="100.0" prefWidth="241.0" />
+                                    <VBox fx:id="identityHopeList" minHeight="100.0" prefWidth="241.0" spacing="10.0" />
                                  </content>
                               </ScrollPane>
                            </content>
@@ -58,7 +58,7 @@
                                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                  </padding>
                                  <content>
-                                    <VBox fx:id="identityDreamList" minHeight="100.0" prefWidth="241.0" />
+                                    <VBox fx:id="identityDreamList" minHeight="100.0" prefWidth="241.0" spacing="10.0" />
                                  </content>
                               </ScrollPane>
                            </content>
@@ -155,7 +155,7 @@
                                     <Separator prefHeight="0.0" prefWidth="90.0" />
                                  </children>
                               </HBox>
-                              <VBox fx:id="skillPane1" prefWidth="100.0" />
+                              <VBox fx:id="skillPane" prefWidth="100.0" />
                            </children></VBox>
                      </content>
                   </ScrollPane>
@@ -211,13 +211,14 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="nextYearBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#namKeTiep" text="TIẾP TỤC" GridPane.columnIndex="1" GridPane.rowSpan="3" />
+                        <Button fx:id="nextYearBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#namKeTiep" text="TIẾP TỤC" GridPane.columnIndex="1" GridPane.rowSpan="2" />
                         <Button fx:id="jobBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CÔNG VIỆC" />
                         <Button fx:id="entertainmentBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showEntertainmentPane" text="GIẢI TRÍ" GridPane.rowIndex="1" />
                         <Button fx:id="worldNewsBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showWorldNews" text="TIN THẾ GIỚI" GridPane.rowIndex="2" />
                         <Button fx:id="bagBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openInventory" text="TÚI ĐỒ" GridPane.columnIndex="2" />
                         <Button fx:id="relationshipBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showRelationship" text="QUAN HỆ" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Button fx:id="historyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHistoryLog" text="LỊCH SỬ" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button fx:id="returnBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#returnMain" text="TRỞ VỀ" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

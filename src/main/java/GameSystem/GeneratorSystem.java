@@ -52,8 +52,8 @@ public class GeneratorSystem {
         {1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0}, // C +
         {1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0}, // D +
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // E +
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // F
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // G
+        {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0}, // F +
+        {1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0}, // G +
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // H
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // I +
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // J
@@ -70,7 +70,7 @@ public class GeneratorSystem {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // U +
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // V
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // W
-        {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1}, // X
+        {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1}, // X
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // Y +
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1} //  Z
     };
@@ -399,7 +399,7 @@ public class GeneratorSystem {
         ChiSo csTuoi = new ChiSo("AGE", "Tuổi", "", false, 0, 0, 0);
         dsTT.add(csTuoi);
 
-        ChiSo csGioiTinh = new ChiSo("GDR", "Giới tính", "", false, gioiTinh, 0, 0);
+        ChiSo csGioiTinh = new ChiSo("GDR", "Giới tính", "", false, gioiTinh, -1, 0);
         dsTT.add(csGioiTinh);
 
 //        Mối quan hệ
@@ -416,12 +416,12 @@ public class GeneratorSystem {
 
 //        Kỹ năng
         ArrayList<KyNang> dsKN = new ArrayList<>();
-        
+
         NhanVat result = new NhanVat(maNV, tenNV, "Nhân loại", dsTT, dsMQH, tuiDo, vt, nn, dsKN, playable);
         for (int i = 0; i < tuoi; i++) {
             result.phatTrien();
         }
-        
+
         return result;
     }
 
@@ -1012,35 +1012,56 @@ public class GeneratorSystem {
             ModalNhanVat.themNhanVat(ACE);
             dsNV.add(ACE);
         }
+    }
 
-//          Dành cho update
-////        Gia đình riêng
-//        ArrayList<MoiQuanHe> dsQH = new ArrayList<MoiQuanHe>();
-//        if (tuoi >= 18) {
-//            boolean married = myGenerator.nextBoolean();
-//            boolean rBreak = myGenerator.nextBoolean();
-////            Đã kết hôn
-//            if (!married) {
-//                if (!rBreak) {
-//                    dsQH.addAll(nv.getQuanHe("Vợ"));
-//                    dsQH.addAll(nv.getQuanHe("Chồng"));
-//                    if (dsQH.size() < 1) {
-//                        NhanVat lover = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(10) + (tuoi - 5), (tuoi + 1) % 2, false);
-//                        if (gioiTinh == 0) {
-//                            dsQH.add(new MoiQuanHe("Vợ", lover.getMaNV(), myGenerator.nextInt(100), myGenerator.nextInt(100)));
-//                        } else {
-//                            dsQH.add(new MoiQuanHe("Chồng", lover.getMaNV(), myGenerator.nextInt(100), myGenerator.nextInt(100)));
-//                        }
-//                    }
-//                }
-////                Con cái
-//                dsQH.clear();
-//                dsQH.addAll(nv.getQuanHe("Con"));
-//                if (dsQH.size() < myGenerator.nextInt(4)) {
-//                    
-//                }
-//            }
-//        }
+    static public void khoiTaoXaHoi(NhanVat nv) {
+        Random myGenerator = new Random();
+        int soLuongNPC = 10;
+
+        ArrayList<MoiQuanHe> dsMQH = nv.getDSQH();
+        int tuoi = nv.getTuoi();
+        int gioiTinh = nv.getGioiTinh();
+
+        TheGioi tg = MainSystem.getTG();
+        ArrayList<NhanVat> dsNV = MainSystem.getDSNV();
+        Tinh viTri = nv.getViTri();
+
+        NhanVat npc;
+
+        for (int i = 0; i < soLuongNPC; i++) {
+            int thanThiet = myGenerator.nextInt(100);
+            int tinTuong = myGenerator.nextInt(100);
+            int typeMQH;
+            if (tuoi >= 3) {
+                typeMQH = myGenerator.nextInt(3);
+            } else {
+                typeMQH = myGenerator.nextInt(2);
+            }
+            switch (typeMQH) {
+                case 0:
+                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
+                    dsMQH.add(new MoiQuanHe("Hàng xóm", "XAHOI", npc.getMaNV(), thanThiet, tinTuong));
+                    npc.getDSQH().add(new MoiQuanHe("Hàng xóm", "XAHOI", nv.getMaNV(), thanThiet, tinTuong));
+                    break;
+                case 1:
+                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
+                    break;
+                case 2:
+                    int ageGap = myGenerator.nextInt(5);
+                    int age = myGenerator.nextInt(ageGap * 2) + tuoi - ageGap;
+                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), age, false, "");
+                    dsMQH.add(new MoiQuanHe("Bạn bè", "XAHOI", npc.getMaNV(), thanThiet, tinTuong));
+                    npc.getDSQH().add(new MoiQuanHe("Bạn bè", "XAHOI", nv.getMaNV(), thanThiet, tinTuong));
+                    break;
+                default:
+                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
+                    break;
+            }
+
+            npc.setViTri(viTri);
+            ModalNhanVat.themNhanVat(npc);
+            dsNV.add(npc);
+        }
     }
 
 }
