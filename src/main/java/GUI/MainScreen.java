@@ -79,10 +79,10 @@ public class MainScreen {
 
     private VBox currentEvent;
     private CurrentEventComponent currentEventController;
-    
+
     private VBox inventory;
     private InventoryComponent inventoryController;
-    
+
     private VBox entertainment;
     private EntertainmentComponent entertainmentController;
 
@@ -94,24 +94,23 @@ public class MainScreen {
 //        Load data
         reloadProfile(MainSystem.getNguoiChoi());
         reloadButtonArea();
-        MainSystem.suKienNamKeTiep();
-
+        MainSystem.suKienNamKeTiep(this);
         loadEvent();
     }
 
     private void initStackPane() throws IOException {
         FXMLLoader loader1 = new FXMLLoader(UI.class.getResource("MiniMapComponent.fxml"));
         worldMap = (VBox) loader1.load();
-        
+
         FXMLLoader loader2 = new FXMLLoader(UI.class.getResource("RelationshipComponent.fxml"));
         relationship = (VBox) loader2.load();
 
         FXMLLoader loader3 = new FXMLLoader(UI.class.getResource("CurrentEventComponent.fxml"));
         currentEvent = loader3.load();
-        
+
         FXMLLoader loader4 = new FXMLLoader(UI.class.getResource("InventoryComponent.fxml"));
         inventory = loader4.load();
-        
+
         FXMLLoader loader5 = new FXMLLoader(UI.class.getResource("EntertainmentComponent.fxml"));
         entertainment = loader5.load();
 
@@ -124,6 +123,33 @@ public class MainScreen {
         entertainmentController = (EntertainmentComponent) loader5.getController();
     }
 
+    public void addLog(String message) {
+        Text txt = new Text(message + "\n");
+        txt.setWrappingWidth(376);
+        eventLog.getChildren().add(txt);
+
+    }
+    
+    public void addTitle(String message) {
+        Text txt = new Text(message + "\n");
+        txt.setFont(Font.font("System", 15));
+        txt.setStyle("-fx-font-weight: bold");
+        txt.setWrappingWidth(376);
+        eventLog.getChildren().add(txt);
+
+    }
+
+    public void addText(Text txt) {
+        eventLog.getChildren().add(txt);
+    }
+
+    private void reloadScreen() throws IOException {
+        reloadStackPane();
+        reloadProfile(MainSystem.getNguoiChoi());
+        reloadLongTermEvent();
+        reloadButtonArea();
+    }
+
     private void reloadStackPane() {
         mainAreaStack.getChildren().clear();
         mainAreaStack.getChildren().add(worldMap);
@@ -132,8 +158,8 @@ public class MainScreen {
         mainAreaStack.getChildren().add(entertainment);
         mainAreaStack.getChildren().add(emptyPane);
         mainAreaStack.getChildren().add(eventLog);
-        emptyPane.toFront();
         eventLog.toFront();
+        emptyPane.toFront();
     }
 
     public void reloadProfile(NhanVat nv) throws IOException {
@@ -194,7 +220,7 @@ public class MainScreen {
         } else {
             jobBtn.setDisable(false);
         }
-        
+
         if (mc.getTuoi() < 3) {
             entertainmentBtn.setDisable(true);
         } else {
@@ -213,6 +239,7 @@ public class MainScreen {
             MainSystem.kichHoatSuKienHienTai();
         } else {
             nextYearBtn.setDisable(false);
+            eventLog.toFront();
         }
         reloadProfile(MainSystem.getNguoiChoi());
     }
@@ -226,6 +253,7 @@ public class MainScreen {
             chucNangHienTai = "WorldMap";
         } else {
             worldMap.toBack();
+            eventLog.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -240,6 +268,7 @@ public class MainScreen {
             chucNangHienTai = "Relationship";
         } else {
             relationship.toBack();
+            eventLog.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -249,11 +278,11 @@ public class MainScreen {
     private void namKeTiep() throws IOException {
         mainAreaStack.getChildren().clear();
         MainSystem.nhanVatPhatTrien();
-        MainSystem.suKienNamKeTiep();
+        MainSystem.suKienNamKeTiep(this);
         loadEvent();
         reloadButtonArea();
     }
-    
+
     @FXML
     private void openInventory() throws IOException {
         inventoryController.loadData(MainSystem.getNguoiChoi().getTuiDo());
@@ -263,11 +292,12 @@ public class MainScreen {
             chucNangHienTai = "Inventory";
         } else {
             inventory.toBack();
+            eventLog.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
     }
-    
+
     @FXML
     private void showEntertainmentPane() throws IOException {
         entertainmentController.loadData(MainSystem.getNguoiChoi().getViTri());
@@ -277,6 +307,20 @@ public class MainScreen {
             chucNangHienTai = "Entertainment";
         } else {
             entertainment.toBack();
+            eventLog.toFront();
+            currentEvent.toFront();
+            chucNangHienTai = "";
+        }
+    }
+
+    @FXML
+    private void showHistoryLog() throws IOException {
+        if (!"HistoryLog".equals(chucNangHienTai)) {
+            emptyPane.toFront();
+            eventLog.toFront();
+            chucNangHienTai = "HistoryLog";
+        } else {
+            eventLog.toBack();
             currentEvent.toFront();
             chucNangHienTai = "";
         }

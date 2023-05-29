@@ -171,8 +171,10 @@ public class MainSystem {
     }
 
     /**
+     * @param mainScreenController
      */
-    static public void suKienNamKeTiep() {
+    static public void suKienNamKeTiep(MainScreen mainScreenController) {
+        mainScreenController.addTitle("Năm " + MainSystem.nguoiChoi.getTuoi() + " tuổi:");
         MainSystem.dsSKHienTai.clear();
         for (int i = 0; i < MainSystem.dsSKLauDai.size(); i++) {
             SuKien sk = MainSystem.dsSKLauDai.get(i);

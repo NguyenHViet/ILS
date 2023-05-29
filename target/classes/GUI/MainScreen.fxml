@@ -213,11 +213,11 @@
                      <children>
                         <Button fx:id="nextYearBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#namKeTiep" text="TIẾP TỤC" GridPane.columnIndex="1" GridPane.rowSpan="3" />
                         <Button fx:id="jobBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="CÔNG VIỆC" />
-                        <Button fx:id="entertainmentBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showEntertainmentPane" text="HOẠT ĐỘNG" GridPane.rowIndex="1" />
+                        <Button fx:id="entertainmentBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showEntertainmentPane" text="GIẢI TRÍ" GridPane.rowIndex="1" />
                         <Button fx:id="worldNewsBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showWorldNews" text="TIN THẾ GIỚI" GridPane.rowIndex="2" />
                         <Button fx:id="bagBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openInventory" text="TÚI ĐỒ" GridPane.columnIndex="2" />
                         <Button fx:id="relationshipBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showRelationship" text="QUAN HỆ" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Button fx:id="historyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="LỊCH SỬ" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button fx:id="historyBtn" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showHistoryLog" text="LỊCH SỬ" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
