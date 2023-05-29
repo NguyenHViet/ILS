@@ -92,7 +92,7 @@ public class MainScreen {
 //        Init
         initStackPane();
 //        Load data
-        reloadProfile();
+        reloadProfile(MainSystem.getNguoiChoi());
         reloadButtonArea();
         MainSystem.suKienNamKeTiep();
 
@@ -136,21 +136,20 @@ public class MainScreen {
         eventLog.toFront();
     }
 
-    private void reloadProfile() throws IOException {
-        NhanVat mc = MainSystem.getNguoiChoi();
+    public void reloadProfile(NhanVat nv) throws IOException {
 
-        ArrayList<ThuocTinh> dsTT = mc.getDSTT();
+        ArrayList<ThuocTinh> dsTT = nv.getDSTT();
 
 //        Tải dữ liệu chung
-        characterNameLabel.textProperty().setValue(mc.getHoTen());
-        if (mc.getGioiTinh() == 0) {
+        characterNameLabel.textProperty().setValue(nv.getHoTen());
+        if (nv.getGioiTinh() == 0) {
             characterGenderLabel.textProperty().setValue("Nam");
         } else {
             characterGenderLabel.textProperty().setValue("Nữ");
         }
-        characterAgeLabel.textProperty().setValue(String.valueOf(mc.getTuoi()));
-        characterRaceLabel.textProperty().setValue(mc.getChungToc());
-        String viTri = mc.getViTri().getBoiCanh().getTenBC() + " - " + mc.getViTri().getTenBC();
+        characterAgeLabel.textProperty().setValue(String.valueOf(nv.getTuoi()));
+        characterRaceLabel.textProperty().setValue(nv.getChungToc());
+        String viTri = nv.getViTri().getBoiCanh().getTenBC() + " - " + nv.getViTri().getTenBC();
         tinhNameLabel.textProperty().setValue(viTri);
 
 //        Tải lại chỉ số nhân vật
@@ -175,7 +174,7 @@ public class MainScreen {
             ((ProfileItemComponent) loader.getController()).loadData(tt);
         }
 
-        double STA_Value = ((ChiSo) mc.getThuocTinh("STA")).getGiaTri() / ((ChiSo) mc.getThuocTinh("PHY")).getGiaTri();
+        double STA_Value = ((ChiSo) nv.getThuocTinh("STA")).getGiaTri() / ((ChiSo) nv.getThuocTinh("PHY")).getGiaTri();
         STA_Value_Bar.setProgress(STA_Value);
     }
 
@@ -215,7 +214,7 @@ public class MainScreen {
         } else {
             nextYearBtn.setDisable(false);
         }
-        reloadProfile();
+        reloadProfile(MainSystem.getNguoiChoi());
     }
 
     @FXML
@@ -234,7 +233,7 @@ public class MainScreen {
 
     @FXML
     private void showRelationship() throws IOException {
-        relationshipController.loadData(MainSystem.getNguoiChoi().getDSQH());
+        relationshipController.loadData(MainSystem.getNguoiChoi().getDSQH(), this);
         if (!"Relationship".equals(chucNangHienTai)) {
             emptyPane.toFront();
             relationship.toFront();

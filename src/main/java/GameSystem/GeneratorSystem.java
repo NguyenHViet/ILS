@@ -257,7 +257,7 @@ public class GeneratorSystem {
         int SVV = 600 - (RSC + CLM + CVL) + CLS;
         result.getDSTT().add(new ChiSo("CVL", "Trình độ văn minh", "", true, CVL, 0, 0));
         result.getDSTT().add(new ChiSo("SVV", "Độ khó sinh tồn", "", true, SVV, 0, 0));
-        
+
         switch (loaiDD) {
             case 0:
                 if (EPM > 80) {
@@ -321,21 +321,27 @@ public class GeneratorSystem {
      * @param tuoi
      * @param gioiTinh
      * @param playable
+     * @param dongHo
      * @return
      */
-    static public NhanVat taoNhanVat(String maNV, BoiCanh bc, int tuoi, int gioiTinh, boolean playable) {
+    static public NhanVat taoNhanVat(String maNV, BoiCanh bc, int tuoi, int gioiTinh, boolean playable, String dongHo) {
         Random myGenerator = new Random();
         int bound;
-        String tenNV = taoTenNgauNghien(2);
+        String tenNV;
+        if ("".equals(dongHo)) {
+            tenNV = taoTenNgauNghien(2);
+        } else {
+            tenNV = dongHo + " ";
+            tenNV += taoTenNgauNghien(1);
+        }
 //        Thuộc tính
         int giaTri;
         int tiemNang;
         int gift = (700 - ((ChiSo) bc.getThuocTinh("SVV")).getGiaTri()) / 70 + 1;
         int basic = gift * 2;
-        int bonus = tuoi * gift * 4;
 
         ArrayList<ThuocTinh> dsTT = new ArrayList<>();
-        int tongDiemTP_Val = ((ChiSo) bc.getThuocTinh("SVV")).getGiaTri() / 10 + bonus;
+        int tongDiemTP_Val = ((ChiSo) bc.getThuocTinh("SVV")).getGiaTri() / 10;
 //        Tổng điểm thiên phú
         ChiSo tongDiemTP = new ChiSo("SOG", "Tổng điểm thiên phú", "", false, tongDiemTP_Val, 0, 0);
         dsTT.add(tongDiemTP);
@@ -390,7 +396,7 @@ public class GeneratorSystem {
         ChiSo triLuc = new ChiSo("INT", "Trí lực", "", true, tongDiemTP_Val + basic, tiemNang, 0);
         dsTT.add(triLuc);
 
-        ChiSo csTuoi = new ChiSo("AGE", "Tuổi", "", false, tuoi, 1, 0);
+        ChiSo csTuoi = new ChiSo("AGE", "Tuổi", "", false, 0, 0, 0);
         dsTT.add(csTuoi);
 
         ChiSo csGioiTinh = new ChiSo("GDR", "Giới tính", "", false, gioiTinh, 0, 0);
@@ -410,8 +416,13 @@ public class GeneratorSystem {
 
 //        Kỹ năng
         ArrayList<KyNang> dsKN = new ArrayList<>();
-
-        return new NhanVat(maNV, tenNV, "Nhân loại", dsTT, dsMQH, tuiDo, vt, nn, dsKN, playable);
+        
+        NhanVat result = new NhanVat(maNV, tenNV, "Nhân loại", dsTT, dsMQH, tuiDo, vt, nn, dsKN, playable);
+        for (int i = 0; i < tuoi; i++) {
+            result.phatTrien();
+        }
+        
+        return result;
     }
 
     /**
@@ -894,13 +905,15 @@ public class GeneratorSystem {
         int gioiTinh = nv.getGioiTinh();
         TheGioi tg = MainSystem.getTG();
         ArrayList<NhanVat> dsNV = MainSystem.getDSNV();
-
+        String dongHo = nv.getHoTen().split(" ")[0];
+        Tinh viTri = nv.getViTri();
 //        Cha
         NhanVat father;
         if (nv.getQuanHe("Cha").size() < 1) {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
-            father = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 0, false);
+            father = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 0, false, dongHo);
+            father.setViTri(viTri);
             dsMQH.add(new MoiQuanHe("Cha", "GIADINH", father.getMaNV(), thanThiet, tinTuong));
             father.getDSQH().add(new MoiQuanHe("Con", "GIADINH", nv.getMaNV(), thanThiet, tinTuong));
             ModalNhanVat.themNhanVat(father);
@@ -913,7 +926,8 @@ public class GeneratorSystem {
         if (nv.getQuanHe("Mẹ").size() < 1) {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
-            mother = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 1, false);
+            mother = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 1, false, dongHo);
+            mother.setViTri(viTri);
             dsMQH.add(new MoiQuanHe("Mẹ", "GIADINH", mother.getMaNV(), thanThiet, tinTuong));
             mother.getDSQH().add(new MoiQuanHe("Con", "GIADINH", nv.getMaNV(), thanThiet, tinTuong));
             ModalNhanVat.themNhanVat(mother);
@@ -941,7 +955,8 @@ public class GeneratorSystem {
             } else {
                 randomACE = myGenerator.nextInt(2);
             }
-            NhanVat ACE = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(hopPhap) + tuoi, randomACE % 2, false);
+            NhanVat ACE = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(hopPhap) + tuoi, randomACE % 2, false, dongHo);
+            ACE.setViTri(viTri);
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
             switch (randomACE) {

@@ -352,7 +352,7 @@ public class NhanVat {
     /**
      * @param tinh
      */
-    public void diChuyen(Tinh tinh) {
+    public void setViTri(Tinh tinh) {
         this.viTri = tinh;
     }
 
@@ -451,7 +451,7 @@ public class NhanVat {
 
         for (ThuocTinh tt : this.dsTT) {
             if (tt instanceof ChiSo) {
-                int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getTiemNang();
+                int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getTiemNang() + 1;
                 ((ChiSo) tt).setGiaTri(chiSoMoi);
             } else if (tt instanceof TrangThai) {
                 int thoiHanMoi = ((TrangThai) tt).getThoiHan() - 1;

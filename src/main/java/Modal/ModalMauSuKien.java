@@ -76,7 +76,7 @@ public class ModalMauSuKien {
                 null,
                 null,
                 null,
-                "NONE",
+                "BOICANH",
                 0,
                 0,
                 "BOICANH",
