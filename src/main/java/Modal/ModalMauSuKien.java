@@ -19,24 +19,10 @@ import java.util.*;
 public class ModalMauSuKien {
 
 //    Sự kiện bối cảnh chung
-    private static ArrayList<SuKien> dsSKBC = new ArrayList<>();
-//    Sự kiện thế giới
-    private static ArrayList<SuKien> dsSKTG = new ArrayList<>();
-//    Sự kiện quốc gia
-    private static ArrayList<SuKien> dsSKQG = new ArrayList<>();
-//    Sự kiện tỉnh
-    private static ArrayList<SuKien> dsSKT = new ArrayList<>();
-//    Sự kiện hằng năm
-    private static ArrayList<SuKien> dsSKHN = new ArrayList<>();
-//    Sự kiện tùy biến
-    private static ArrayList<SuKien> dsSKTB = new ArrayList<>();
-//    Danh sách kỳ vọng
-    private static ArrayList<SuKien> dsKV = new ArrayList<>();
-//    Danh sách hệ quả
-    private static ArrayList<SuKien> dsHQ = new ArrayList<>();
+    private static ArrayList<SuKien> dsSK = new ArrayList<>();
 
     public static void taiMauSuKien() {
-        dsSKBC = new ArrayList<SuKien>();
+        dsSK = new ArrayList<SuKien>();
 //        Sự kiện thử nghiệm
         DieuKien dk0000 = Modal.ModalDieuKien.getDieuKien("0000");
         DieuKien dk0001 = Modal.ModalDieuKien.getDieuKien("0001");
@@ -144,6 +130,7 @@ public class ModalMauSuKien {
 
         dsDK.clear();
         dsDK.add(dk0005);
+        dsDK.add(dk0006);
 
         dsHU.clear();
         dsHU.add(hu0003);
@@ -169,7 +156,7 @@ public class ModalMauSuKien {
 
         SuKien sk0005 = new SuKien("0005",
                 "SỐNG KHỞE",
-                "Bạn đã sống được 5 năm.",
+                "Bạn đã sống được 3 năm.",
                 "",
                 null,
                 null,
@@ -179,48 +166,54 @@ public class ModalMauSuKien {
                 "MC",
                 0,
                 5,
-                "KYVONG",
+                "UOCMO",
                 1,
                 false);
 
-        dsSKBC.add(sk0000);
-        dsSKBC.add(sk0001);
-        dsHQ.add(sk0002);
-        dsSKHN.add(sk0003);
-        dsSKHN.add(sk0004);
-        dsSKHN.add(sk0005);
-        
+        dsSK.add(sk0000);
+        dsSK.add(sk0001);
+        dsSK.add(sk0002);
+        dsSK.add(sk0003);
+        dsSK.add(sk0004);
+        dsSK.add(sk0005);
+
         ArrayList<HashMap> DsSK = Modal.GameDatabase.getDsSuKien();
         ArrayList<HashMap> DsSK_LC = Modal.GameDatabase.getDsMSK_MLC();
         ArrayList<HashMap> DsSK_HU = Modal.GameDatabase.getDsSK_HU();
         ArrayList<HashMap> DsSK_DK = Modal.GameDatabase.getDsSK_DK();
         ArrayList<HashMap> DsSK_NV = Modal.GameDatabase.getDsSK_NV();
-        for(HashMap SK: DsSK){
+        for (HashMap SK : DsSK) {
             String MaSK = (String) SK.get("MaSK");
             ArrayList<LuaChon> DsLC = new ArrayList<>();
             ArrayList<HieuUng> DsHU = new ArrayList<>();
             ArrayList<DieuKien> DsDK = new ArrayList<>();
             ArrayList<NhanVat> DsDTTG = new ArrayList<>();
-            for(HashMap SK_LC: DsSK_LC){
-                if(SK_LC.get("MaMSK").equals(MaSK)){
+            for (HashMap SK_LC : DsSK_LC) {
+                if (SK_LC.get("MaMSK").equals(MaSK)) {
                     DsLC.add(Modal.ModalLuaChon.getLuaChon((String) SK_LC.get("MaMLC")));
                 }
             }
-            for(HashMap SK_HU: DsSK_HU){
-                if(SK_HU.get("MaMSK").equals(MaSK)){
-                    DsHU.add(Modal.ModalHieuUng.getHieuUng((String) SK_HU.get("MaHU")));
+            for (HashMap SK_HU : DsSK_HU) {
+                if (SK_HU.get("MaMSK").equals(MaSK)) {
+                    HieuUng hu = Modal.ModalHieuUng.getHieuUng((String) SK_HU.get("MaHU"));
+                    if (hu != null) {
+                        DsHU.add(hu);
+                    }
                 }
             }
-            for(HashMap SK_DK: DsSK_DK){
-                if(SK_DK.get("MaMSK").equals(MaSK)){
-                    DsDK.add(Modal.ModalDieuKien.getDieuKien((String) SK_DK.get("MaDK")));
+            for (HashMap SK_DK : DsSK_DK) {
+                if (SK_DK.get("MaMSK").equals(MaSK)) {
+                    DieuKien dk = Modal.ModalDieuKien.getDieuKien((String) SK_DK.get("MaDK"));
+                    if (dk != null) {
+                        DsDK.add(dk);
+                    }
                 }
             }
-            for(HashMap SK_NV: DsSK_NV){
-                if(SK_NV.get("MaMSK").equals(MaSK)){
-                    DsDTTG.add(Modal.ModalNhanVat.getNhanVat((String) SK_NV.get("MaNN")));
-                }
-            }
+//            for (HashMap SK_NV : DsSK_NV) {
+//                if (SK_NV.get("MaMSK").equals(MaSK)) {
+//                    DsDTTG.add(Modal.ModalNhanVat.getNhanVat((String) SK_NV.get("MaNN")));
+//                }
+//            }
             SuKien temp = new SuKien(
                     MaSK,
                     (String) SK.get("TenSK"),
@@ -240,18 +233,12 @@ public class ModalMauSuKien {
             );
             // Thêm vào Ds Sự kiện
             // ********
+            dsSK.add(temp);
         }
     }
 
     public static SuKien getMauSuKien(String maSK) {
-        ArrayList<SuKien> toanBoSuKien = new ArrayList<SuKien>(dsSKBC);
-        toanBoSuKien.addAll(dsSKTG);
-        toanBoSuKien.addAll(dsSKQG);
-        toanBoSuKien.addAll(dsSKT);
-        toanBoSuKien.addAll(dsSKHN);
-        toanBoSuKien.addAll(dsSKTB);
-        toanBoSuKien.addAll(dsKV);
-        toanBoSuKien.addAll(dsHQ);
+        ArrayList<SuKien> toanBoSuKien = (ArrayList<SuKien>) dsSK.clone();
 
         for (SuKien sk : toanBoSuKien) {
             if (sk.getMaSK().equals(maSK)) {
@@ -265,8 +252,12 @@ public class ModalMauSuKien {
      * @return
      */
     static public ArrayList<SuKien> suKienTheGioi() {
-        ArrayList<SuKien> result = new ArrayList<SuKien>(dsSKBC);
-        result.addAll(dsSKTG);
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("BOICANH".equals(sk.getLoaiSK()) || "THEGIOI".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
         return result;
     }
 
@@ -274,31 +265,67 @@ public class ModalMauSuKien {
      * @return
      */
     static public ArrayList<SuKien> suKienQuocGia() {
-        // TODO implement here
-        return null;
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("BOICANH".equals(sk.getLoaiSK()) || "QUOCGIA".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
     }
 
     /**
      * @return
      */
     static public ArrayList<SuKien> suKienTinh() {
-        // TODO implement here
-        return null;
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("BOICANH".equals(sk.getLoaiSK()) || "TINH".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
     }
 
     /**
      * @return
      */
     static public ArrayList<SuKien> suKienHangNam() {
-        return dsSKHN;
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("HANGNAM".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
     }
 
     /**
      * @return
      */
     static public ArrayList<SuKien> suKienTuyBien() {
-        // TODO implement here
-        return null;
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("TUYBIEN".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @return
+     */
+    static public ArrayList<SuKien> suKienKyVong() {
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("KYVONG".equals(sk.getLoaiSK())
+                    || "UOCMO".equals(sk.getLoaiSK())
+                    || "KEHOACH".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
     }
 
 }

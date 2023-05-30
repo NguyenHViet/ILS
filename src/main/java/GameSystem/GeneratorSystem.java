@@ -455,45 +455,45 @@ public class GeneratorSystem {
                         }
                     }
                     break;
-                case "FAMILY":
+                case "GIADINH":
                     for (MoiQuanHe mqh : mc.getVongQuanHe("GIADINH")) {
                         npc = MainSystem.getNhanVat(mqh.getMaNV());
                         result.add(npc);
                         dsDTTG.remove(npc);
                     }
                     break;
+//                case "RANDOMNPC":
+//                    while (!dsDTTG.isEmpty()) {
+//                        index = new Random().nextInt(dsDTTG.size());
+//                        npc = dsDTTG.get(index);
+//                        if (!npc.isPlayable()) {
+//                            result.add(npc);
+//                            dsDTTG.remove(npc);
+//                        }
+//                    }
+//                    break;
+//                case "RANDOMMNPC":
+//                    while (!dsDTTG.isEmpty()) {
+//                        index = new Random().nextInt(dsDTTG.size());
+//                        npc = dsDTTG.get(index);
+//                        if (!npc.isPlayable() && npc.getGioiTinh() == 0) {
+//                            result.add(npc);
+//                            dsDTTG.remove(npc);
+//                        }
+//                    }
+//                    break;
+//                case "RANDOMFNPC":
+//                    while (!dsDTTG.isEmpty()) {
+//                        index = new Random().nextInt(dsDTTG.size());
+//                        npc = dsDTTG.get(index);
+//                        if (!npc.isPlayable() && npc.getGioiTinh() == 1) {
+//                            result.add(npc);
+//                            dsDTTG.remove(npc);
+//                            break;
+//                        }
+//                    }
+//                    break;
                 case "RANDOMNPC":
-                    while (!dsDTTG.isEmpty()) {
-                        index = new Random().nextInt(dsDTTG.size());
-                        npc = dsDTTG.get(index);
-                        if (!npc.isPlayable()) {
-                            result.add(npc);
-                            dsDTTG.remove(npc);
-                        }
-                    }
-                    break;
-                case "RANDOMMNPC":
-                    while (!dsDTTG.isEmpty()) {
-                        index = new Random().nextInt(dsDTTG.size());
-                        npc = dsDTTG.get(index);
-                        if (!npc.isPlayable() && npc.getGioiTinh() == 0) {
-                            result.add(npc);
-                            dsDTTG.remove(npc);
-                        }
-                    }
-                    break;
-                case "RANDOMFNPC":
-                    while (!dsDTTG.isEmpty()) {
-                        index = new Random().nextInt(dsDTTG.size());
-                        npc = dsDTTG.get(index);
-                        if (!npc.isPlayable() && npc.getGioiTinh() == 1) {
-                            result.add(npc);
-                            dsDTTG.remove(npc);
-                            break;
-                        }
-                    }
-                    break;
-                case "RANDOMNPCS":
                     while (result.size() < soLuong && !dsDTTG.isEmpty()) {
                         index = new Random().nextInt(dsDTTG.size());
                         npc = dsDTTG.get(index);
@@ -503,24 +503,54 @@ public class GeneratorSystem {
                         }
                     }
                     break;
-                case "RANDOMMNPCS":
-                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
-                        index = new Random().nextInt(dsDTTG.size());
-                        npc = dsDTTG.get(index);
-                        if (!npc.isPlayable() && npc.getGioiTinh() == 0) {
-                            result.add(npc);
-                            dsDTTG.remove(npc);
-                        }
+//                case "RANDOMMNPCS":
+//                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
+//                        index = new Random().nextInt(dsDTTG.size());
+//                        npc = dsDTTG.get(index);
+//                        if (!npc.isPlayable() && npc.getGioiTinh() == 0) {
+//                            result.add(npc);
+//                            dsDTTG.remove(npc);
+//                        }
+//                    }
+//                    break;
+//                case "RANDOMFNPCS":
+//                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
+//                        index = new Random().nextInt(dsDTTG.size());
+//                        npc = dsDTTG.get(index);
+//                        if (!npc.isPlayable() && npc.getGioiTinh() == 1) {
+//                            result.add(npc);
+//                            dsDTTG.remove(npc);
+//                        }
+//                    }
+//                    break;
+                case "CON":
+                    for (MoiQuanHe mqh : mc.getQuanHe("Con")) {
+                        npc = MainSystem.getNhanVat(mqh.getMaNV());
+                        result.add(npc);
+                        dsDTTG.remove(npc);
                     }
                     break;
-                case "RANDOMFNPCS":
+                case "NGUOILA":
                     while (result.size() < soLuong && !dsDTTG.isEmpty()) {
                         index = new Random().nextInt(dsDTTG.size());
                         npc = dsDTTG.get(index);
-                        if (!npc.isPlayable() && npc.getGioiTinh() == 1) {
+                        if (!npc.isPlayable() && npc.getMoiQuanHe(mc.getMaNV()) == null) {
                             result.add(npc);
-                            dsDTTG.remove(npc);
                         }
+                        dsDTTG.remove(npc);
+                    }
+                    break;
+                case "BANBE":
+                    while (result.size() < soLuong && !dsDTTG.isEmpty()) {
+                        index = new Random().nextInt(dsDTTG.size());
+                        npc = dsDTTG.get(index);
+                        MoiQuanHe mqh = npc.getMoiQuanHe(mc.getMaNV());
+                        if (mqh != null) {
+                            if ("Bạn bè".equals(mqh.getQuanHe())) {
+                                result.add(npc);
+                            }
+                        }
+                        dsDTTG.remove(npc);
                     }
                     break;
                 case "NONE":
@@ -570,8 +600,10 @@ public class GeneratorSystem {
         ArrayList<DieuKien> dsMauDK = mauSK.getDSDK();
         ArrayList<DieuKien> dsDK = new ArrayList<>();
         if (dsMauDK != null) {
-            for (DieuKien mauDK : dsMauDK) {
-                dsDK.add(taoDieuKien(mauDK, mc));
+            if (!dsMauDK.isEmpty()) {
+                for (DieuKien mauDK : dsMauDK) {
+                    dsDK.add(taoDieuKien(mauDK, mc));
+                }
             }
         }
         sk.setDSDK(dsDK);
@@ -579,8 +611,10 @@ public class GeneratorSystem {
         ArrayList<HieuUng> dsMauHU = mauSK.getDSHU();
         ArrayList<HieuUng> dsHU = new ArrayList<>();
         if (dsMauHU != null) {
-            for (HieuUng mauHU : dsMauHU) {
-                dsHU.add(taoHieuUng(mauHU, mc));
+            if (!dsMauHU.isEmpty()) {
+                for (HieuUng mauHU : dsMauHU) {
+                    dsHU.add(taoHieuUng(mauHU, mc));
+                }
             }
         }
         sk.setDSHU(dsHU);
@@ -594,6 +628,10 @@ public class GeneratorSystem {
      * @return
      */
     static public DieuKien taoDieuKien(DieuKien mauDK, NhanVat mcSK) {
+        if (mauDK == null) {
+            System.out.println("ERROR: mauDK = null");
+            return null;
+        }
         DieuKien dk = mauDK.cloneDK();
         if (dk instanceof DK_SoSanh) {
             return dk;
@@ -626,6 +664,10 @@ public class GeneratorSystem {
      * @return
      */
     static public HieuUng taoHieuUng(HieuUng mauHU, NhanVat mcSK) {
+        if (mauHU == null) {
+            System.out.println("ERROR: mauHU = null");
+            return null;
+        }
         HieuUng hu = mauHU.cloneHU();
         if (hu instanceof HU_ThuocTinh) {
             return hu;

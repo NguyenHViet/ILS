@@ -435,11 +435,14 @@ public class SuKien implements Interface_KichHoatSK {
      */
     @Override
     public boolean kiemTraDK() {
-
-        if (dsDK == null) {
+        if (dsDK == null || dsDK.isEmpty()) {
             return true;
         }
         for (DieuKien dk : dsDK) {
+            if (dk == null) {
+                System.out.println("ERROR: DieuKien not exsist in dsDK of SuKien");
+                continue;
+            }
             if (!dk.kiemTraDK(dsDTTG, boiCanh)) {
                 return false;
             }

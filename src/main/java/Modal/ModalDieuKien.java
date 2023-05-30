@@ -61,7 +61,7 @@ public class ModalDieuKien {
                 100,
                 100
         );
-        
+
         DieuKien dk0004 = new DK_ThanThiet(
                 "0004",
                 true,
@@ -73,7 +73,7 @@ public class ModalDieuKien {
                 100,
                 100
         );
-        
+
         DieuKien dk0005 = new DK_SoHuuVP(
                 "0005",
                 true,
@@ -84,14 +84,14 @@ public class ModalDieuKien {
                 1,
                 "NHANVAT"
         );
-        
+
         DieuKien dk0006 = new DK_SoSanh(
                 "0006",
                 false,
                 1,
                 "Lớn lên",
                 "AGE",
-                4,
+                2,
                 "NHANVAT",
                 DK_SoSanh.LON_HON
         );
@@ -103,20 +103,24 @@ public class ModalDieuKien {
         dsDieuKien.add(dk0004);
         dsDieuKien.add(dk0005);
         dsDieuKien.add(dk0006);
-        
+
         ArrayList<HashMap> DsDieuKien = Modal.GameDatabase.getDsDieuKien();
         ArrayList<HashMap> DsDK_HU = Modal.GameDatabase.getDsDK_HU();
         ArrayList<HashMap> DsDK_QH = Modal.GameDatabase.getDsDK_QH();
         ArrayList<HashMap> DsDK_TT = Modal.GameDatabase.getDsDK_TT();
         ArrayList<HashMap> DsDK_VP = Modal.GameDatabase.getDsDK_VP();
-        
-        for(HashMap DK: DsDieuKien){
-            String MaDK = (String) DK.get("LoaiDK");
-            int SLDTT = Integer.parseInt((String) DK.get("SLDTT"));
-            switch((String) DK.get("LoaiDK")){
+
+        for (HashMap DK : DsDieuKien) {
+            String MaDK = (String) DK.get("MaDK");
+            System.out.println("Load object DieuKien with maDK = " + MaDK);
+            int SLDTT = -1;
+            if (DK.get("SLDTT") != null) {
+                SLDTT = Integer.parseInt((String) DK.get("SLDTT"));
+            }
+            switch ((String) DK.get("LoaiDK")) {
                 case "THUOCTINH":
-                    for(HashMap DK_TT: DsDK_TT){
-                        if(DK_TT.get("MaDK").equals(MaDK)){
+                    for (HashMap DK_TT : DsDK_TT) {
+                        if (DK_TT.get("MaDK").equals(MaDK)) {
                             DK_SoSanh temp = new DK_SoSanh(
                                     MaDK,
                                     (boolean) DK_TT.get("IsNot"),
@@ -132,8 +136,8 @@ public class ModalDieuKien {
                     }
                     break;
                 case "THANTHIET":
-                    for(HashMap DK_QH: DsDK_QH){
-                        if(DK_QH.get("MaDK").equals(MaDK)){
+                    for (HashMap DK_QH : DsDK_QH) {
+                        if (DK_QH.get("MaDK").equals(MaDK)) {
                             DK_ThanThiet temp = new DK_ThanThiet(
                                     MaDK,
                                     (boolean) DK_QH.get("IsNot"),
@@ -150,8 +154,8 @@ public class ModalDieuKien {
                     }
                     break;
                 case "VATPHAM":
-                    for(HashMap DK_VP: DsDK_QH){
-                        if(DK_VP.get("MaDK").equals(MaDK)){
+                    for (HashMap DK_VP : DsDK_QH) {
+                        if (DK_VP.get("MaDK").equals(MaDK)) {
                             DK_SoHuuVP temp = new DK_SoHuuVP(
                                     MaDK,
                                     (boolean) DK_VP.get("IsNot"),
@@ -167,7 +171,7 @@ public class ModalDieuKien {
                     }
                     break;
                 default:
-                    System.out.println("ERROR");
+                    System.out.println("ERROR: loaiDK = " + (String) DK.get("LoaiDK") + " not exsist" );
             }
         }
     }
@@ -185,9 +189,10 @@ public class ModalDieuKien {
         for (DieuKien dk : dsDieuKien) {
             if (dk.getMaDK().equals(maDK)) {
                 result = dk.cloneDK();
-                break;
+                return result;
             }
         }
+        System.out.println("Not found DieuKien with maDK = " + maDK);
         return result;
     }
 

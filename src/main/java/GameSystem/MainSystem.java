@@ -85,7 +85,6 @@ public class MainSystem {
         ArrayList<SuKien> dsKVDuBi = new ArrayList<>();
         ArrayList<SuKien> dsKHDuBi = new ArrayList<>();
         double lucky = new Random().nextDouble();
-
         for (SuKien mauSK : dsMauSK) {
             SuKien sk = GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, dsNV, tg);
             if (lucky <= sk.getTyLeXuatHien()) {
@@ -140,14 +139,14 @@ public class MainSystem {
             dsSKDuBi.remove(index);
             i--;
         }
-        
+
         for (int i = 0; i < soLuongSKToiDa && i < dsKVDuBi.size(); i++) {
             int index = new Random().nextInt(dsKVDuBi.size());
             MainSystem.dsSKLauDai.add(dsKVDuBi.get(index));
             dsKVDuBi.remove(index);
             i--;
         }
-        
+
         for (int i = 0; i < soLuongSKToiDa && i < dsKHDuBi.size(); i++) {
             int index = new Random().nextInt(dsKHDuBi.size());
             MainSystem.dsThanhTuu.add(dsKHDuBi.get(index));

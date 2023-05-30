@@ -97,9 +97,12 @@ public class MainScreen {
     public void initialize() throws IOException {
 //        Init
         initStackPane();
-//        Load data
-        reloadProfile(MainSystem.getNguoiChoi());
+
         reloadButtonArea();
+        
+//        Load data
+        System.out.println(">");
+        reloadProfile(MainSystem.getNguoiChoi());
         MainSystem.suKienNamKeTiep(this);
         loadEvent();
     }
