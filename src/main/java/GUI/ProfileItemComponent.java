@@ -143,7 +143,7 @@ public class ProfileItemComponent {
         Label timerValue = new Label("" + sk.getThoiHan());
         Label completeLabel = new Label("Tình trạng:");
         Label timeStampLabel = new Label("Thời điểm:");
-        Label timeStampValue = new Label("" + sk.getThoiDiem());
+        Label timeStampValue = new Label(sk.getThoiDiem() + " tuổi");
 
         profileItemContent.getColumnConstraints().get(0).setPercentWidth(35);
         profileItemContent.setHgap(10);
