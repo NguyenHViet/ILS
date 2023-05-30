@@ -6,7 +6,8 @@ package Modal;
 
 import GameEvent.DieuKien;
 import GameEvent.LuaChon;
-import java.util.ArrayList;
+import GameEvent.SuKien;
+import java.util.*;
 
 /**
  *
@@ -67,6 +68,38 @@ public class ModalLuaChon {
         dsLuaChon.add(lc0000);
         dsLuaChon.add(lc0001);
         dsLuaChon.add(lc0002);
+        ArrayList<HashMap> DsLC = Modal.GameDatabase.getDsLuaChon();
+        ArrayList<HashMap> DsLC_DK = Modal.GameDatabase.getDsLC_DK();
+        ArrayList<HashMap> DsMLC_MSK = Modal.GameDatabase.getDsMLC_MSK();
+        
+        for(HashMap LC: DsLC){
+            String MaLC = (String) LC.get("MaMLC");
+            String LoaiDTTG = LC.get("LDTTG")!= null ? (String) LC.get("LDTTG") : "NONE";
+            ArrayList<DieuKien> DsDK = new ArrayList<>();
+            ArrayList<String> DsSK_LC = new ArrayList<>();
+            for(HashMap LC_DK: DsLC_DK){
+                if(LC_DK.get("MaMLC").equals(MaLC)){
+                    DsDK.add(Modal.ModalDieuKien.getDieuKien((String) LC_DK.get("MaDK")));
+                }
+            }
+            for(HashMap MLC_MSK: DsLC_DK){
+                if(MLC_MSK.get("MaMLC").equals(MaLC)){
+                    DsSK_LC.add((String) MLC_MSK.get("MaSK"));
+                }
+            }
+            LuaChon temp = new LuaChon(
+                    MaLC,
+                    (String) LC.get("MoTa"),
+                    DsSK_LC,
+                    DsDK,
+                    LoaiDTTG,
+                    1,
+                    null,
+                    null
+            );
+            Modal.ModalLuaChon.dsLuaChon.add(temp);
+        }
+        System.out.println(Modal.ModalLuaChon.dsLuaChon.size());
     }
 
     public static void themLuaChon(LuaChon dk) {
@@ -77,10 +110,10 @@ public class ModalLuaChon {
         return dsLuaChon;
     }
 
-    public static LuaChon getLuaChon(String maDK) {
+    public static LuaChon getLuaChon(String maLC) {
         LuaChon result = null;
         for (LuaChon lc : dsLuaChon) {
-            if (lc.getMaLC().equals(maDK)) {
+            if (lc.getMaLC().equals(maLC)) {
                 result = lc.cloneLC();
                 break;
             }

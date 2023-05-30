@@ -5,7 +5,7 @@
 package Modal;
 
 import GameEvent.*;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -103,6 +103,73 @@ public class ModalDieuKien {
         dsDieuKien.add(dk0004);
         dsDieuKien.add(dk0005);
         dsDieuKien.add(dk0006);
+        
+        ArrayList<HashMap> DsDieuKien = Modal.GameDatabase.getDsDieuKien();
+        ArrayList<HashMap> DsDK_HU = Modal.GameDatabase.getDsDK_HU();
+        ArrayList<HashMap> DsDK_QH = Modal.GameDatabase.getDsDK_QH();
+        ArrayList<HashMap> DsDK_TT = Modal.GameDatabase.getDsDK_TT();
+        ArrayList<HashMap> DsDK_VP = Modal.GameDatabase.getDsDK_VP();
+        
+        for(HashMap DK: DsDieuKien){
+            String MaDK = (String) DK.get("LoaiDK");
+            int SLDTT = Integer.parseInt((String) DK.get("SLDTT"));
+            switch((String) DK.get("LoaiDK")){
+                case "THUOCTINH":
+                    for(HashMap DK_TT: DsDK_TT){
+                        if(DK_TT.get("MaDK").equals(MaDK)){
+                            DK_SoSanh temp = new DK_SoSanh(
+                                    MaDK,
+                                    (boolean) DK_TT.get("IsNot"),
+                                    SLDTT,
+                                    (String) DK.get("MoTa"),
+                                    (String) DK.get("MaTT"),
+                                    (Integer) Integer.parseInt((String) DK_TT.get("GTSS")),
+                                    (String) DK_TT.get("LoaiDT"),
+                                    (String) DK_TT.get("LoaiSS")
+                            );
+                            ModalDieuKien.dsDieuKien.add(temp);
+                        }
+                    }
+                    break;
+                case "THANTHIET":
+                    for(HashMap DK_QH: DsDK_QH){
+                        if(DK_QH.get("MaDK").equals(MaDK)){
+                            DK_ThanThiet temp = new DK_ThanThiet(
+                                    MaDK,
+                                    (boolean) DK_QH.get("IsNot"),
+                                    SLDTT,
+                                    (String) DK.get("MoTa"),
+                                    "",
+                                    (String) DK_QH.get("LoaiQH"),
+                                    (String) DK_QH.get("VongQH"),
+                                    Integer.parseInt((String) DK_QH.get("ThanThiet")),
+                                    Integer.parseInt((String) DK_QH.get("TinTuong"))
+                            );
+                            ModalDieuKien.dsDieuKien.add(temp);
+                        }
+                    }
+                    break;
+                case "VATPHAM":
+                    for(HashMap DK_VP: DsDK_QH){
+                        if(DK_VP.get("MaDK").equals(MaDK)){
+                            DK_SoHuuVP temp = new DK_SoHuuVP(
+                                    MaDK,
+                                    (boolean) DK_VP.get("IsNot"),
+                                    SLDTT,
+                                    (String) DK.get("MoTa"),
+                                    (String) DK_VP.get("MaVP"),
+                                    (String) DK_VP.get("LoaiVP"),
+                                    Integer.parseInt((String) DK_VP.get("SoLuong")),
+                                    (String) DK_VP.get("LoaiDT")
+                            );
+                            ModalDieuKien.dsDieuKien.add(temp);
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("ERROR");
+            }
+        }
     }
 
     public static void themDieuKien(DieuKien dk) {
