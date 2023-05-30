@@ -10,7 +10,7 @@ import GameEvent.LuaChon;
 import GameEvent.SuKien;
 import GameObject.NhanVat;
 import GameSystem.GeneratorSystem;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -189,6 +189,58 @@ public class ModalMauSuKien {
         dsSKHN.add(sk0003);
         dsSKHN.add(sk0004);
         dsSKHN.add(sk0005);
+        
+        ArrayList<HashMap> DsSK = Modal.GameDatabase.getDsSuKien();
+        ArrayList<HashMap> DsSK_LC = Modal.GameDatabase.getDsMSK_MLC();
+        ArrayList<HashMap> DsSK_HU = Modal.GameDatabase.getDsSK_HU();
+        ArrayList<HashMap> DsSK_DK = Modal.GameDatabase.getDsSK_DK();
+        ArrayList<HashMap> DsSK_NV = Modal.GameDatabase.getDsSK_NV();
+        for(HashMap SK: DsSK){
+            String MaSK = (String) SK.get("MaSK");
+            ArrayList<LuaChon> DsLC = new ArrayList<>();
+            ArrayList<HieuUng> DsHU = new ArrayList<>();
+            ArrayList<DieuKien> DsDK = new ArrayList<>();
+            ArrayList<NhanVat> DsDTTG = new ArrayList<>();
+            for(HashMap SK_LC: DsSK_LC){
+                if(SK_LC.get("MaMSK").equals(MaSK)){
+                    DsLC.add(Modal.ModalLuaChon.getLuaChon((String) SK_LC.get("MaMLC")));
+                }
+            }
+            for(HashMap SK_HU: DsSK_HU){
+                if(SK_HU.get("MaMSK").equals(MaSK)){
+                    DsHU.add(Modal.ModalHieuUng.getHieuUng((String) SK_HU.get("MaHU")));
+                }
+            }
+            for(HashMap SK_DK: DsSK_DK){
+                if(SK_DK.get("MaMSK").equals(MaSK)){
+                    DsDK.add(Modal.ModalDieuKien.getDieuKien((String) SK_DK.get("MaDK")));
+                }
+            }
+            for(HashMap SK_NV: DsSK_NV){
+                if(SK_NV.get("MaMSK").equals(MaSK)){
+                    DsDTTG.add(Modal.ModalNhanVat.getNhanVat((String) SK_NV.get("MaNN")));
+                }
+            }
+            SuKien temp = new SuKien(
+                    MaSK,
+                    (String) SK.get("TenSK"),
+                    (String) SK.get("MoTa"),
+                    (String) SK.get("TomTat"),
+                    DsLC,
+                    DsHU,
+                    DsDK,
+                    DsDTTG,
+                    null,
+                    (String) SK.get("LoaiDTTG"),
+                    Integer.parseInt((String) SK.get("SLTG")),
+                    Integer.parseInt((String) SK.get("ThoiHan")),
+                    (String) SK.get("LoaiSK"),
+                    Double.parseDouble((String) SK.get("TLXH")),
+                    false
+            );
+            // Thêm vào Ds Sự kiện
+            // ********
+        }
     }
 
     public static SuKien getMauSuKien(String maSK) {

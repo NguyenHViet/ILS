@@ -307,6 +307,7 @@ public class GameDatabase {
                 HashMap<String, String> MSK = new HashMap<>();
                 MSK.put("MaSK", bangMSK.getString("idMauSuKien"));
                 MSK.put("MoTa",(String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("NoiDung"));
+                MSK.put("TomTat",(String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("TomTat"));
                 MSK.put("TenSK", bangMSK.getString("tenMauSuKien"));
                 MSK.put("LoaiSK", bangMSK.getString("loaiSuKien"));
                 MSK.put("ThoiHan", bangMSK.getString("thoiHan"));
@@ -396,6 +397,7 @@ public class GameDatabase {
                 DK_QH.put("MaDK", bangDK_QH.getString("idDieuKien"));
                 DK_QH.put("LoaiQH", bangDK_QH.getString("loaiQuanHe"));
                 DK_QH.put("IsNot", bangDK_QH.getString("isNot"));
+                DK_QH.put("VongQH", bangDK_QH.getString("vongQH"));
                 DK_QH.put("ThanThiet", bangDK_QH.getString("thanThiet"));
                 DK_QH.put("TinTuong", bangDK_QH.getString("tinTuong"));
                 GameDatabase.dsDK_QH.add(DK_QH);
@@ -409,6 +411,7 @@ public class GameDatabase {
                 DK_TT.put("MaDK", bangDK_TT.getString("idDieuKien"));
                 DK_TT.put("MaTT", bangDK_TT.getString("idThuocTinh"));
                 DK_TT.put("IsNot", bangDK_TT.getString("isNot"));
+                DK_TT.put("LoaiSS", bangDK_TT.getString("loaiSoSanh"));
                 DK_TT.put("LoaiDT", bangDK_TT.getString("loaiDoiTuong"));
                 DK_TT.put("GTSS", bangDK_TT.getString("giaTriSS"));
                 GameDatabase.dsDK_TT.add(DK_TT);
@@ -687,5 +690,162 @@ public class GameDatabase {
     static public void setMaTG(String maTG) {
         // TODO implement here
     }
+
+    public static ArrayList<HashMap> getDsNhanVat() {
+        return dsNhanVat;
+    }
+
+    public static ArrayList<HashMap> getDsVatPham() {
+        return dsVatPham;
+    }
+
+    public static ArrayList<HashMap> getDsThuocTinh() {
+        return dsThuocTinh;
+    }
+
+    public static ArrayList<HashMap> getDsKyNang() {
+        return dsKyNang;
+    }
+
+    public static ArrayList<HashMap> getDsNgheNghiep() {
+        return dsNgheNghiep;
+    }
+
+    public static ArrayList<HashMap> getDsChucVu() {
+        return dsChucVu;
+    }
+
+    public static ArrayList<HashMap> getDsBoiCanh() {
+        return dsBoiCanh;
+    }
+
+    public static ArrayList<HashMap> getDsDauAn() {
+        return dsDauAn;
+    }
+
+    public static ArrayList<HashMap> getDsThuongMai() {
+        return dsThuongMai;
+    }
+
+    public static ArrayList<HashMap> getDsSuKien() {
+        return dsSuKien;
+    }
+
+    public static ArrayList<HashMap> getDsLuaChon() {
+        return dsLuaChon;
+    }
+
+    public static ArrayList<HashMap> getDsHieuUng() {
+        return dsHieuUng;
+    }
+
+    public static ArrayList<HashMap> getDsQuanHe() {
+        return dsQuanHe;
+    }
+
+    public static ArrayList<HashMap> getDsDieuKien() {
+        return dsDieuKien;
+    }
+
+    public static ArrayList<HashMap> getDsBC_BC() {
+        return dsBC_BC;
+    }
+
+    public static ArrayList<HashMap> getDsBC_TN() {
+        return dsBC_TN;
+    }
+
+    public static ArrayList<HashMap> getDsDK_HU() {
+        return dsDK_HU;
+    }
+
+    public static ArrayList<HashMap> getDsDK_KN() {
+        return dsDK_KN;
+    }
+
+    public static ArrayList<HashMap> getDsDK_NN() {
+        return dsDK_NN;
+    }
+
+    public static ArrayList<HashMap> getDsDK_QH() {
+        return dsDK_QH;
+    }
+
+    public static ArrayList<HashMap> getDsDK_TT() {
+        return dsDK_TT;
+    }
+
+    public static ArrayList<HashMap> getDsDK_VP() {
+        return dsDK_VP;
+    }
+
+    public static ArrayList<HashMap> getDsHU_KN() {
+        return dsHU_KN;
+    }
+
+    public static ArrayList<HashMap> getDsHU_NN() {
+        return dsHU_NN;
+    }
+
+    public static ArrayList<HashMap> getDsHU_QH() {
+        return dsHU_QH;
+    }
+
+    public static ArrayList<HashMap> getDsHU_TT() {
+        return dsHU_TT;
+    }
+
+    public static ArrayList<HashMap> getDsHU_VP() {
+        return dsHU_VP;
+    }
+
+    public static ArrayList<HashMap> getDsLC_DK() {
+        return dsLC_DK;
+    }
+
+    public static ArrayList<HashMap> getDsMLC_MSK() {
+        return dsMLC_MSK;
+    }
+
+    public static ArrayList<HashMap> getDsMSK_MLC() {
+        return dsMSK_MLC;
+    }
+
+    public static ArrayList<HashMap> getDsNV_KN() {
+        return dsNV_KN;
+    }
+
+    public static ArrayList<HashMap> getDsNV_TT() {
+        return dsNV_TT;
+    }
+
+    public static ArrayList<HashMap> getDsNV_VP() {
+        return dsNV_VP;
+    }
+
+    public static ArrayList<HashMap> getDsNV_NN_CV() {
+        return dsNV_NN_CV;
+    }
+
+    public static ArrayList<HashMap> getDsSK_DK() {
+        return dsSK_DK;
+    }
+
+    public static ArrayList<HashMap> getDsSK_HU() {
+        return dsSK_HU;
+    }
+
+    public static ArrayList<HashMap> getDsSK_NV() {
+        return dsSK_NV;
+    }
+
+    public static ArrayList<HashMap> getDsVP_HU() {
+        return dsVP_HU;
+    }
+
+    public static ArrayList<HashMap> getDsVP_TT() {
+        return dsVP_TT;
+    }
+    
 
 }
