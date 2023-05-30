@@ -307,6 +307,7 @@ public class GameDatabase {
                 HashMap<String, String> MSK = new HashMap<>();
                 MSK.put("MaSK", bangMSK.getString("idMauSuKien"));
                 MSK.put("MoTa",(String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("NoiDung"));
+                MSK.put("TomTat",(String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("TomTat"));
                 MSK.put("TenSK", bangMSK.getString("tenMauSuKien"));
                 MSK.put("LoaiSK", bangMSK.getString("loaiSuKien"));
                 MSK.put("ThoiHan", bangMSK.getString("thoiHan"));

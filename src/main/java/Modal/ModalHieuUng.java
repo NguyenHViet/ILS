@@ -80,7 +80,7 @@ public class ModalHieuUng {
                     DsHU_DK.add(Modal.ModalDieuKien.getDieuKien((String) DK_HU.get("MaDK")));
                 }
             }
-            switch ((String) HU.get("LoaiHU")){
+            switch ((String) HU.get("LoaiSK")){
                 case "THUOCTINH":
                     for(HashMap HU_TT: DsHU_TT){
                         if(HU_TT.get("MaHU").equals(MaHU)){
