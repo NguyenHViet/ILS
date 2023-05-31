@@ -65,7 +65,7 @@ public class ModelMauSuKien {
                 "NONE",
                 0,
                 0,
-                "BOICANH",
+                "HANGNAM",
                 99,
                 false);
 
@@ -81,7 +81,7 @@ public class ModelMauSuKien {
                 "MC",
                 0,
                 0,
-                "BOICANH",
+                "HANGNAM",
                 100,
                 false);
 
@@ -124,12 +124,11 @@ public class ModelMauSuKien {
                 "GIADINH",
                 0,
                 0,
-                "SUKIEN",
+                "HANGNAM",
                 100,
                 false);
 
         dsDK.clear();
-        dsDK.add(dk0005);
         dsDK.add(dk0006);
 
         dsHU.clear();
@@ -141,14 +140,14 @@ public class ModelMauSuKien {
                 "",
                 null,
                 (ArrayList<HieuUng>) dsHU.clone(),
-                null,
+                (ArrayList<DieuKien>) dsDK.clone(),
                 null,
                 null,
                 "MC",
                 0,
                 0,
                 "HANGNAM",
-                80,
+                50,
                 false);
 
         dsDK.clear();
@@ -165,7 +164,7 @@ public class ModelMauSuKien {
                 null,
                 "MC",
                 0,
-                5,
+                3,
                 "UOCMO",
                 100,
                 false);
@@ -322,6 +321,16 @@ public class ModelMauSuKien {
             if ("KYVONG".equals(sk.getLoaiSK())
                     || "UOCMO".equals(sk.getLoaiSK())
                     || "KEHOACH".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
+    }
+
+    static public ArrayList<SuKien> suKienHeQua() {
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("HEQUA".equals(sk.getLoaiSK())) {
                 result.add(sk);
             }
         }

@@ -49,6 +49,8 @@ public class MainScreen {
     @FXML
     private GridPane generalProfilePane;
     @FXML
+    private ScrollPane eventLogWrapper;
+    @FXML
     private TextFlow eventLog;
     @FXML
     private StackPane mainAreaStack;
@@ -99,9 +101,8 @@ public class MainScreen {
         initStackPane();
 
         reloadButtonArea();
-        
+
 //        Load data
-        System.out.println(">");
         reloadProfile(MainSystem.getNguoiChoi());
         MainSystem.suKienNamKeTiep(this);
         loadEvent();
@@ -136,7 +137,7 @@ public class MainScreen {
         Text txt = new Text(message + "\n");
         txt.setWrappingWidth(376);
         eventLog.getChildren().add(txt);
-
+        eventLogWrapper.setVvalue(1.0);
     }
 
     public void addTitle(String message) {
@@ -145,11 +146,12 @@ public class MainScreen {
         txt.setStyle("-fx-font-weight: bold");
         txt.setWrappingWidth(376);
         eventLog.getChildren().add(txt);
-
+        eventLogWrapper.setVvalue(1.0);
     }
 
     public void addText(Text txt) {
         eventLog.getChildren().add(txt);
+        eventLogWrapper.setVvalue(1.0);
     }
 
     private void reloadScreen() throws IOException {
@@ -166,8 +168,8 @@ public class MainScreen {
         mainAreaStack.getChildren().add(inventory);
         mainAreaStack.getChildren().add(entertainment);
         mainAreaStack.getChildren().add(emptyPane);
-        mainAreaStack.getChildren().add(eventLog);
-        eventLog.toFront();
+        mainAreaStack.getChildren().add(eventLogWrapper);
+        eventLogWrapper.toFront();
         emptyPane.toFront();
     }
 
@@ -268,7 +270,7 @@ public class MainScreen {
             MainSystem.kichHoatSuKienHienTai(this);
         } else {
             nextYearBtn.setDisable(false);
-            eventLog.toFront();
+            eventLogWrapper.toFront();
             chucNangHienTai = "";
         }
         reloadProfile(MainSystem.getNguoiChoi());
@@ -283,7 +285,7 @@ public class MainScreen {
             chucNangHienTai = "WorldMap";
         } else {
             worldMap.toBack();
-            eventLog.toFront();
+            eventLogWrapper.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -299,7 +301,7 @@ public class MainScreen {
             chucNangHienTai = "Relationship";
         } else {
             relationship.toBack();
-            eventLog.toFront();
+            eventLogWrapper.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -324,7 +326,7 @@ public class MainScreen {
             chucNangHienTai = "Inventory";
         } else {
             inventory.toBack();
-            eventLog.toFront();
+            eventLogWrapper.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -340,7 +342,7 @@ public class MainScreen {
             chucNangHienTai = "Entertainment";
         } else {
             entertainment.toBack();
-            eventLog.toFront();
+            eventLogWrapper.toFront();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -351,10 +353,10 @@ public class MainScreen {
     private void showHistoryLog() throws IOException {
         if (!"HistoryLog".equals(chucNangHienTai)) {
             emptyPane.toFront();
-            eventLog.toFront();
+            eventLogWrapper.toFront();
             chucNangHienTai = "HistoryLog";
         } else {
-            eventLog.toBack();
+            eventLogWrapper.toBack();
             currentEvent.toFront();
             chucNangHienTai = "";
         }
@@ -364,7 +366,7 @@ public class MainScreen {
     @FXML
     private void returnMain() throws IOException {
         emptyPane.toFront();
-        eventLog.toFront();
+        eventLogWrapper.toFront();
         currentEvent.toFront();
         chucNangHienTai = "";
         reloadButtonArea();

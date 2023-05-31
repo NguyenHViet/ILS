@@ -7,6 +7,8 @@ import SupportClass.*;
 import GUI.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -156,17 +158,23 @@ public class MainSystem {
      */
     static public void taoSuKien() {
 //        Sự kiện thế giới
-        int SoLuongSKTGToiDa = 1;
+        int SoLuongSKTGToiDa = new Random().nextInt(1);
         ArrayList<SuKien> dsSKTG = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienTheGioi(), SoLuongSKTGToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKTG);
 //        Sự kiện quốc gia
+        int SoLuongSKQGToiDa = new Random().nextInt(1);
+        ArrayList<SuKien> dsSKQG = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienQuocGia(), SoLuongSKQGToiDa);
+        MainSystem.dsSKHienTai.addAll(dsSKQG);
 //        Sự kiện tỉnh
+        int SoLuongSKTToiDa = new Random().nextInt(1);
+        ArrayList<SuKien> dsSKT = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienTinh(), SoLuongSKTToiDa);
+        MainSystem.dsSKHienTai.addAll(dsSKT);
 //        Sự kiện hằng năm
         int SoLuongSKHNToiDa = 1;
         ArrayList<SuKien> dsSKHN = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienHangNam(), SoLuongSKHNToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKHN);
 //        Sự kiện kỳ vọng
-        int SoLuongSKKVToiDa = 1;
+        int SoLuongSKKVToiDa = new Random().nextInt(1);
         ArrayList<SuKien> dsSKKV = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienKyVong(), SoLuongSKKVToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKKV);
     }
