@@ -412,7 +412,7 @@ public class NewWorldScreen {
         Task<NhanVat> task = new Task<NhanVat>() {
             @Override
             protected NhanVat call() throws Exception {
-                NhanVat mc = GeneratorSystem.taoNhanVat("0000", MainSystem.getTG(), 0, 0, true);
+                NhanVat mc = GeneratorSystem.taoNhanVat("0000", MainSystem.getTG(), 0, 0, true, "");
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {

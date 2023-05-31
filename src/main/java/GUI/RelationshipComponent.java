@@ -4,12 +4,17 @@
  */
 package GUI;
 
+import GameObject.NhanVat;
 import SupportClass.MoiQuanHe;
 import GameSystem.MainSystem;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -27,11 +32,12 @@ public class RelationshipComponent {
 //        loadData(MainSystem.getNguoiChoi().getDSQH());
     }
 
-    public void loadData(ArrayList<MoiQuanHe> MQH) throws IOException {
+    public void loadData(ArrayList<MoiQuanHe> MQH, MainScreen mainScreenController) throws IOException {
         ArrayList<MoiQuanHe> dsMQH = (ArrayList<MoiQuanHe>) MQH.clone();
         familyRelationshipPane.getChildren().clear();
         socialRelationshipPane.getChildren().clear();
         for (MoiQuanHe mqh : dsMQH) {
+            NhanVat nv = Modal.ModalNhanVat.getNhanVat(mqh.getMaNV());
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
             VBox quanHeItem = loader.load();
             quanHeItem.setPrefWidth(300);
@@ -40,6 +46,16 @@ public class RelationshipComponent {
             } else if ("XAHOI".equals(mqh.getVongQuanHe())) {
                 socialRelationshipPane.getChildren().add(quanHeItem);
             }
+            quanHeItem.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent e) {
+                        try {
+                            mainScreenController.reloadProfile(nv);
+                        } catch (IOException ex) {
+                            Logger.getLogger(RelationshipComponent.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
             ((ProfileItemComponent) loader.getController()).loadData(mqh);
         }
     }

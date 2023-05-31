@@ -358,7 +358,7 @@ public class NewCharacterScreen {
     @FXML
     private void randomCharacterValue() {
 //        Init
-        MainSystem.setNguoiChoi(GeneratorSystem.taoNhanVat(MainSystem.getNguoiChoi().getMaNV(), MainSystem.getTG(), 0, new Random().nextInt(2), true));
+        MainSystem.setNguoiChoi(GeneratorSystem.taoNhanVat(MainSystem.getNguoiChoi().getMaNV(), MainSystem.getTG(), 0, new Random().nextInt(2), true, ""));
 //        Load data
         loadDataFrom();
     }
@@ -397,7 +397,13 @@ public class NewCharacterScreen {
         Task<Void> task2 = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                ArrayList<QuocGia> dsQG = MainSystem.getTG().getDSQG();
+                QuocGia qg = dsQG.get(new Random().nextInt(dsQG.size()));
+                ArrayList<Tinh> dsT = qg.getDST();
+                Tinh vt = dsT.get(new Random().nextInt(dsT.size()));
+                MainSystem.getNguoiChoi().setViTri(vt);
                 GeneratorSystem.khoiTaoNguoiThan(MainSystem.getNguoiChoi());
+                GeneratorSystem.khoiTaoXaHoi(MainSystem.getNguoiChoi());
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -411,11 +417,6 @@ public class NewCharacterScreen {
         task2.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent arg0) {
-                ArrayList<QuocGia> dsQG = MainSystem.getTG().getDSQG();
-                QuocGia qg = dsQG.get(new Random().nextInt(dsQG.size()));
-                ArrayList<Tinh> dsT = qg.getDST();
-                Tinh vt = dsT.get(new Random().nextInt(dsT.size()));
-                MainSystem.getNguoiChoi().diChuyen(vt);
                 try {
                     UI.setMainFrame("MainScreen");
                 } catch (IOException ex) {

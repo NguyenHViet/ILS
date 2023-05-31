@@ -20,7 +20,6 @@ public class GameDatabase {
      *
      */
     static private String maTG;
-    
 
     static private ArrayList<HashMap> dsNhanVat = new ArrayList<>();
     static private ArrayList<HashMap> dsVatPham = new ArrayList<>();
@@ -60,17 +59,19 @@ public class GameDatabase {
     static private ArrayList<HashMap> dsSK_HU = new ArrayList<>();
     static private ArrayList<HashMap> dsSK_NV = new ArrayList<>();
     static private ArrayList<HashMap> dsVP_HU = new ArrayList<>();
-    static private ArrayList<HashMap> dsVP_TT= new ArrayList<>();
-    
-    static private HashMap getMoTa(ArrayList<HashMap> dsMoTa, String MaMT){
-        for(HashMap temp: dsMoTa){
+    static private ArrayList<HashMap> dsVP_TT = new ArrayList<>();
+
+    static private HashMap getMoTa(ArrayList<HashMap> dsMoTa, String MaMT) {
+        for (HashMap temp : dsMoTa) {
             String value = (String) temp.get("MaMT");
             if (value != null && value.equals(MaMT)) {
                 return temp;
             }
         }
         return new HashMap<>();
-    };
+    }
+
+    ;
 
     /**
      * @param dbURL
@@ -83,7 +84,7 @@ public class GameDatabase {
             Connection conn = DriverManager.getConnection(dbURL, username, password);
             GameDatabase.dataConn = conn;
             System.out.println("Kết nối thành công!");
-            
+
             // Câu query lấy dữ liệu
             String queryNV = "SELECT * FROM NhanVat";
             String queryVP = "SELECT * FROM VatPham";
@@ -125,12 +126,12 @@ public class GameDatabase {
             String querySK_NV = "SELECT * FROM SuKien_NhanVat";
             String queryVP_HU = "SELECT * FROM VatPham_HieuUng";
             String queryVP_TT = "SELECT * FROM VatPham_ThuocTinh";
-            
+
             // Lưu các bảng phụ
             ArrayList<HashMap> dsMoTa = new ArrayList<>();
 
             Statement statement = conn.createStatement();
-            
+
             // Lấy dữ liệu từ bảng MoTa
             ResultSet bangMoTa = statement.executeQuery(queryMoTa);
             while (bangMoTa.next()) {
@@ -139,12 +140,12 @@ public class GameDatabase {
                 String tomtat = bangMoTa.getString("tomTat");
                 MoTa.put("MaMT", bangMoTa.getString("idMoTa"));
                 MoTa.put("NoiDung", bangMoTa.getString("noiDung"));
-                if(tomtat != null){
+                if (tomtat != null) {
                     MoTa.put("TomTat", tomtat);
                 }
                 dsMoTa.add(MoTa);
             }
-            
+
             // Lấy dữ liệu từ bảng NhanVat
             ResultSet bangNV = statement.executeQuery(queryNV);
             while (bangNV.next()) {
@@ -155,12 +156,12 @@ public class GameDatabase {
                 NV.put("MaTG", bangNV.getString("idTheGioi"));
                 NV.put("TenNV", bangNV.getString("tenNhanVat"));
                 NV.put("ViTri", bangNV.getString("viTri"));
-                if(MC != null){
+                if (MC != null) {
                     NV.put("NguoiChoi", MC);
                 }
                 GameDatabase.dsNhanVat.add(NV);
             }
-            
+
             // Lấy dữ liệu từ bảng VatPham
             ResultSet bangVP = statement.executeQuery(queryVP);
             while (bangVP.next()) {
@@ -170,11 +171,11 @@ public class GameDatabase {
                 temp.put("TenVP", bangVP.getString("tenVatPham"));
                 temp.put("LoaiVP", bangVP.getString("loaiVatPham"));
                 temp.put("doBen", bangVP.getString("doBen"));
-                temp.put("MoTa",(String) getMoTa(dsMoTa, bangVP.getString("idMoTa")).get("NoiDung"));
-                
+                temp.put("MoTa", (String) getMoTa(dsMoTa, bangVP.getString("idMoTa")).get("NoiDung"));
+
                 GameDatabase.dsVatPham.add(temp);
             }
-            
+
             // Lấy dữ liệu từ bảng HieuUng
             ResultSet bangHU = statement.executeQuery(queryHU);
             while (bangHU.next()) {
@@ -182,10 +183,10 @@ public class GameDatabase {
                 HashMap<String, String> temp = new HashMap<>();
                 temp.put("MaHU", bangHU.getString("idHieuUng"));
                 temp.put("LoaiSK", bangHU.getString("loaiSuKien"));
-                temp.put("MoTa",(String) getMoTa(dsMoTa, bangHU.getString("idMoTa")).get("NoiDung"));
+                temp.put("MoTa", (String) getMoTa(dsMoTa, bangHU.getString("idMoTa")).get("NoiDung"));
                 GameDatabase.dsHieuUng.add(temp);
             }
-            
+
             // Lấy dữ liệu từ bảng NgheNghiep
             ResultSet bangNN = statement.executeQuery(queryNN);
             while (bangNN.next()) {
@@ -193,10 +194,10 @@ public class GameDatabase {
                 HashMap<String, String> temp = new HashMap<>();
                 temp.put("MaNN", bangNN.getString("idNgheNghiep"));
                 temp.put("TenNN", bangNN.getString("tenNgheNghiep"));
-                temp.put("MoTa",(String) getMoTa(dsMoTa, bangNN.getString("idMoTa")).get("NoiDung"));
+                temp.put("MoTa", (String) getMoTa(dsMoTa, bangNN.getString("idMoTa")).get("NoiDung"));
                 GameDatabase.dsNgheNghiep.add(temp);
             }
-            
+
             // Lấy dữ liệu từ bảng ChucVu
             ResultSet bangCV = statement.executeQuery(queryCV);
             while (bangCV.next()) {
@@ -205,12 +206,12 @@ public class GameDatabase {
                 temp.put("MaCV", bangCV.getString("idChucVu"));
                 temp.put("TenCV", bangCV.getString("tenChucVu"));
                 temp.put("MaNN", bangCV.getString("idNgheNghiep"));
-                temp.put("MoTa",(String) getMoTa(dsMoTa, bangCV.getString("idMoTa")).get("NoiDung"));
+                temp.put("MoTa", (String) getMoTa(dsMoTa, bangCV.getString("idMoTa")).get("NoiDung"));
                 temp.put("CapBac", bangCV.getString("capBac"));
                 temp.put("LCB", bangCV.getString("luongCoBan"));
                 GameDatabase.dsChucVu.add(temp);
             }
-            
+
             // Lấy dữ liệu từ bảng ThuocTinh
             ResultSet bangTT = statement.executeQuery(queryTT);
             while (bangTT.next()) {
@@ -218,15 +219,15 @@ public class GameDatabase {
                 HashMap<String, String> temp = new HashMap<>();
                 temp.put("MaTT", bangTT.getString("idThuocTinh"));
                 temp.put("TenTT", bangTT.getString("tenThuocTinh"));
-                temp.put("MoTa",(String) getMoTa(dsMoTa, bangTT.getString("idMoTa")).get("NoiDung"));
+                temp.put("MoTa", (String) getMoTa(dsMoTa, bangTT.getString("idMoTa")).get("NoiDung"));
                 temp.put("LoaiTT", bangTT.getString("loaiThuocTinh"));
                 String HT = bangTT.getString("hienThi");
-                if(HT != null){
+                if (HT != null) {
                     temp.put("HienThi", HT);
                 }
                 GameDatabase.dsThuocTinh.add(temp);
             }
-            
+
             // Lấy dữ liệu từ bảng BoiCanh
             ResultSet bangBC = statement.executeQuery(queryBC);
             while (bangBC.next()) {
@@ -240,7 +241,7 @@ public class GameDatabase {
                 BC.put("TD", bangBC.getString("tungDo"));
                 GameDatabase.dsBoiCanh.add(BC);
             }
-            
+
             // Lấy dữ liệu từ bảng DauAn
             ResultSet bangDA = statement.executeQuery(queryDA);
             while (bangDA.next()) {
@@ -250,18 +251,18 @@ public class GameDatabase {
                 DA.put("MaSK", bangDA.getString("idSụKien"));
                 GameDatabase.dsDauAn.add(DA);
             }
-            
-             // Lấy dữ liệu từ bảng KyNang
+
+            // Lấy dữ liệu từ bảng KyNang
             ResultSet bangKN = statement.executeQuery(queryKN);
             while (bangKN.next()) {
                 // Lấy giá trị từ các cột
                 HashMap<String, String> KN = new HashMap<>();
                 KN.put("MaBC", bangKN.getString("idKyNang"));
                 KN.put("TenKN", bangKN.getString("tenKyNang"));
-                KN.put("MoTa",(String) getMoTa(dsMoTa, bangKN.getString("idMoTa")).get("NoiDung"));
+                KN.put("MoTa", (String) getMoTa(dsMoTa, bangKN.getString("idMoTa")).get("NoiDung"));
                 GameDatabase.dsKyNang.add(KN);
             }
-            
+
             // Lấy dữ liệu từ bảng MLC
             ResultSet bangMLC = statement.executeQuery(queryMLC);
             while (bangMLC.next()) {
@@ -269,13 +270,13 @@ public class GameDatabase {
                 HashMap<String, String> MLC = new HashMap<>();
                 String LDTTG = bangMLC.getString("loaiDoiTuongTG");
                 MLC.put("MaMLC", bangMLC.getString("idMauLuaChon"));
-                MLC.put("MoTa",(String) getMoTa(dsMoTa, bangMLC.getString("idMoTa")).get("NoiDung"));
-                if(LDTTG != null){
+                MLC.put("MoTa", (String) getMoTa(dsMoTa, bangMLC.getString("idMoTa")).get("NoiDung"));
+                if (LDTTG != null) {
                     MLC.put("LDTTG", LDTTG);
                 }
                 GameDatabase.dsLuaChon.add(MLC);
             }
-            
+
             // Lấy dữ liệu từ bảng MoiQuanHe
             ResultSet bangMQH = statement.executeQuery(queryMQH);
             while (bangMQH.next()) {
@@ -288,7 +289,7 @@ public class GameDatabase {
                 MQH.put("TinTuong", bangMQH.getString("tinTuong"));
                 GameDatabase.dsQuanHe.add(MQH);
             }
-            
+
             // Lấy dữ liệu từ bảng ThuongMai
             ResultSet bangTM = statement.executeQuery(queryTM);
             while (bangTM.next()) {
@@ -299,24 +300,7 @@ public class GameDatabase {
                 TM.put("GiaCa", bangTM.getString("giaCa"));
                 GameDatabase.dsThuongMai.add(TM);
             }
-            
-            // Lấy dữ liệu từ bảng MauSuKien
-            ResultSet bangMSK = statement.executeQuery(queryMSK);
-            while (bangMSK.next()) {
-                // Lấy giá trị từ các cột
-                HashMap<String, String> MSK = new HashMap<>();
-                MSK.put("MaSK", bangMSK.getString("idMauSuKien"));
-                MSK.put("MoTa",(String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("NoiDung"));
-                MSK.put("TomTat",(String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("TomTat"));
-                MSK.put("TenSK", bangMSK.getString("tenMauSuKien"));
-                MSK.put("LoaiSK", bangMSK.getString("loaiSuKien"));
-                MSK.put("ThoiHan", bangMSK.getString("thoiHan"));
-                MSK.put("LoaiDTTG", bangMSK.getString("loaiDoiTuongTG"));
-                MSK.put("SLTG", bangMSK.getString("soLuongTG"));
-                MSK.put("TLXH", bangMSK.getString("tyLeXuatHien"));
-                GameDatabase.dsSuKien.add(MSK);
-            }
-            
+
             // Lấy dữ liệu từ bảng DieuKien
             ResultSet bangDK = statement.executeQuery(queryDK);
             while (bangDK.next()) {
@@ -324,15 +308,15 @@ public class GameDatabase {
                 HashMap<String, String> DK = new HashMap<>();
                 DK.put("MaDK", bangDK.getString("idDieuKien"));
                 DK.put("LoaiDK", bangDK.getString("loaiDieuKien"));
-                DK.put("MoTa",(String) getMoTa(dsMoTa, bangDK.getString("idMoTa")).get("NoiDung"));
+                DK.put("MoTa", (String) getMoTa(dsMoTa, bangDK.getString("idMoTa")).get("NoiDung"));
                 String SLDTT = bangDK.getString("slDungTT");
-                if(SLDTT != null){
+                if (SLDTT != null) {
                     DK.put("SLDTT", SLDTT);
                 }
-                
+
                 GameDatabase.dsDieuKien.add(DK);
             }
-            
+
             // Lấy dữ liệu từ bảng BoiCanh_BoiCanh
             ResultSet bangBC_BC = statement.executeQuery(queryBC_BC);
             while (bangBC_BC.next()) {
@@ -342,7 +326,7 @@ public class GameDatabase {
                 BC_BC.put("MaBC2", bangBC_BC.getString("idBoiCanh2"));
                 GameDatabase.dsBC_BC.add(BC_BC);
             }
-            
+
             // Lấy dữ liệu từ bảng BoiCanh_TaiNguyen
             ResultSet bangBC_TN = statement.executeQuery(queryBC_TN);
             while (bangBC_TN.next()) {
@@ -352,7 +336,7 @@ public class GameDatabase {
                 BC_TN.put("MaVP", bangBC_TN.getString("idVatPham"));
                 GameDatabase.dsBC_TN.add(BC_TN);
             }
-            
+
             // Lấy dữ liệu từ bảng DieuKien_HieuUng
             ResultSet bangDK_HU = statement.executeQuery(queryDK_HU);
             while (bangDK_HU.next()) {
@@ -363,7 +347,7 @@ public class GameDatabase {
                 DK_HU.put("IsNot", bangDK_HU.getString("isNot"));
                 GameDatabase.dsDK_HU.add(DK_HU);
             }
-            
+
             // Lấy dữ liệu từ bảng DieuKien_KyNang
             ResultSet bangDK_KN = statement.executeQuery(queryDK_KN);
             while (bangDK_KN.next()) {
@@ -375,7 +359,7 @@ public class GameDatabase {
                 DK_KN.put("CapDo", bangDK_KN.getString("capDo"));
                 GameDatabase.dsDK_KN.add(DK_KN);
             }
-            
+
             // Lấy dữ liệu từ bảng DieuKien_NgheNghiep
             ResultSet bangDK_NN = statement.executeQuery(queryDK_NN);
             while (bangDK_NN.next()) {
@@ -388,7 +372,7 @@ public class GameDatabase {
                 DK_NN.put("CapBac", bangDK_NN.getString("capBac"));
                 GameDatabase.dsDK_NN.add(DK_NN);
             }
-            
+
             // Lấy dữ liệu từ bảng DieuKien_QuanHe
             ResultSet bangDK_QH = statement.executeQuery(queryDK_QH);
             while (bangDK_QH.next()) {
@@ -402,7 +386,7 @@ public class GameDatabase {
                 DK_QH.put("TinTuong", bangDK_QH.getString("tinTuong"));
                 GameDatabase.dsDK_QH.add(DK_QH);
             }
-            
+
             // Lấy dữ liệu từ bảng DieuKien_ThuocTinh
             ResultSet bangDK_TT = statement.executeQuery(queryDK_TT);
             while (bangDK_TT.next()) {
@@ -416,7 +400,7 @@ public class GameDatabase {
                 DK_TT.put("GTSS", bangDK_TT.getString("giaTriSS"));
                 GameDatabase.dsDK_TT.add(DK_TT);
             }
-            
+
             // Lấy dữ liệu từ bảng DieuKien_VatPham
             ResultSet bangDK_VP = statement.executeQuery(queryDK_VP);
             while (bangDK_VP.next()) {
@@ -430,7 +414,7 @@ public class GameDatabase {
                 DK_VP.put("SoLuong", bangDK_VP.getString("soLuong"));
                 GameDatabase.dsDK_VP.add(DK_VP);
             }
-            
+
             // Lấy dữ liệu từ bảng HieuUng_KyNang
             ResultSet bangHU_KN = statement.executeQuery(queryHU_KN);
             while (bangHU_KN.next()) {
@@ -454,7 +438,7 @@ public class GameDatabase {
                 HU_NN.put("HSLuong", bangHU_NN.getString("heSoLuong"));
                 GameDatabase.dsHU_NN.add(HU_NN);
             }
-            
+
             // Lấy dữ liệu từ bảng HieuUng_QuanHe
             ResultSet bangHU_QH = statement.executeQuery(queryHU_QH);
             while (bangHU_QH.next()) {
@@ -466,7 +450,7 @@ public class GameDatabase {
                 HU_QH.put("TinTuong", bangHU_QH.getString("tinTuong"));
                 GameDatabase.dsHU_QH.add(HU_QH);
             }
-            
+
             // Lấy dữ liệu từ bảng HieuUng_ThuocTinh
             ResultSet bangHU_TT = statement.executeQuery(queryHU_TT);
             while (bangHU_TT.next()) {
@@ -478,7 +462,7 @@ public class GameDatabase {
                 HU_TT.put("TLTang", bangHU_TT.getString("tiLeTang"));
                 GameDatabase.dsHU_TT.add(HU_TT);
             }
-            
+
             // Lấy dữ liệu từ bảng HieuUng_VatPham
             ResultSet bangHU_VP = statement.executeQuery(queryHU_VP);
             while (bangHU_VP.next()) {
@@ -491,7 +475,7 @@ public class GameDatabase {
                 HU_VP.put("SuDung", bangHU_VP.getString("SuDung"));
                 GameDatabase.dsHU_VP.add(HU_VP);
             }
-            
+
             // Lấy dữ liệu từ bảng LuaChon_DieuKien
             ResultSet bangLC_DK = statement.executeQuery(queryLC_DK);
             while (bangLC_DK.next()) {
@@ -501,7 +485,7 @@ public class GameDatabase {
                 LC_DK.put("MaDK", bangLC_DK.getString("idDieuKien"));
                 GameDatabase.dsLC_DK.add(LC_DK);
             }
-            
+
             // Lấy dữ liệu từ bảng MLC_MSK
             ResultSet bangMLC_MSK = statement.executeQuery(queryMLC_MSK);
             while (bangMLC_MSK.next()) {
@@ -511,7 +495,7 @@ public class GameDatabase {
                 MLC_MSK.put("MaMSK", bangMLC_MSK.getString("idMauSuKien"));
                 GameDatabase.dsMLC_MSK.add(MLC_MSK);
             }
-            
+
             // Lấy dữ liệu từ bảng MSK_MLC
             ResultSet bangMSK_MLC = statement.executeQuery(queryMSK_MLC);
             while (bangMSK_MLC.next()) {
@@ -521,7 +505,7 @@ public class GameDatabase {
                 MSK_MLC.put("MaMSK", bangMSK_MLC.getString("idMauSuKien"));
                 GameDatabase.dsMSK_MLC.add(MSK_MLC);
             }
-            
+
             // Lấy dữ liệu từ bảng NhanVat_KyNang
             ResultSet bangNV_KN = statement.executeQuery(queryNV_KN);
             while (bangNV_KN.next()) {
@@ -533,7 +517,7 @@ public class GameDatabase {
                 NV_KN.put("CapDo", bangNV_KN.getString("capDo"));
                 GameDatabase.dsNV_KN.add(NV_KN);
             }
-            
+
             // Lấy dữ liệu từ bảng NhanVat_ThuocTinh
             ResultSet bangNV_TT = statement.executeQuery(queryNV_TT);
             while (bangNV_TT.next()) {
@@ -546,7 +530,7 @@ public class GameDatabase {
                 NV_TT.put("TGHL", bangNV_TT.getString("tgHieuLuc"));
                 GameDatabase.dsNV_TT.add(NV_TT);
             }
-            
+
             // Lấy dữ liệu từ bảng NhanVat_VatPham
             ResultSet bangNV_VP = statement.executeQuery(queryNV_VP);
             while (bangNV_VP.next()) {
@@ -557,7 +541,7 @@ public class GameDatabase {
                 NV_VP.put("SoLuong", bangNV_VP.getString("soLuong"));
                 GameDatabase.dsNV_VP.add(NV_VP);
             }
-            
+
             // Lấy dữ liệu từ bảng NhanVat_VatPham
             ResultSet bangNV_NN_CV = statement.executeQuery(queryNV_NN_CV);
             while (bangNV_NN_CV.next()) {
@@ -570,7 +554,24 @@ public class GameDatabase {
                 NV_NN_CV.put("HSLuong", bangNV_NN_CV.getString("HSLuong"));
                 GameDatabase.dsNV_NN_CV.add(NV_NN_CV);
             }
-            
+
+            // Lấy dữ liệu từ bảng MauSuKien
+            ResultSet bangMSK = statement.executeQuery(queryMSK);
+            while (bangMSK.next()) {
+                // Lấy giá trị từ các cột
+                HashMap<String, String> MSK = new HashMap<>();
+                MSK.put("MaSK", bangMSK.getString("idMauSuKien"));
+                MSK.put("MoTa", (String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("NoiDung"));
+                MSK.put("TomTat", (String) getMoTa(dsMoTa, bangMSK.getString("idMoTa")).get("TomTat"));
+                MSK.put("TenSK", bangMSK.getString("tenMauSuKien"));
+                MSK.put("LoaiSK", bangMSK.getString("loaiSuKien"));
+                MSK.put("ThoiHan", bangMSK.getString("thoiHan"));
+                MSK.put("LoaiDTTG", bangMSK.getString("loaiDoiTuongTG"));
+                MSK.put("SLTG", bangMSK.getString("soLuongTG"));
+                MSK.put("TLXH", bangMSK.getString("tyLeXuatHien"));
+                GameDatabase.dsSuKien.add(MSK);
+            }
+
             // Lấy dữ liệu từ bảng SuKien_DieuKien
             ResultSet bangSK_DK = statement.executeQuery(querySK_DK);
             while (bangSK_DK.next()) {
@@ -580,7 +581,7 @@ public class GameDatabase {
                 SK_DK.put("MaDK", bangSK_DK.getString("idDieuKien"));
                 GameDatabase.dsSK_DK.add(SK_DK);
             }
-            
+
             // Lấy dữ liệu từ bảng SuKien_HieuUng
             ResultSet bangSK_HU = statement.executeQuery(querySK_HU);
             while (bangSK_HU.next()) {
@@ -590,7 +591,7 @@ public class GameDatabase {
                 SK_HU.put("MaHU", bangSK_HU.getString("idHieuUng"));
                 GameDatabase.dsSK_HU.add(SK_HU);
             }
-            
+
             // Lấy dữ liệu từ bảng SuKien_HieuUng
             ResultSet bangSK_NV = statement.executeQuery(querySK_NV);
             while (bangSK_NV.next()) {
@@ -601,7 +602,7 @@ public class GameDatabase {
                 SK_NV.put("ThuTu", bangSK_NV.getString("thuTu"));
                 GameDatabase.dsSK_NV.add(SK_NV);
             }
-            
+
             // Lấy dữ liệu từ bảng VatPham_HieuUng
             ResultSet bangVP_HU = statement.executeQuery(queryVP_HU);
             while (bangVP_HU.next()) {
@@ -611,7 +612,7 @@ public class GameDatabase {
                 VP_HU.put("MaHU", bangVP_HU.getString("idHieuUng"));
                 GameDatabase.dsVP_HU.add(VP_HU);
             }
-            
+
             // Lấy dữ liệu từ bảng VatPham_ThuocTinh
             ResultSet bangVP_TT = statement.executeQuery(queryVP_TT);
             while (bangVP_TT.next()) {
@@ -623,9 +624,9 @@ public class GameDatabase {
                 VP_TT.put("tiemNang", bangVP_TT.getString("tiemNang"));
                 VP_TT.put("TGTD", bangVP_TT.getString("tgTacDung"));
                 GameDatabase.dsVP_TT.add(VP_TT);
-                
+
             }
-            
+
             // Đóng kết nối
             conn.close();
             System.out.println("Đã đóng kết nối!");
@@ -846,6 +847,5 @@ public class GameDatabase {
     public static ArrayList<HashMap> getDsVP_TT() {
         return dsVP_TT;
     }
-    
 
 }
