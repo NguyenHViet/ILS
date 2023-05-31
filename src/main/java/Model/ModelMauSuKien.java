@@ -318,9 +318,33 @@ public class ModelMauSuKien {
     static public ArrayList<SuKien> suKienKyVong() {
         ArrayList<SuKien> result = new ArrayList<SuKien>();
         for (SuKien sk : dsSK) {
-            if ("KYVONG".equals(sk.getLoaiSK())
-                    || "UOCMO".equals(sk.getLoaiSK())
-                    || "KEHOACH".equals(sk.getLoaiSK())) {
+            if ("KYVONG".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @return
+     */
+    static public ArrayList<SuKien> suKienUocMo() {
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("UOCMO".equals(sk.getLoaiSK())) {
+                result.add(sk);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @return
+     */
+    static public ArrayList<SuKien> suKienKeHoach() {
+        ArrayList<SuKien> result = new ArrayList<SuKien>();
+        for (SuKien sk : dsSK) {
+            if ("KEHOACH".equals(sk.getLoaiSK())) {
                 result.add(sk);
             }
         }
