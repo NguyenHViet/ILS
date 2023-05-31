@@ -11,10 +11,9 @@
          <children>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="800.0" style="-fx-spacing: 20;">
                <children>
-                  <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#newGame" text="Chơi Mới" />
-                  <Button mnemonicParsing="false" text="Chơi Tiếp" />
-                  <Button mnemonicParsing="false" text="Cài Đặt" />
-                  <Button mnemonicParsing="false" text="Thoát" />
+                  <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#newGame" prefWidth="200.0" text="TẠO THẾ GIỚI MỚI" />
+                  <Button mnemonicParsing="false" onAction="#fastPlay" prefWidth="200.0" text="CHƠI NHANH" />
+                  <Button mnemonicParsing="false" onAction="#quit" prefWidth="200.0" text="THOÁT" />
                </children>
                <opaqueInsets>
                   <Insets />

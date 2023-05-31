@@ -158,5 +158,15 @@ public class HU_ThuocTinh extends HieuUng {
     public String loaiHU() {
         return "HU_TT";
     }
+    
+    /**
+     * @param dsDT
+     * @param bc
+     * @return
+     */
+    @Override
+    public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
+        return false;
+    }
 
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modal;
+package Model;
 
 import GameEvent.*;
 import java.util.*;
@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author vuvuive
  */
-public class ModalDieuKien {
+public class ModelDieuKien {
 
     private static ArrayList<DieuKien> dsDieuKien = new ArrayList<DieuKien>();
 
@@ -58,8 +58,8 @@ public class ModalDieuKien {
                 "",
                 "Cha",
                 "GIADINH",
-                100,
-                100
+                20,
+                50
         );
 
         DieuKien dk0004 = new DK_ThanThiet(
@@ -70,8 +70,8 @@ public class ModalDieuKien {
                 "",
                 "Mẹ",
                 "GIADINH",
-                100,
-                100
+                20,
+                50
         );
 
         DieuKien dk0005 = new DK_SoHuuVP(
@@ -104,11 +104,11 @@ public class ModalDieuKien {
         dsDieuKien.add(dk0005);
         dsDieuKien.add(dk0006);
 
-        ArrayList<HashMap> DsDieuKien = Modal.GameDatabase.getDsDieuKien();
-        ArrayList<HashMap> DsDK_HU = Modal.GameDatabase.getDsDK_HU();
-        ArrayList<HashMap> DsDK_QH = Modal.GameDatabase.getDsDK_QH();
-        ArrayList<HashMap> DsDK_TT = Modal.GameDatabase.getDsDK_TT();
-        ArrayList<HashMap> DsDK_VP = Modal.GameDatabase.getDsDK_VP();
+        ArrayList<HashMap> DsDieuKien = Model.GameDatabase.getDsDieuKien();
+        ArrayList<HashMap> DsDK_HU = Model.GameDatabase.getDsDK_HU();
+        ArrayList<HashMap> DsDK_QH = Model.GameDatabase.getDsDK_QH();
+        ArrayList<HashMap> DsDK_TT = Model.GameDatabase.getDsDK_TT();
+        ArrayList<HashMap> DsDK_VP = Model.GameDatabase.getDsDK_VP();
 
         for (HashMap DK : DsDieuKien) {
             String MaDK = (String) DK.get("MaDK");
@@ -131,7 +131,7 @@ public class ModalDieuKien {
                                     (String) DK_TT.get("LoaiDT"),
                                     (String) DK_TT.get("LoaiSS")
                             );
-                            ModalDieuKien.dsDieuKien.add(temp);
+                            ModelDieuKien.dsDieuKien.add(temp);
                         }
                     }
                     break;
@@ -149,7 +149,7 @@ public class ModalDieuKien {
                                     Integer.parseInt((String) DK_QH.get("ThanThiet")),
                                     Integer.parseInt((String) DK_QH.get("TinTuong"))
                             );
-                            ModalDieuKien.dsDieuKien.add(temp);
+                            ModelDieuKien.dsDieuKien.add(temp);
                         }
                     }
                     break;
@@ -166,7 +166,7 @@ public class ModalDieuKien {
                                     Integer.parseInt((String) DK_VP.get("SoLuong")),
                                     (String) DK_VP.get("LoaiDT")
                             );
-                            ModalDieuKien.dsDieuKien.add(temp);
+                            ModelDieuKien.dsDieuKien.add(temp);
                         }
                     }
                     break;

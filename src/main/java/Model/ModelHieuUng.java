@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modal;
+package Model;
 
 import GameEvent.*;
 import java.util.*;
@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author vuvuive
  */
-public class ModalHieuUng {
+public class ModelHieuUng {
 
     private static ArrayList<HieuUng> dsHieuUng = new ArrayList<HieuUng>();
 
@@ -65,19 +65,19 @@ public class ModalHieuUng {
         dsHieuUng.add(hu0001);
         dsHieuUng.add(hu0002);
         dsHieuUng.add(hu0003);
-        ArrayList<HashMap> DsHieuUng = Modal.GameDatabase.getDsHieuUng();
-        ArrayList<DieuKien> DsDK = Modal.ModalDieuKien.getDSDieuKien();
-        ArrayList<HashMap> DsDK_HU = Modal.GameDatabase.getDsDK_HU();
-        ArrayList<HashMap> DsHU_TT = Modal.GameDatabase.getDsHU_TT();
-        ArrayList<HashMap> DsHU_QH = Modal.GameDatabase.getDsHU_QH();
-        ArrayList<HashMap> DsHU_VP = Modal.GameDatabase.getDsHU_VP();
+        ArrayList<HashMap> DsHieuUng = Model.GameDatabase.getDsHieuUng();
+        ArrayList<DieuKien> DsDK = Model.ModelDieuKien.getDSDieuKien();
+        ArrayList<HashMap> DsDK_HU = Model.GameDatabase.getDsDK_HU();
+        ArrayList<HashMap> DsHU_TT = Model.GameDatabase.getDsHU_TT();
+        ArrayList<HashMap> DsHU_QH = Model.GameDatabase.getDsHU_QH();
+        ArrayList<HashMap> DsHU_VP = Model.GameDatabase.getDsHU_VP();
         
         for(HashMap HU: DsHieuUng){
             String MaHU = (String) HU.get("MaHU");
             ArrayList<DieuKien> DsHU_DK = new ArrayList<>();
             for(HashMap DK_HU: DsDK_HU){
                 if(DK_HU.get("MaHU").equals(MaHU)){
-                    DsHU_DK.add(Modal.ModalDieuKien.getDieuKien((String) DK_HU.get("MaDK")));
+                    DsHU_DK.add(Model.ModelDieuKien.getDieuKien((String) DK_HU.get("MaDK")));
                 }
             }
             switch ((String) HU.get("LoaiSK")){
@@ -94,7 +94,7 @@ public class ModalHieuUng {
                                     0,
                                     0
                             );
-                            Modal.ModalHieuUng.dsHieuUng.add(temp);
+                            Model.ModelHieuUng.dsHieuUng.add(temp);
                         }
                     }
                     break;
@@ -112,7 +112,7 @@ public class ModalHieuUng {
                                     Integer.parseInt((String) HU_QH.get("ThanThiet")),
                                     Integer.parseInt((String) HU_QH.get("TinTuong"))
                             );
-                            Modal.ModalHieuUng.dsHieuUng.add(temp);
+                            Model.ModelHieuUng.dsHieuUng.add(temp);
                         }
                     }
                     break;
@@ -127,7 +127,7 @@ public class ModalHieuUng {
                                     Integer.parseInt((String) HU_VP.get("SoLuong")),
                                     (boolean) HU_VP.get("SuDung")
                             );
-                            Modal.ModalHieuUng.dsHieuUng.add(temp);
+                            Model.ModelHieuUng.dsHieuUng.add(temp);
                         }
                     }
                 default:

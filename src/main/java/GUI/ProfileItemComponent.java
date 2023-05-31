@@ -6,7 +6,7 @@ package GUI;
 
 import GameEvent.SuKien;
 import GameObject.*;
-import Modal.ModalNhanVat;
+import Model.ModelNhanVat;
 import SupportClass.*;
 import WorldBuilder.DiaDanh;
 import javafx.fxml.FXML;
@@ -51,15 +51,17 @@ public class ProfileItemComponent {
     }
 
     public void loadData(MoiQuanHe mqh) {
-        NhanVat nv = ModalNhanVat.getNhanVat(mqh.getMaNV());
+        NhanVat nv = ModelNhanVat.getNhanVat(mqh.getMaNV());
         String gioiTinh;
         if (nv.getGioiTinh() == 0) {
             gioiTinh = "Nam";
         } else {
             gioiTinh = "Nữ";
         }
-        itemName.textProperty().setValue(nv.getHoTen() + " - " + gioiTinh + " - " + nv.getTuoi() + " tuổi (" + mqh.getQuanHe() + ")");
+        itemName.textProperty().setValue(nv.getHoTen() + " - " + gioiTinh + " - " + nv.getTuoi() + " tuổi");
         if (mqh instanceof MoiQuanHe) {
+            Label mqhLabel = new Label("Quan hệ:");
+            Label mqhValue = new Label(mqh.getQuanHe() + "");
             Label thanThietLabel = new Label("Thân thiết:");
             Label thanThietValue = new Label(mqh.getThanThiet() + "");
             Label tinTuongLabel = new Label("Tin tưởng:");
@@ -89,10 +91,12 @@ public class ProfileItemComponent {
             pbTinTuong.setMaxHeight(15);
             profileItemContent.setMinWidth(153);
 
-            profileItemContent.add(thanThietLabel, 0, 0);
-            profileItemContent.add(thanThiet, 1, 0);
-            profileItemContent.add(tinTuongLabel, 0, 1);
-            profileItemContent.add(tinTuong, 1, 1);
+            profileItemContent.add(mqhLabel, 0, 0);
+            profileItemContent.add(mqhValue, 1, 0);
+            profileItemContent.add(thanThietLabel, 0, 1);
+            profileItemContent.add(thanThiet, 1, 1);
+            profileItemContent.add(tinTuongLabel, 0, 2);
+            profileItemContent.add(tinTuong, 1, 2);
         }
     }
 
