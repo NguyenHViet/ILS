@@ -427,11 +427,11 @@ public class NhanVat {
                         int soLuong = ((VPTieuHao) vp).getSoLuong();
                         ((VPTieuHao) vp).setSoLuong(soLuong + ((HU_VatPham) hu).getSoLuong());
                     } else {
-                        TrangBi trangBi = (TrangBi) Modal.ModalVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
+                        TrangBi trangBi = (TrangBi) Model.ModelVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
                         this.tuiDo.add(trangBi);
                     }
                 } else {
-                    VatPham newvp = Modal.ModalVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
+                    VatPham newvp = Model.ModelVatPham.getVatPham(((HU_VatPham) hu).getMaVP());
                     if (newvp instanceof VPTieuHao) {
                         ((VPTieuHao) newvp).setSoLuong(((HU_VatPham) hu).getSoLuong());
                     }

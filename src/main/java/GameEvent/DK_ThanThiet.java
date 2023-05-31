@@ -184,7 +184,7 @@ public class DK_ThanThiet extends DieuKien {
         if (this.dungToiThieu == -1) {
             toiThieu = dsDT.size();
         }
-        NhanVat mc = Modal.ModalNhanVat.getNhanVat(this.maNV);
+        NhanVat mc = Model.ModelNhanVat.getNhanVat(this.maNV);
 
         for (NhanVat nv : dsDT) {
             MoiQuanHe mqh = mc.getMoiQuanHe(nv.getMaNV());

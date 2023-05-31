@@ -5,7 +5,7 @@
 package GUI;
 
 import GameObject.NhanVat;
-import Modal.ModalNhanVat;
+import Model.ModelNhanVat;
 import SupportClass.ChiSo;
 import GameSystem.GeneratorSystem;
 import static GameSystem.GeneratorSystem.randomValue;
@@ -352,7 +352,7 @@ public class NewCharacterScreen {
 //        Chủng tộc
         mc.setChungToc("Nhân tộc");
 
-        ModalNhanVat.themNhanVat(mc);
+        ModelNhanVat.themNhanVat(mc);
     }
 
     @FXML

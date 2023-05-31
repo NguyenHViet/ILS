@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modal;
+package Model;
 
 import GameEvent.DieuKien;
 import GameEvent.LuaChon;
@@ -13,14 +13,14 @@ import java.util.*;
  *
  * @author vuvuive
  */
-public class ModalLuaChon {
+public class ModelLuaChon {
 
     private static ArrayList<LuaChon> dsLuaChon = new ArrayList<LuaChon>();
 
     public static void taiLuaChon() {
 //        Tạo lựa chọn thử nghiệm
-        DieuKien dk0001 = Modal.ModalDieuKien.getDieuKien("0001");
-        DieuKien dk0002 = Modal.ModalDieuKien.getDieuKien("0002");
+        DieuKien dk0001 = Model.ModelDieuKien.getDieuKien("0001");
+        DieuKien dk0002 = Model.ModelDieuKien.getDieuKien("0002");
 
         ArrayList<DieuKien> dsDK = new ArrayList<>();
         ArrayList<String> nextEvent = new ArrayList<>();
@@ -68,9 +68,9 @@ public class ModalLuaChon {
         dsLuaChon.add(lc0000);
         dsLuaChon.add(lc0001);
         dsLuaChon.add(lc0002);
-        ArrayList<HashMap> DsLC = Modal.GameDatabase.getDsLuaChon();
-        ArrayList<HashMap> DsLC_DK = Modal.GameDatabase.getDsLC_DK();
-        ArrayList<HashMap> DsMLC_MSK = Modal.GameDatabase.getDsMLC_MSK();
+        ArrayList<HashMap> DsLC = Model.GameDatabase.getDsLuaChon();
+        ArrayList<HashMap> DsLC_DK = Model.GameDatabase.getDsLC_DK();
+        ArrayList<HashMap> DsMLC_MSK = Model.GameDatabase.getDsMLC_MSK();
         
         for(HashMap LC: DsLC){
             String MaLC = (String) LC.get("MaMLC");
@@ -79,7 +79,7 @@ public class ModalLuaChon {
             ArrayList<String> DsSK_LC = new ArrayList<>();
             for(HashMap LC_DK: DsLC_DK){
                 if(LC_DK.get("MaMLC").equals(MaLC)){
-                    DsDK.add(Modal.ModalDieuKien.getDieuKien((String) LC_DK.get("MaDK")));
+                    DsDK.add(Model.ModelDieuKien.getDieuKien((String) LC_DK.get("MaDK")));
                 }
             }
             for(HashMap MLC_MSK: DsLC_DK){
@@ -97,9 +97,9 @@ public class ModalLuaChon {
                     null,
                     null
             );
-            Modal.ModalLuaChon.dsLuaChon.add(temp);
+            Model.ModelLuaChon.dsLuaChon.add(temp);
         }
-        System.out.println(Modal.ModalLuaChon.dsLuaChon.size());
+        System.out.println(Model.ModelLuaChon.dsLuaChon.size());
     }
 
     public static void themLuaChon(LuaChon dk) {

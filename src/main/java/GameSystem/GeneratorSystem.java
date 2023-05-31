@@ -1,11 +1,11 @@
 package GameSystem;
 
+import Model.ModelNhanVat;
 import GUI.UI;
 import GameEvent.*;
 import GameObject.*;
 import WorldBuilder.*;
 import SupportClass.*;
-import Modal.*;
 import java.util.*;
 import javafx.concurrent.Task;
 import javafx.concurrent.Service;
@@ -442,7 +442,7 @@ public class GeneratorSystem {
 
         int index;
         NhanVat mc = MainSystem.getNguoiChoi();
-        NhanVat npc = null;
+        NhanVat npc;
         for (String type : dsLoaiDTTG) {
             switch (type) {
                 case "MC":
@@ -499,8 +499,8 @@ public class GeneratorSystem {
                         npc = dsDTTG.get(index);
                         if (!npc.isPlayable()) {
                             result.add(npc);
-                            dsDTTG.remove(npc);
                         }
+                        dsDTTG.remove(npc);
                     }
                     break;
 //                case "RANDOMMNPCS":
@@ -564,7 +564,10 @@ public class GeneratorSystem {
     }
 
     /**
-     * @param maSK
+     * @param mauSK
+     * @param mc
+     * @param dsDTTG
+     * @param bc
      * @return
      */
     static public SuKien taoSuKien(SuKien mauSK, NhanVat mc, ArrayList<NhanVat> dsDTTG, BoiCanh bc) {
@@ -577,7 +580,7 @@ public class GeneratorSystem {
 
         ArrayList<LuaChon> dsMauLC = mauSK.getDSLC();
         ArrayList<LuaChon> dsLC = new ArrayList<>();
-        if (dsMauLC == null) {
+        if (dsMauLC == null || dsMauLC.isEmpty()) {
             dsLC.add(new LuaChon(
                     "00000",
                     "Đóng",
@@ -618,6 +621,75 @@ public class GeneratorSystem {
             }
         }
         sk.setDSHU(dsHU);
+
+        String moTa = sk.getMoTa();
+        String[] chuoiMoTa = moTa.split("_");
+        int NPCindex = 1;
+        int ITEMindex = 0;
+        for (int i = 1; i < chuoiMoTa.length; i++) {
+            switch (chuoiMoTa[i]) {
+                case "NPC":
+                    if (NPCindex < sk.getDSDTTG().size()) {
+                        chuoiMoTa[i] = sk.getDSDTTG().get(NPCindex).getHoTen();
+                        NPCindex++;
+                    }
+                    break;
+                case "VATPHAM":
+                    for (int j = ITEMindex; j < sk.getDSHU().size(); j++) {
+                        HieuUng hu = sk.getDSHU().get(j);
+                        if (hu instanceof HU_VatPham) {
+                            ITEMindex = j;
+                            String maVP = ((HU_VatPham) hu).getMaVP();
+                            VatPham vp = Model.ModelVatPham.getVatPham(maVP);
+                            if (vp != null) {
+                                chuoiMoTa[i] = vp.getTenVP();
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        String moTaMoi = String.join("", chuoiMoTa);
+        sk.setMoTa(moTaMoi);
+
+        String tomTat = sk.getTomTat();
+        if (tomTat != null) {
+            String[] chuoiTomTat = tomTat.split("_");
+            NPCindex = 1;
+            ITEMindex = 0;
+            for (int i = 1; i < chuoiTomTat.length; i++) {
+                switch (chuoiTomTat[i]) {
+                    case "NPC":
+                        if (NPCindex < sk.getDSDTTG().size()) {
+                            chuoiTomTat[i] = sk.getDSDTTG().get(NPCindex).getHoTen();
+                            NPCindex++;
+                        }
+                        break;
+                    case "VATPHAM":
+                        for (int j = ITEMindex; j < sk.getDSHU().size(); j++) {
+                            HieuUng hu = sk.getDSHU().get(j);
+                            if (hu instanceof HU_VatPham) {
+                                ITEMindex = j;
+                                String maVP = ((HU_VatPham) hu).getMaVP();
+                                VatPham vp = Model.ModelVatPham.getVatPham(maVP);
+                                if (vp != null) {
+                                    chuoiTomTat[i] = vp.getTenVP();
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            String tomTatMoi = String.join("", chuoiTomTat);
+            sk.setTomTat(tomTatMoi);
+        } else {
+            sk.setTomTat(moTaMoi);
+        }
 
         return sk;
     }
@@ -954,11 +1026,11 @@ public class GeneratorSystem {
         if (nv.getQuanHe("Cha").size() < 1) {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
-            father = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 0, false, dongHo);
+            father = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 0, false, dongHo);
             father.setViTri(viTri);
             dsMQH.add(new MoiQuanHe("Cha", "GIADINH", father.getMaNV(), thanThiet, tinTuong));
             father.getDSQH().add(new MoiQuanHe("Con", "GIADINH", nv.getMaNV(), thanThiet, tinTuong));
-            ModalNhanVat.themNhanVat(father);
+            ModelNhanVat.themNhanVat(father);
             dsNV.add(father);
         } else {
             father = MainSystem.getNhanVat(nv.getQuanHe("Cha").get(0).getMaNV());
@@ -968,11 +1040,11 @@ public class GeneratorSystem {
         if (nv.getQuanHe("Mẹ").size() < 1) {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
-            mother = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 1, false, dongHo);
+            mother = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(20) + 20, 1, false, dongHo);
             mother.setViTri(viTri);
             dsMQH.add(new MoiQuanHe("Mẹ", "GIADINH", mother.getMaNV(), thanThiet, tinTuong));
             mother.getDSQH().add(new MoiQuanHe("Con", "GIADINH", nv.getMaNV(), thanThiet, tinTuong));
-            ModalNhanVat.themNhanVat(mother);
+            ModelNhanVat.themNhanVat(mother);
             dsNV.add(mother);
         } else {
             mother = MainSystem.getNhanVat(nv.getQuanHe("Mẹ").get(0).getMaNV());
@@ -997,7 +1069,7 @@ public class GeneratorSystem {
             } else {
                 randomACE = myGenerator.nextInt(2);
             }
-            NhanVat ACE = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(hopPhap) + tuoi, randomACE % 2, false, dongHo);
+            NhanVat ACE = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(hopPhap) + tuoi, randomACE % 2, false, dongHo);
             ACE.setViTri(viTri);
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
@@ -1051,7 +1123,7 @@ public class GeneratorSystem {
                     }
                     break;
             }
-            ModalNhanVat.themNhanVat(ACE);
+            ModelNhanVat.themNhanVat(ACE);
             dsNV.add(ACE);
         }
     }
@@ -1073,35 +1145,34 @@ public class GeneratorSystem {
         for (int i = 0; i < soLuongNPC; i++) {
             int thanThiet = myGenerator.nextInt(100);
             int tinTuong = myGenerator.nextInt(100);
-            int typeMQH;
-            if (tuoi >= 3) {
-                typeMQH = myGenerator.nextInt(3);
-            } else {
-                typeMQH = myGenerator.nextInt(2);
-            }
+            int typeMQH = myGenerator.nextInt(3);
             switch (typeMQH) {
                 case 0:
-                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
+                    npc = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
                     dsMQH.add(new MoiQuanHe("Hàng xóm", "XAHOI", npc.getMaNV(), thanThiet, tinTuong));
                     npc.getDSQH().add(new MoiQuanHe("Hàng xóm", "XAHOI", nv.getMaNV(), thanThiet, tinTuong));
                     break;
                 case 1:
-                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
+                    npc = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
                     break;
                 case 2:
                     int ageGap = myGenerator.nextInt(5);
-                    int age = myGenerator.nextInt(ageGap * 2) + tuoi - ageGap;
-                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), age, false, "");
+                    int gender = myGenerator.nextInt(2);
+                    int age = tuoi + ageGap;
+                    if (age < 0) {
+                        age = 0;
+                    }
+                    npc = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, age, gender, false, "");
                     dsMQH.add(new MoiQuanHe("Bạn bè", "XAHOI", npc.getMaNV(), thanThiet, tinTuong));
                     npc.getDSQH().add(new MoiQuanHe("Bạn bè", "XAHOI", nv.getMaNV(), thanThiet, tinTuong));
                     break;
                 default:
-                    npc = taoNhanVat(ModalNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
+                    npc = taoNhanVat(ModelNhanVat.maNhanVatMoi(), tg, myGenerator.nextInt(100), myGenerator.nextInt(2), false, "");
                     break;
             }
 
             npc.setViTri(viTri);
-            ModalNhanVat.themNhanVat(npc);
+            ModelNhanVat.themNhanVat(npc);
             dsNV.add(npc);
         }
     }

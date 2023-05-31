@@ -37,7 +37,7 @@ public class RelationshipComponent {
         familyRelationshipPane.getChildren().clear();
         socialRelationshipPane.getChildren().clear();
         for (MoiQuanHe mqh : dsMQH) {
-            NhanVat nv = Modal.ModalNhanVat.getNhanVat(mqh.getMaNV());
+            NhanVat nv = Model.ModelNhanVat.getNhanVat(mqh.getMaNV());
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
             VBox quanHeItem = loader.load();
             quanHeItem.setPrefWidth(300);

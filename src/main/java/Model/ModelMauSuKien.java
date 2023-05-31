@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modal;
+package Model;
 
 import GameEvent.DieuKien;
 import GameEvent.HieuUng;
@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author vuvuive
  */
-public class ModalMauSuKien {
+public class ModelMauSuKien {
 
 //    Sự kiện bối cảnh chung
     private static ArrayList<SuKien> dsSK = new ArrayList<>();
@@ -24,22 +24,22 @@ public class ModalMauSuKien {
     public static void taiMauSuKien() {
         dsSK = new ArrayList<SuKien>();
 //        Sự kiện thử nghiệm
-        DieuKien dk0000 = Modal.ModalDieuKien.getDieuKien("0000");
-        DieuKien dk0001 = Modal.ModalDieuKien.getDieuKien("0001");
-        DieuKien dk0002 = Modal.ModalDieuKien.getDieuKien("0002");
-        DieuKien dk0003 = Modal.ModalDieuKien.getDieuKien("0003");
-        DieuKien dk0004 = Modal.ModalDieuKien.getDieuKien("0004");
-        DieuKien dk0005 = Modal.ModalDieuKien.getDieuKien("0005");
-        DieuKien dk0006 = Modal.ModalDieuKien.getDieuKien("0006");
+        DieuKien dk0000 = Model.ModelDieuKien.getDieuKien("0000");
+        DieuKien dk0001 = Model.ModelDieuKien.getDieuKien("0001");
+        DieuKien dk0002 = Model.ModelDieuKien.getDieuKien("0002");
+        DieuKien dk0003 = Model.ModelDieuKien.getDieuKien("0003");
+        DieuKien dk0004 = Model.ModelDieuKien.getDieuKien("0004");
+        DieuKien dk0005 = Model.ModelDieuKien.getDieuKien("0005");
+        DieuKien dk0006 = Model.ModelDieuKien.getDieuKien("0006");
 
-        LuaChon lc0000 = Modal.ModalLuaChon.getLuaChon("0000");
-        LuaChon lc0001 = Modal.ModalLuaChon.getLuaChon("0001");
-        LuaChon lc0002 = Modal.ModalLuaChon.getLuaChon("0002");
+        LuaChon lc0000 = Model.ModelLuaChon.getLuaChon("0000");
+        LuaChon lc0001 = Model.ModelLuaChon.getLuaChon("0001");
+        LuaChon lc0002 = Model.ModelLuaChon.getLuaChon("0002");
 
-        HieuUng hu0000 = Modal.ModalHieuUng.getHieuUng("0000");
-        HieuUng hu0001 = Modal.ModalHieuUng.getHieuUng("0001");
-        HieuUng hu0002 = Modal.ModalHieuUng.getHieuUng("0002");
-        HieuUng hu0003 = Modal.ModalHieuUng.getHieuUng("0003");
+        HieuUng hu0000 = Model.ModelHieuUng.getHieuUng("0000");
+        HieuUng hu0001 = Model.ModelHieuUng.getHieuUng("0001");
+        HieuUng hu0002 = Model.ModelHieuUng.getHieuUng("0002");
+        HieuUng hu0003 = Model.ModelHieuUng.getHieuUng("0003");
 
         ArrayList<LuaChon> dsLC = new ArrayList<>();
         ArrayList<DieuKien> dsDK = new ArrayList<>();
@@ -66,7 +66,7 @@ public class ModalMauSuKien {
                 0,
                 0,
                 "BOICANH",
-                0.99,
+                99,
                 false);
 
         SuKien sk0001 = new SuKien("0001",
@@ -82,7 +82,7 @@ public class ModalMauSuKien {
                 0,
                 0,
                 "BOICANH",
-                1,
+                100,
                 false);
 
         dsDK.clear();
@@ -101,7 +101,7 @@ public class ModalMauSuKien {
                 0,
                 0,
                 "HEQUA",
-                1,
+                100,
                 false);
 
         dsDK.clear();
@@ -125,7 +125,7 @@ public class ModalMauSuKien {
                 0,
                 0,
                 "SUKIEN",
-                1,
+                100,
                 false);
 
         dsDK.clear();
@@ -141,14 +141,14 @@ public class ModalMauSuKien {
                 "",
                 null,
                 (ArrayList<HieuUng>) dsHU.clone(),
-                (ArrayList<DieuKien>) dsDK.clone(),
+                null,
                 null,
                 null,
                 "MC",
                 0,
                 0,
                 "HANGNAM",
-                1,
+                80,
                 false);
 
         dsDK.clear();
@@ -167,7 +167,7 @@ public class ModalMauSuKien {
                 0,
                 5,
                 "UOCMO",
-                1,
+                100,
                 false);
 
         dsSK.add(sk0000);
@@ -177,11 +177,11 @@ public class ModalMauSuKien {
         dsSK.add(sk0004);
         dsSK.add(sk0005);
 
-        ArrayList<HashMap> DsSK = Modal.GameDatabase.getDsSuKien();
-        ArrayList<HashMap> DsSK_LC = Modal.GameDatabase.getDsMSK_MLC();
-        ArrayList<HashMap> DsSK_HU = Modal.GameDatabase.getDsSK_HU();
-        ArrayList<HashMap> DsSK_DK = Modal.GameDatabase.getDsSK_DK();
-        ArrayList<HashMap> DsSK_NV = Modal.GameDatabase.getDsSK_NV();
+        ArrayList<HashMap> DsSK = Model.GameDatabase.getDsSuKien();
+        ArrayList<HashMap> DsSK_LC = Model.GameDatabase.getDsMSK_MLC();
+        ArrayList<HashMap> DsSK_HU = Model.GameDatabase.getDsSK_HU();
+        ArrayList<HashMap> DsSK_DK = Model.GameDatabase.getDsSK_DK();
+        ArrayList<HashMap> DsSK_NV = Model.GameDatabase.getDsSK_NV();
         for (HashMap SK : DsSK) {
             String MaSK = (String) SK.get("MaSK");
             ArrayList<LuaChon> DsLC = new ArrayList<>();
@@ -190,12 +190,12 @@ public class ModalMauSuKien {
             ArrayList<NhanVat> DsDTTG = new ArrayList<>();
             for (HashMap SK_LC : DsSK_LC) {
                 if (SK_LC.get("MaMSK").equals(MaSK)) {
-                    DsLC.add(Modal.ModalLuaChon.getLuaChon((String) SK_LC.get("MaMLC")));
+                    DsLC.add(Model.ModelLuaChon.getLuaChon((String) SK_LC.get("MaMLC")));
                 }
             }
             for (HashMap SK_HU : DsSK_HU) {
                 if (SK_HU.get("MaMSK").equals(MaSK)) {
-                    HieuUng hu = Modal.ModalHieuUng.getHieuUng((String) SK_HU.get("MaHU"));
+                    HieuUng hu = Model.ModelHieuUng.getHieuUng((String) SK_HU.get("MaHU"));
                     if (hu != null) {
                         DsHU.add(hu);
                     }
@@ -203,7 +203,7 @@ public class ModalMauSuKien {
             }
             for (HashMap SK_DK : DsSK_DK) {
                 if (SK_DK.get("MaMSK").equals(MaSK)) {
-                    DieuKien dk = Modal.ModalDieuKien.getDieuKien((String) SK_DK.get("MaDK"));
+                    DieuKien dk = Model.ModelDieuKien.getDieuKien((String) SK_DK.get("MaDK"));
                     if (dk != null) {
                         DsDK.add(dk);
                     }
