@@ -126,8 +126,8 @@ public class ModelDieuKien {
                                     Boolean.parseBoolean((String) DK_TT.get("IsNot")),
                                     SLDTT,
                                     (String) DK.get("MoTa"),
-                                    (String) DK.get("MaTT"),
-                                    (Integer) Integer.parseInt((String) DK_TT.get("GTSS")),
+                                    (String) DK_TT.get("MaTT"),
+                                    Integer.parseInt((String) DK_TT.get("GTSS")),
                                     (String) DK_TT.get("LoaiDT"),
                                     (String) DK_TT.get("LoaiSS")
                             );

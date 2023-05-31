@@ -8,6 +8,7 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,6 +19,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -203,22 +205,29 @@ public class UI {
             event.consume();
         });
 
-        mainWindow.setOnCloseRequest(event -> {
+        Platform.setImplicitExit(false);
+
+        mainWindow.setOnCloseRequest((WindowEvent event) -> {
             Alert alert = new Alert(AlertType.CONFIRMATION,
                     "Tiến trình chơi của bạn sẽ không được lưu. Xác nhận thoát trò chơi?",
                     ButtonType.YES,
                     ButtonType.NO);
             alert.showAndWait();
-
             if (alert.getResult() == ButtonType.YES) {
                 Platform.exit();
+            } else if (alert.getResult() == ButtonType.NO) {
+                event.consume();
             }
         });
 
         mainWindow.setScene(scene);
+
         mainWindow.show();
+
         mainWindow.sizeToScene();
-        mainWindow.setResizable(false);
+
+        mainWindow.setResizable(
+                false);
     }
 
     static <T> T getChildByID(Parent parent, String id) {

@@ -1,9 +1,14 @@
 package GameObject;
 
+import GUI.UI;
 import GameEvent.*;
+import GameSystem.MainSystem;
 import SupportClass.*;
 import WorldBuilder.*;
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -448,10 +453,35 @@ public class NhanVat {
      */
     public void phatTrien() {
         int sucBen = ((ChiSo) this.getThuocTinh("STA")).getGiaTri();
+        int oldness = 0;
+        TrangThai old = ((TrangThai) this.getThuocTinh("OLD"));
+        if (this.getTuoi() > 50) {
+            if (old == null) {
+                dsTT.add(new TrangThai(
+                        "OLD",
+                        "Lão hóa",
+                        "Bạn đang già đi",
+                        true,
+                        1,
+                        999,
+                        999
+                ));
+            } else {
+                old.setTinhTrang((this.getTuoi() / 10) - 4);
+                oldness = old.getTinhTrang();
+            }
+        }
 
         for (ThuocTinh tt : this.dsTT) {
+            if ("AGE".equals(tt.getMaTT())) {
+                ((ChiSo) tt).setGiaTri(((ChiSo) tt).getGiaTri() + 1);
+                continue;
+            }
+            if ("GDR".equals(tt.getMaTT())) {
+                continue;
+            }
             if (tt instanceof ChiSo) {
-                int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getTiemNang() + 1;
+                int chiSoMoi = ((ChiSo) tt).getGiaTri() + ((ChiSo) tt).getTiemNang() + 1 - oldness;
                 ((ChiSo) tt).setGiaTri(chiSoMoi);
             } else if (tt instanceof TrangThai) {
                 int thoiHanMoi = ((TrangThai) tt).getThoiHan() - 1;
@@ -476,6 +506,28 @@ public class NhanVat {
             if (tt instanceof ChiSo) {
                 ((ChiSo) tt).setGiaTriTamThoi(0);
             }
+        }
+        if (((ChiSo) this.getThuocTinh("STR")).getGiaTri() <= 0) {
+            if (this.playable) {
+                UI.setNeededContent(10);
+                UI.setLoadedContent(0);
+                try {
+                    UI.startLoad();
+                    UI.setMainFrame("finishScreen");
+                } catch (IOException ex) {
+                    Logger.getLogger(MainSystem.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                UI.loadFill();
+            }
+        }
+        if (((ChiSo) this.getThuocTinh("STR")).getGiaTri() <= 5) {
+
+        }
+        if (((ChiSo) this.getThuocTinh("STA")).getGiaTri() <= ((ChiSo) this.getThuocTinh("PHY")).getGiaTri() / 10) {
+
+        }
+        if (((ChiSo) this.getThuocTinh("MNT")).getGiaTri() <= 5) {
+
         }
     }
 

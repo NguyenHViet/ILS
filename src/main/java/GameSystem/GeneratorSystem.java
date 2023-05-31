@@ -363,10 +363,6 @@ public class GeneratorSystem {
         bound = tongDiemTP_Val / 3;
         giaTri = randomValue(bound);
         tongDiemTP_Val -= giaTri;
-//        Lão hóa
-        if (tuoi > (50 - gift)) {
-            giaTri -= (tuoi - gift) / 10;
-        }
 //            Tiềm năng
         bound = tongDiemTP_Val / 15;
         tiemNang = randomValue(bound);
@@ -669,35 +665,39 @@ public class GeneratorSystem {
         String tomTat = sk.getTomTat();
         if (tomTat != null) {
             String[] chuoiTomTat = tomTat.split("_");
-            NPCindex = 1;
-            ITEMindex = 0;
-            for (int i = 1; i < chuoiTomTat.length; i++) {
-                switch (chuoiTomTat[i]) {
-                    case "NPC":
-                        if (NPCindex < sk.getDSDTTG().size()) {
-                            chuoiTomTat[i] = sk.getDSDTTG().get(NPCindex).getHoTen();
-                            NPCindex++;
-                        }
-                        break;
-                    case "VATPHAM":
-                        for (int j = ITEMindex; j < sk.getDSHU().size(); j++) {
-                            HieuUng hu = sk.getDSHU().get(j);
-                            if (hu instanceof HU_VatPham) {
-                                ITEMindex = j;
-                                String maVP = ((HU_VatPham) hu).getMaVP();
-                                VatPham vp = Model.ModelVatPham.getVatPham(maVP);
-                                if (vp != null) {
-                                    chuoiTomTat[i] = vp.getTenVP();
+            if (!tomTat.isBlank()) {
+                NPCindex = 1;
+                ITEMindex = 0;
+                for (int i = 1; i < chuoiTomTat.length; i++) {
+                    switch (chuoiTomTat[i]) {
+                        case "NPC":
+                            if (NPCindex < sk.getDSDTTG().size()) {
+                                chuoiTomTat[i] = sk.getDSDTTG().get(NPCindex).getHoTen();
+                                NPCindex++;
+                            }
+                            break;
+                        case "VATPHAM":
+                            for (int j = ITEMindex; j < sk.getDSHU().size(); j++) {
+                                HieuUng hu = sk.getDSHU().get(j);
+                                if (hu instanceof HU_VatPham) {
+                                    ITEMindex = j;
+                                    String maVP = ((HU_VatPham) hu).getMaVP();
+                                    VatPham vp = Model.ModelVatPham.getVatPham(maVP);
+                                    if (vp != null) {
+                                        chuoiTomTat[i] = vp.getTenVP();
+                                    }
                                 }
                             }
-                        }
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                String tomTatMoi = String.join("", chuoiTomTat);
+                sk.setTomTat(tomTatMoi);
+            } else {
+                sk.setTomTat(moTaMoi);
             }
-            String tomTatMoi = String.join("", chuoiTomTat);
-            sk.setTomTat(tomTatMoi);
         } else {
             sk.setTomTat(moTaMoi);
         }
