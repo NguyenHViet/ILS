@@ -123,7 +123,7 @@ public class ModelDieuKien {
                         if (DK_TT.get("MaDK").equals(MaDK)) {
                             DK_SoSanh temp = new DK_SoSanh(
                                     MaDK,
-                                    (boolean) DK_TT.get("IsNot"),
+                                    Boolean.parseBoolean((String) DK_TT.get("IsNot")),
                                     SLDTT,
                                     (String) DK.get("MoTa"),
                                     (String) DK.get("MaTT"),
@@ -135,12 +135,12 @@ public class ModelDieuKien {
                         }
                     }
                     break;
-                case "THANTHIET":
+                case "QUANHE":
                     for (HashMap DK_QH : DsDK_QH) {
                         if (DK_QH.get("MaDK").equals(MaDK)) {
                             DK_ThanThiet temp = new DK_ThanThiet(
                                     MaDK,
-                                    (boolean) DK_QH.get("IsNot"),
+                                    Boolean.parseBoolean((String) DK_QH.get("IsNot")),
                                     SLDTT,
                                     (String) DK.get("MoTa"),
                                     "",
@@ -154,11 +154,11 @@ public class ModelDieuKien {
                     }
                     break;
                 case "VATPHAM":
-                    for (HashMap DK_VP : DsDK_QH) {
+                    for (HashMap DK_VP : DsDK_VP) {
                         if (DK_VP.get("MaDK").equals(MaDK)) {
                             DK_SoHuuVP temp = new DK_SoHuuVP(
                                     MaDK,
-                                    (boolean) DK_VP.get("IsNot"),
+                                    Boolean.parseBoolean((String) DK_VP.get("IsNot")),
                                     SLDTT,
                                     (String) DK.get("MoTa"),
                                     (String) DK_VP.get("MaVP"),
