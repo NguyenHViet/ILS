@@ -191,5 +191,15 @@ public class HU_QuanHe extends HieuUng {
     public String loaiHU() {
         return "HU_QH";
     }
+    
+    /**
+     * @param dsDT
+     * @param bc
+     * @return
+     */
+    @Override
+    public boolean kiemTraDK(ArrayList<NhanVat> dsDT, BoiCanh bc) {
+        return false;
+    }
 
 }
