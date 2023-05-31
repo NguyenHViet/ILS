@@ -179,7 +179,19 @@ public class GeneratorSystem {
         ArrayList<QuocGia> dsQG = new ArrayList<>();
 //        Tạo thuộc tính ban đầu cho thế giới
         ArrayList<ThuocTinh> dsTT = taoThuocTinhBoiCanh();
-        return new TheGioi(maTG, tenTG, dsTT, dsQG);
+        TheGioi result = new TheGioi(maTG, tenTG, dsTT, dsQG);
+        int SNT = ((ChiSo) result.getThuocTinh("SNT")).getGiaTri();
+        int MNA = ((ChiSo) result.getThuocTinh("MNA")).getGiaTri();
+        int MNE = ((ChiSo) result.getThuocTinh("MNE")).getGiaTri();
+        int EPM = ((ChiSo) result.getThuocTinh("EPM")).getGiaTri();
+        int CVL = SNT + MNA + MNE + EPM;
+        int RSC = ((ChiSo) result.getThuocTinh("RSC")).getGiaTri();
+        int CLM = ((ChiSo) result.getThuocTinh("CLM")).getGiaTri();
+        int CLS = ((ChiSo) result.getThuocTinh("CLS")).getGiaTri();
+        int SVV = 600 - (RSC + CLM + CVL) + CLS;
+        result.getDSTT().add(new ChiSo("CVL", "Trình độ văn minh", "", true, CVL, 0, 0));
+        result.getDSTT().add(new ChiSo("SVV", "Độ khó sinh tồn", "", true, SVV, 0, 0));
+        return result;
     }
 
     /**
@@ -421,7 +433,6 @@ public class GeneratorSystem {
         for (int i = 0; i < tuoi; i++) {
             result.phatTrien();
         }
-
         return result;
     }
 
@@ -981,7 +992,7 @@ public class GeneratorSystem {
                     if (k < 3) {
                         loaiDD = k;
                     } else {
-                        loaiDD = myGenerator.nextInt(10);
+                        loaiDD = myGenerator.nextInt(3);
                     }
                     DiaDanh dd = taoDiaDanh("0000", t, loaiDD);
                     dd.setToaDo(pos);

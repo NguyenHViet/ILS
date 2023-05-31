@@ -376,7 +376,7 @@ public class NewCharacterScreen {
     private void nextToBegin() throws IOException {
         UI.startLoad();
         UI.setLoadingContent("Bắt đầu khởi tạo những yếu tố khác ...");
-        UI.setNeededContent(1000);
+        UI.setNeededContent(600);
         UI.setLoadedContent(0);
         saveNewCharacter();
 //        Task

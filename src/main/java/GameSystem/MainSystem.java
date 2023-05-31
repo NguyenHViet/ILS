@@ -62,21 +62,12 @@ public class MainSystem {
      *
      * @return the value of dsSKLauDai
      */
-    public static ArrayList<SuKien> getDsSKLauDai() {
+    public static ArrayList<SuKien> getDSSKLauDai() {
         return dsSKLauDai;
     }
 
-    public static ArrayList<SuKien> getDsThanhTuu() {
+    public static ArrayList<SuKien> getDSThanhTuu() {
         return dsThanhTuu;
-    }
-
-    /**
-     * Set the value of dsSKLauDai
-     *
-     * @param dsSKLauDai new value of dsSKLauDai
-     */
-    public void setDsSKLauDai(ArrayList<SuKien> dsSKLauDai) {
-        MainSystem.dsSKLauDai = dsSKLauDai;
     }
 
     static private ArrayList<SuKien> chuanBiSuKienTiepTheo(ArrayList<SuKien> dsMauSK, int soLuongSKToiDa) {

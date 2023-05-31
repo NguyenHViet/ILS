@@ -217,7 +217,7 @@ public class MainScreen {
         identityPlanList.getChildren().clear();
         identityHopeList.getChildren().clear();
         identityDreamList.getChildren().clear();
-        for (SuKien sk : MainSystem.getDsSKLauDai()) {
+        for (SuKien sk : MainSystem.getDSSKLauDai()) {
             FXMLLoader loader = new FXMLLoader(UI.class.getResource("ProfileItemComponent.fxml"));
             switch (sk.getLoaiSK()) {
                 case "KYVONG":
