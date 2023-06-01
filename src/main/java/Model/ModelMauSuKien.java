@@ -66,7 +66,7 @@ public class ModelMauSuKien {
                 0,
                 0,
                 "HANGNAM",
-                99,
+                50,
                 false);
 
         SuKien sk0001 = new SuKien("0001",
@@ -147,7 +147,7 @@ public class ModelMauSuKien {
                 0,
                 0,
                 "HANGNAM",
-                50,
+                40,
                 false);
 
         dsDK.clear();

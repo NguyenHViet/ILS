@@ -26,9 +26,9 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="ISEKAI LIFE SIMULATOR" textFill="WHITE">
+            <Label text="ISEKAI LIFE SIMULATION" textFill="WHITE">
                <font>
-                  <Font name="Comic Sans MS Bold" size="72.0" />
+                  <Font name="Comic Sans MS Bold" size="64.0" />
                </font>
             </Label>
          </children>

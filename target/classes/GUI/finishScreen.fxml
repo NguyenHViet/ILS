@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to top,  #ffb88c, #de6262);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FinishScreenController">
+   <bottom>
+      <FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="250.0" prefWidth="800.0" style="-fx-spacing: 20;">
+               <children>
+                  <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#newGame" prefWidth="200.0" text="CHƠI MỚI" />
+                  <Button mnemonicParsing="false" onAction="#fastPlay" prefWidth="200.0" text="CHƠI LẠI NHANH" />
+                  <Button mnemonicParsing="false" onAction="#quit" prefWidth="200.0" text="THOÁT" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </FlowPane>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" prefHeight="402.0" prefWidth="1000.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="introLabel" text="BẠN ĐÃ SỐNG ĐƯỢC" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="ageLabel" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="90.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

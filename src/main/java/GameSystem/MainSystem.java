@@ -166,11 +166,11 @@ public class MainSystem {
         ArrayList<SuKien> dsSKQG = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienQuocGia(), SoLuongSKQGToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKQG);
 //        Sự kiện tỉnh
-        int SoLuongSKTToiDa = new Random().nextInt(1);
+        int SoLuongSKTToiDa = new Random().nextInt(3);
         ArrayList<SuKien> dsSKT = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienTinh(), SoLuongSKTToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKT);
 //        Sự kiện hằng năm
-        int SoLuongSKHNToiDa = 1;
+        int SoLuongSKHNToiDa = 3;
         ArrayList<SuKien> dsSKHN = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienHangNam(), SoLuongSKHNToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKHN);
 //        Sự kiện kỳ vọng

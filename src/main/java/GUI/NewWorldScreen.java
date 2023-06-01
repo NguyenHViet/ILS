@@ -386,6 +386,7 @@ public class NewWorldScreen {
         UI.updateProgress(1);
 //        Trình độ văn minh
         tg.getDSTT().add(new ChiSo("CVL", "Trình độ văn minh", "", true, CVL_Value, 0, 0));
+        tg.setTenBC(worldNameTextField.getText());
         UI.updateProgress(1);
     }
 

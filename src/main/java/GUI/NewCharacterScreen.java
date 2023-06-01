@@ -351,7 +351,7 @@ public class NewCharacterScreen {
         ((ChiSo) mc.getThuocTinh("AGE")).setGiaTri(0);
 //        Chủng tộc
         mc.setChungToc("Nhân tộc");
-
+        mc.setHoTen(characterNameTF.getText());
         ModelNhanVat.themNhanVat(mc);
     }
 
