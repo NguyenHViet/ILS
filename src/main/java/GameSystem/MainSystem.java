@@ -202,9 +202,9 @@ public class MainSystem {
                 SuKien mauSK = Model.ModelMauSuKien.getMauSuKien(maSK);
                 dsSuKienTiepTheo.add(GameSystem.GeneratorSystem.taoSuKien(mauSK, nguoiChoi, dsNV, tg));
             }
-            dsSK.addAll(0, chuanBiSuKienTiepTheo(dsSuKienTiepTheo, 100));
+            dsSK.addAll(chuanBiSuKienTiepTheo(dsSuKienTiepTheo, 100));
         }
-        MainSystem.dsSKHienTai.addAll(dsSK);
+        MainSystem.dsSKHienTai.addAll(0, dsSK);
 //        Kiểm tra sự kiện kỳ vọng và ước mơ
         for (int i = 0; i < MainSystem.dsSKLauDai.size(); i++) {
             SuKien sk = MainSystem.dsSKLauDai.get(i);
