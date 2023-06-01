@@ -177,6 +177,10 @@ public class MainSystem {
         int SoLuongSKKVToiDa = new Random().nextInt(1);
         ArrayList<SuKien> dsSKKV = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienKyVong(), SoLuongSKKVToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKKV);
+//        Sự kiện ước mơ
+        int SoLuongSKUMToiDa = new Random().nextInt(1);
+        ArrayList<SuKien> dsSKUM = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienUocMo(), SoLuongSKUMToiDa);
+        MainSystem.dsSKHienTai.addAll(dsSKUM);
     }
 
     /**

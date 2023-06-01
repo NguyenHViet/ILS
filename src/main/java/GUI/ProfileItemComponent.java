@@ -47,6 +47,16 @@ public class ProfileItemComponent {
             profileItemContent.add(giaTriValue, 1, 0);
             profileItemContent.add(tiemNangLabel, 0, 1);
             profileItemContent.add(tiemNangValue, 1, 1);
+        } else if (thuocTinh instanceof TrangThai) {
+            int tinhTrang = ((TrangThai) thuocTinh).getTinhTrang();
+            Label giaTriLabel = new Label("Tình trạng:");
+            Label giaTriValue = new Label(tinhTrang + "");
+            Label tiemNangLabel = new Label("Thời hạn:");
+            Label tiemNangValue = new Label("" + ((TrangThai) thuocTinh).getThoiHan());
+            profileItemContent.add(giaTriLabel, 0, 0);
+            profileItemContent.add(giaTriValue, 1, 0);
+            profileItemContent.add(tiemNangLabel, 0, 1);
+            profileItemContent.add(tiemNangValue, 1, 1);
         }
     }
 
