@@ -166,7 +166,7 @@ public class MainSystem {
         ArrayList<SuKien> dsSKQG = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienQuocGia(), SoLuongSKQGToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKQG);
 //        Sự kiện tỉnh
-        int SoLuongSKTToiDa = new Random().nextInt(1);
+        int SoLuongSKTToiDa = new Random().nextInt(3);
         ArrayList<SuKien> dsSKT = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienTinh(), SoLuongSKTToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKT);
 //        Sự kiện hằng năm
@@ -177,6 +177,10 @@ public class MainSystem {
         int SoLuongSKKVToiDa = new Random().nextInt(1);
         ArrayList<SuKien> dsSKKV = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienKyVong(), SoLuongSKKVToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKKV);
+//        Sự kiện ước mơ
+        int SoLuongSKUMToiDa = new Random().nextInt(1);
+        ArrayList<SuKien> dsSKUM = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienUocMo(), SoLuongSKUMToiDa);
+        MainSystem.dsSKHienTai.addAll(dsSKUM);
     }
 
     /**

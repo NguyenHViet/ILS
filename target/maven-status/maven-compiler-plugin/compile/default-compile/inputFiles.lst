@@ -1,62 +1,62 @@
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_NgheNghiep.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\Interface_KichHoatSK.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\QuocGia.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameSystem\MainSystem.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\MainScreen.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\RelationshipComponent.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_KyNang.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\LoadingScreen.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_SoSanh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_ThanThiet.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelMauSuKien.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\ChiSo.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameObject\VatPham.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelKyNang.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\Interface_KiemTraDK.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\tryhardnihongo\isekailifesimulator\App.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HieuUng.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameSystem\JobSystem.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\DiaDanh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\FinishScreenController.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameObject\NhanVat.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\NewWorldScreen.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\NewCharacterScreen.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DieuKien.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelThuocTinh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\ChucVu.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\TinhCach.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\LuaChon.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_CapDo.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_ChiuTacDong.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameSystem\GeneratorSystem.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\UI.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameObject\VPTieuHao.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelHieuUng.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelNgheNghiep.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\KyNang.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\MoiQuanHe.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameObject\TrangBi.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelVatPham.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\TheGioi.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\BoiCanh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\NgheNghiep.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\SuKien.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\WaitingScreen.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\CurrentEventComponent.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\EntertainmentComponent.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\ThuocTinh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_ThongThao.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\WorldBuilder\Tinh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_VatPham.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\ProfileItemComponent.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\DK_SoHuuVP.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelNhanVat.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\module-info.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\MiniMapComponent.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\GameDatabase.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GUI\InventoryComponent.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_QuanHe.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\GameEvent\HU_ThuocTinh.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelDieuKien.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\Model\ModelLuaChon.java
-C:\Users\win\Desktop\Tai Lieu Mon Hoc\Project\IsekaiLifeSimulator\src\main\java\SupportClass\TrangThai.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameObject\VPTieuHao.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\HieuUng.java
+E:\Workspace\java\ILS\ILS\src\main\java\tryhardnihongo\isekailifesimulator\App.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DK_ChiuTacDong.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DK_SoHuuVP.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\NgheNghiep.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\Interface_KichHoatSK.java
+E:\Workspace\java\ILS\ILS\src\main\java\WorldBuilder\Tinh.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DK_CapDo.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelThuocTinh.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameObject\TrangBi.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelDieuKien.java
+E:\Workspace\java\ILS\ILS\src\main\java\module-info.java
+E:\Workspace\java\ILS\ILS\src\main\java\WorldBuilder\DiaDanh.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\HU_VatPham.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelNhanVat.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\HU_NgheNghiep.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\ChucVu.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DK_SoSanh.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\MoiQuanHe.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\HU_KyNang.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\Interface_KiemTraDK.java
+E:\Workspace\java\ILS\ILS\src\main\java\WorldBuilder\TheGioi.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\NewCharacterScreen.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\KyNang.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\SuKien.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\CurrentEventComponent.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelVatPham.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelNgheNghiep.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelLuaChon.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\MiniMapComponent.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DK_ThongThao.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\GameDatabase.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\ThuocTinh.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DK_ThanThiet.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameObject\VatPham.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameSystem\GeneratorSystem.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameSystem\MainSystem.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\ChiSo.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\WaitingScreen.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\LuaChon.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\ProfileItemComponent.java
+E:\Workspace\java\ILS\ILS\src\main\java\WorldBuilder\QuocGia.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\FinishScreenController.java
+E:\Workspace\java\ILS\ILS\src\main\java\WorldBuilder\BoiCanh.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\DieuKien.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\LoadingScreen.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelHieuUng.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\HU_QuanHe.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\MainScreen.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameObject\NhanVat.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\EntertainmentComponent.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\RelationshipComponent.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameSystem\JobSystem.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\InventoryComponent.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\TrangThai.java
+E:\Workspace\java\ILS\ILS\src\main\java\GameEvent\HU_ThuocTinh.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelKyNang.java
+E:\Workspace\java\ILS\ILS\src\main\java\Model\ModelMauSuKien.java
+E:\Workspace\java\ILS\ILS\src\main\java\SupportClass\TinhCach.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\UI.java
+E:\Workspace\java\ILS\ILS\src\main\java\GUI\NewWorldScreen.java
