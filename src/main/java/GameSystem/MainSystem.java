@@ -170,7 +170,7 @@ public class MainSystem {
         ArrayList<SuKien> dsSKT = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienTinh(), SoLuongSKTToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKT);
 //        Sự kiện hằng năm
-        int SoLuongSKHNToiDa = 1;
+        int SoLuongSKHNToiDa = 3;
         ArrayList<SuKien> dsSKHN = chuanBiSuKienTiepTheo(Model.ModelMauSuKien.suKienHangNam(), SoLuongSKHNToiDa);
         MainSystem.dsSKHienTai.addAll(dsSKHN);
 //        Sự kiện kỳ vọng

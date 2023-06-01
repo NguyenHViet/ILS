@@ -90,7 +90,7 @@ public class ModelHieuUng {
                                     DsHU_DK,
                                     (String) HU_TT.get("MaTT"),
                                     Integer.parseInt((String) HU_TT.get("GiaTriTang")),
-                                    Integer.parseInt((String) HU_TT.get("TLTang")),
+                                    Double.parseDouble((String) HU_TT.get("TLTang")),
                                     0,
                                     0
                             );
