@@ -267,7 +267,6 @@ public class MainScreen {
             nextYearBtn.setDisable(true);
             currentEventController.loadData(sk, this);
             mainAreaStack.getChildren().add(currentEvent);
-            MainSystem.kichHoatSuKienHienTai(this);
         } else {
             nextYearBtn.setDisable(false);
             eventLogWrapper.toFront();

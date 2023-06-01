@@ -61,6 +61,7 @@ public class CurrentEventComponent {
             luaChon.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    MainSystem.kichHoatSuKienHienTai(mainScreenController);
                     MainSystem.xuLySuKienHienTai(lc);
                     try {
                         mainScreenController.loadEvent();

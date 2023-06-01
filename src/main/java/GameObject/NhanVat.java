@@ -452,6 +452,9 @@ public class NhanVat {
     /**
      */
     public void phatTrien() {
+        if (((TrangThai) this.getThuocTinh("DIE")) != null) {
+            return;
+        }
         int sucBen = ((ChiSo) this.getThuocTinh("STA")).getGiaTri();
         int oldness = 0;
         TrangThai old = ((TrangThai) this.getThuocTinh("OLD"));
@@ -507,7 +510,18 @@ public class NhanVat {
                 ((ChiSo) tt).setGiaTriTamThoi(0);
             }
         }
-        if (((ChiSo) this.getThuocTinh("STR")).getGiaTri() <= 0) {
+        if (((ChiSo) this.getThuocTinh("STR")).getGiaTri() <= 0
+                || ((ChiSo) this.getThuocTinh("PHY")).getGiaTri() <= 0
+                || ((ChiSo) this.getThuocTinh("MNT")).getGiaTri() <= 0) {
+            dsTT.add(new TrangThai(
+                    "DIE",
+                    "Qua đời",
+                    "Đã sống một cuộc sống trọn vẹn",
+                    true,
+                    1,
+                    999,
+                    999
+            ));
             if (this.playable) {
                 UI.setNeededContent(10);
                 UI.setLoadedContent(0);
@@ -520,6 +534,7 @@ public class NhanVat {
                 UI.loadFill();
             }
         }
+
         if (((ChiSo) this.getThuocTinh("STR")).getGiaTri() <= 5) {
 
         }
